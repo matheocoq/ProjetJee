@@ -14,7 +14,7 @@ import fr.eni.ProjetJee.dal.RetraitDAO;
 
 public class RetraitDAOImpl implements RetraitDAO{
 	
-	private static final String INSERT = "insert into RETRAITS(no_retrait,no_article, rue,code_postal,ville) values (?, ?,?,?)";
+	private static final String INSERT = "insert into RETRAITS(no_article, rue, code_postal, ville) values (?, ?, ?, ?)";
 	private static final String ALL = "select * from RETRAITS";
 	private static final String UPDATE = "UPDATE RETRAITS SET no_article=?,rue=?,code_postal=?,ville=? where no_retrait=?";
 	private final String DELETE = "DELETE FROM RETRAITS WHERE no_retrait=?";
@@ -30,10 +30,10 @@ public class RetraitDAOImpl implements RetraitDAO{
 
 			//Pr�parer la requete
 			PreparedStatement stmt = conn.prepareStatement(INSERT, PreparedStatement.RETURN_GENERATED_KEYS);
-			stmt.setInt(2, retrait.getNo_article());
-			stmt.setString(3, retrait.getRue());
-			stmt.setString(4, retrait.getCodePostal());
-			stmt.setString(5,retrait.getVille());
+			stmt.setInt(1, retrait.getNo_article());
+			stmt.setString(2, retrait.getRue());
+			stmt.setString(3, retrait.getCodePostal());
+			stmt.setString(4,retrait.getVille());
 			
 			//Executer la requete
 			stmt.executeUpdate();
