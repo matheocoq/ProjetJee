@@ -16,5 +16,5 @@
 <body>
 <div>
 <span>ENI-Enchère</span>
-<a href="/Projet_ENI-Encheres/Connexion">S'insrire - Se Connecter</a>
+<a href="<%= request.getContextPath() %>/Connexion">S'insrire - Se Connecter</a>
 </div>

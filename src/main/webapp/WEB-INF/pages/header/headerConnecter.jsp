@@ -19,5 +19,5 @@
 <a>Enchère</a>
 <a>Vendre un article</a>
 <a>Mon profil</a>
-<a href="/Projet_ENI-Encheres/Deconnexion">Déconexion</a>
+<a href="<%= request.getContextPath() %>/Deconnexion">Déconexion</a>
 </div>
