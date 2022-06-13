@@ -17,7 +17,7 @@ import fr.eni.ProjetJee.dal.DALException;
 /**
  * Servlet implementation class RegisterServer
  */
-@WebServlet({"/inscription","/ajouter"})
+@WebServlet("/inscription")
 public class RegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -53,6 +53,7 @@ public class RegisterServlet extends HttpServlet {
 				if(mdp.equals(confirmation)) {
 					Utilisateur user = new Utilisateur(0, speudo, nom, prenom, email, tel, rue, codePostal, ville, userMgr.generateHash(mdp), 0,false);
 					try {
+						
 						userMgr.ajouterUtilisateur(user);
 						req.getSession().setAttribute("utilisateur", user);
 					} catch (BLLException e) {
