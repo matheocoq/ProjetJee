@@ -40,9 +40,9 @@ public class EnchereMger {
 		}
 	}
 	
-	public Enchere lastEnchereByUserArticle(int noUtilisateur, int noArticleVendu) throws BLLException {
+	public Enchere lastEnchereByArticle(int noArticleVendu) throws BLLException {
 		try {
-			return enchereDAO.selecteLast(noUtilisateur, noArticleVendu);
+			return enchereDAO.selecteLast(noArticleVendu);
 		} catch (DALException e) {
 			throw new BLLException("lastEnchereByUserArticle Error ", e);
 		}

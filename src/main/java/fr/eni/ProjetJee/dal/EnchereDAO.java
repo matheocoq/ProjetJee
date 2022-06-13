@@ -9,7 +9,7 @@ public interface EnchereDAO {
 
 	void insert(Enchere enchere) throws DALException;
 	Enchere selecteByIndex(LocalDateTime dateEnchere, Integer noUtilisateur, Integer noArticleVendu) throws DALException;
-	Enchere selecteLast(Integer noUtilisateur, Integer noArticleVendu) throws DALException;
+	Enchere selecteLast(Integer noArticleVendu) throws DALException;
 	void delete(Integer noUtilisateur) throws DALException;
 	
 }

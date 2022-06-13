@@ -19,7 +19,7 @@ public class EnchereDAOsqlServerImpl implements EnchereDAO {
 	
 	private static final String INSERT = "INSERT INTO ENCHERES(date_enchere, montant_enchere, no_article, no_utilisateur) values(?, ?, ?, ?)";
 	private static final String SELECT_BY_INDEX = "SELECT * FROM ENCHERES WHERE date_enchere = ?, no_article = ?, no_utilisateur = ?";
-	private static final String SELECT_LAST = "SELECT * FROM ENCHERES WHERE no_article = ?, no_utilisateur = ? ORDER BY date_enchere DESC LIMIT 1";
+	private static final String SELECT_LAST = "SELECT TOP 1 * FROM ENCHERES WHERE no_article = ? ORDER BY date_enchere";
 	private static final String DELETE_BY_USER = "DELETE FROM ENCHERES WHERE no_utilisateur = ?";
 	
 	private static UtilisateursDAO utilisateurDAO = DAOFactory.getDAOUtilisateur();
@@ -88,21 +88,23 @@ public class EnchereDAOsqlServerImpl implements EnchereDAO {
 	}
 
 	@Override
-	public Enchere selecteLast(Integer noUtilisateur, Integer noArticleVendu) throws DALException {
+	public Enchere selecteLast(Integer noArticleVendu) throws DALException {
 		try (Connection conn = ConnectionProvider.getConnection();) {
 			PreparedStatement stmt = conn.prepareStatement(SELECT_LAST);
 			
 			//Préparer la requete
-			stmt.setInt(2, noArticleVendu);
-			stmt.setInt(3, noUtilisateur);
+			stmt.setInt(1, noArticleVendu);
 			
 			//Executer la requete
 			ResultSet rs = stmt.executeQuery();
 			
-			rs.next();
+			Enchere enchere = null;
 			
+			if (rs.next()) {
+				enchere = new Enchere(rs.getTimestamp("date_enchere").toLocalDateTime(), rs.getInt("montant_enchere"), utilisateurDAO.selectById(rs.getInt("no_utilisateur")), articleVenduDAO.select(rs.getInt("no_article")));
+			}
 			// Ajouter articleVenduDAO pour get l'article
-			Enchere enchere = new Enchere(rs.getTimestamp("date_enchere").toLocalDateTime(), rs.getInt("montant_enchere"), utilisateurDAO.selectById(rs.getInt("no_utilisateur")), articleVenduDAO.select(rs.getInt("no_article")));
+			
 			return enchere;
 			
 		} catch (Exception e) {
