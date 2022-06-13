@@ -153,7 +153,7 @@ public class CategorieDAOImpl implements CategorieDAO{
 			conn = ConnectionProvider.getConnection();
 
 			//Pr�parer la requete
-			stmt = conn.prepareStatement(ALL);
+			//stmt = conn.prepareStatement(ALL);
 			
 			//Execution de la requ�te
 			stmt = conn.prepareStatement(UPDATE);

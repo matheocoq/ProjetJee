@@ -1,7 +1,7 @@
 
 
 <jsp:include page="header/headerRegister.jsp" />
-<form action="http://localhost:8080/ProjetJee/ajouter" method="post">
+<form action="http://localhost:8080/ProjetJee/inscription" method="post">
 	
 	${not empty errorInscription ? "<div class='alert alert-danger mb-4' role='alert'>Inscription incorrect !!</div>" : null }
 	<br><br>
