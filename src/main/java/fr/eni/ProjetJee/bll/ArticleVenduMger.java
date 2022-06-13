@@ -109,21 +109,17 @@ public class ArticleVenduMger {
 		System.out.println(categorie=="Toute");
 		if(categorie.equals("Toute")) {
 			if(nom.equals("")) {
-				System.out.println("je passe 1");
 				return allArticleVendu();
 			}
 			else {
-				System.out.println("je passe 2");
 				return articleVenduByName("%"+nom+"%");
 			}
 		}
 		else {
 			if(nom.equals("")) {
-				System.out.println("je passe 3");
 				return articleVenduByCategorie(Integer.parseInt(categorie));
 			}
 			else {
-				System.out.println("je passe 4");
 				return articleVenduByCategorieName(Integer.parseInt(categorie), "%"+nom+"%");
 			}
 		}

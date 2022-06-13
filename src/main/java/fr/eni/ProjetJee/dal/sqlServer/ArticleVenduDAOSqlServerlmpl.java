@@ -474,7 +474,7 @@ ArrayList<ArticleVendu> articles =new ArrayList<ArticleVendu>();
 				}
 			}
 			
-			if(name!=null){
+			if(name!=""){
 				if(checkbox.equals("vente") || categorie==0 ||mesEnchere!=null||mesEnchereReporter!=null ||ouvertes!=null) {
 					requete=requete+"AND nom_article LIKE ? ";
 				}
@@ -485,6 +485,7 @@ ArrayList<ArticleVendu> articles =new ArrayList<ArticleVendu>();
 			 
 			 requete=requete+"ORDER BY date_debut_encheres ;";
 			//Executer la requete
+			 System.out.println(requete);
 			 stmt = conn.prepareStatement(requete);
 			 if(checkbox.equals("achat")) {
 					if(mesEnchere!=null){
@@ -503,8 +504,7 @@ ArrayList<ArticleVendu> articles =new ArrayList<ArticleVendu>();
 					stmt.setInt(nb, categorie);
 					nb++;
 				}
-				
-				if(name!=null){
+				if(name!=""){
 					 stmt.setString(nb, "%"+name+"%");
 					 nb++;
 				}

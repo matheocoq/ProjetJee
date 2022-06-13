@@ -19,7 +19,7 @@
     %>
 </select>
 <div>
-      <input type="radio" id="radioAchat" name="radioAchat" value="achat" checked>
+      <input type="radio" id="radioAchat" name="radioAchat" value="achat" class="boutonRadio" checked>
       <label for="radioAchat">Achat</label>
       <div>
       	<div>
@@ -36,25 +36,25 @@
   	  	</div>
   	  </div>
 
-      <input type="radio" id="radioVente" name="radioAchat" value="vente">
+      <input type="radio" id="radioVente" name="radioAchat" value="vente" class="boutonRadio">
       <label for="radioVente">Mes Ventes</label>
       
       <div>
       	<div>
-	      	<input type="checkbox" id="mesVenteCours" name="mesVenteCours">
-	      	<label for="ouvertes">Mes ventes en cours</label>
+	      	<input type="checkbox" id="mesVenteCours" name="mesVenteCours" disabled="disabled">
+	      	<label for="mesVenteCours">Mes ventes en cours</label>
       	</div>
       	<div>
-	      	<input type="checkbox" id="mesVenteDebutees" name="mesVenteDebutees">
+	      	<input type="checkbox" id="mesVenteDebutees" name="mesVenteDebutees" disabled="disabled">
 	      	<label for="mesVenteDebutees">Mes ventes non débutées</label>
       	</div>
       	<div>
-	      	<input type="checkbox" id="mesVentetTerminees" name="mesVentetTerminees">
+	      	<input type="checkbox" id="mesVentetTerminees" name="mesVentetTerminees" disabled="disabled">
 	      	<label for="mesVentetTerminees">Mes ventes terminées</label>
   	  	</div>
   	  </div>
 </div>
-<button>Rechercher</button>
+<button value=true name="rechercher" >Rechercher</button>
 </form>
 <div class="fiche-produits">
 	<%
