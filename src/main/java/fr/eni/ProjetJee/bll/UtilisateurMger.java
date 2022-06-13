@@ -34,6 +34,14 @@ public class UtilisateurMger {
 			throw new BLLException("ajouterUtilisateur Error ", e);
 		}
 	}
+	
+	public void ajouterUtilisateurHistorique(Utilisateur utilisateur) throws BLLException {
+		try {
+			utilisateurDAO.insertHistoriques(utilisateur);
+		} catch (DALException e) {
+			throw new BLLException("ajouterUtilisateur Error ", e);
+		}
+	}
 
 	public Utilisateur utilisateurById(int noUtilisateur) throws BLLException {
 		try {

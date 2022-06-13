@@ -33,7 +33,8 @@ public class ArticleVenduDAOSqlServerlmpl implements ArticleVenduDAO {
 	private static final String SELECTBYCATEGORIE = "Select * from ARTICLES_VENDUS where no_categorie=? and etat_vente='En cours'";
 	private static final String SELECTBYCATEGORIENAME = "Select * from ARTICLES_VENDUS where no_categorie=? and nom_article LIKE ? and etat_vente='En cours'";
 	private static final String SELECTBYNAME = "Select * from ARTICLES_VENDUS where nom_article LIKE ? and etat_vente='En cours'";
-	private static final String DELETE = "DELETE FROM ARTICLES_VENDUS WHERE no_article=?;";
+	private static final String DELETE = "DELETE FROM ARTICLES_VENDUS WHERE no_article=?";
+	private static final String DELETECREE = "DELETE FROM ARTICLES_VENDUS WHERE where no_utilisateur=? AND etat_vente = 'Créée'";
 	private static final String UPDATE = "UPDATE ARTICLES_VENDUS SET nom_article = ?, description = ? , date_debut_encheres = ?, date_fin_encheres = ?, prix_initial = ?, prix_vente = ?, no_utilisateur = ?, no_categorie = ? , no_retrait =? ,photo=? ,etat_vente = ? WHERE no_article=?;";
 
 	@Override
@@ -545,6 +546,21 @@ ArrayList<ArticleVendu> articles =new ArrayList<ArticleVendu>();
 		// TODO Auto-generated method stub
 		return articles;
 		
+	}
+
+	@Override
+	public void deleteCreeByUtilisateur(Utilisateur utilisateur) throws DALException {
+			try(Connection conn = ConnectionProvider.getConnection();) {
+			
+			PreparedStatement stmt = conn.prepareStatement(DELETECREE);
+			stmt.setInt(1, utilisateur.getNoUtilisateur());
+			stmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	

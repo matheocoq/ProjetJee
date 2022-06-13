@@ -2,7 +2,9 @@ package fr.eni.ProjetJee.bll;
 
 import java.time.LocalDateTime;
 
+import fr.eni.ProjetJee.bo.ArticleVendu;
 import fr.eni.ProjetJee.bo.Enchere;
+import fr.eni.ProjetJee.bo.Utilisateur;
 import fr.eni.ProjetJee.dal.DALException;
 import fr.eni.ProjetJee.dal.DAOFactory;
 import fr.eni.ProjetJee.dal.EnchereDAO;
@@ -55,5 +57,15 @@ public class EnchereMger {
 			throw new BLLException("supprimerEncheresByUser Error ", e);
 		}
 	}
-
+	
+	public void supprimerEncheresById(ArticleVendu article, Utilisateur user) throws BLLException {
+		try {
+			enchereDAO.deleteById(article,user);
+		} catch (DALException e) {
+			throw new BLLException("supprimerEncheresByUser Error ", e);
+		}
+	}
+	public void supprimerEncheresByUserSup(int noUtilisateur) throws BLLException{
+		
+	}
 }
