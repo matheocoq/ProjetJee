@@ -24,23 +24,24 @@
   		<input type="email" id="email" name="email"  required="required" value="<%= user.getPseudo()%>"><br><br>
  
  		<label for="tel">Teléphone :  </label>
-  		<input type="tel" id="tel" name="tel"  required="required"> 
+  		<input type="tel" id="tel" name="tel"  required="required" value="<%= user.getTelephone()%>"> 
   		<label for="rue">Rue :  </label>
-  		<input type="text" id="rue" name="rue"  required="required" value="<%= user.getPseudo()%>"><br><br>
+  		<input type="text" id="rue" name="rue"  required="required" value="<%= user.getRue()%>"><br><br>
   	
   		<label for="codePostal">Code postal :  </label>
-  		<input type="text" id="codePostal" name="codePostal"  required="required" > 
+  		<input type="text" id="codePostal" name="codePostal"  required="required" value="<%= user.getCodePostal()%>"> 
   		<label for="ville">Ville :  </label>
-  		<input type="text" id="ville" name="ville"  required="required"><br><br>
+  		<input type="text" id="ville" name="ville"  required="required" value="<%= user.getVille()%>"><br><br>
 	
 		<label for="mdp">Mot de passe actuel :  </label>
-  		<input type="password" id="mdp" name="mdp"  required="required"><br><br>
+  		<input type="password" id="mdp" name="mdp"  required="required" value="<%= user.getMotDePasse()%>"> <br><br>
 	
 		<label for="newMdp">Nouveau mot de passe :  </label>
   		<input type="password" id="newMdp" name="newMdp"  pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{12,}$" title="Doit contenir au moins une lettre majuscule,une minscule et au moins un chiffre, un caractère spécial et au minimum 12 caractères" required="required"> 
   		<label for="confirmation">Confirmation :  </label>
   		<input type="password" id="confirmation" name="confirmation" pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{12,}$" title="Doit contenir au moins une lettre majuscule,une minsculeet au moins un chiffre, un caractère spécial et au minimum 12 caractères" required="required"><br><br>
 		<label for="credit">Crédit :  </label>
+		<input type="text" id="credit" name="credit"  required="required" value="<%= user.getCredit()%>" readonly>
 		<br><br>
 	</div>
 	<input type="submit" value="Enregistrer">
