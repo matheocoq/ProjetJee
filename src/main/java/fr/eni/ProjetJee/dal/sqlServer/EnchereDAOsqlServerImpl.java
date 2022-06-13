@@ -8,7 +8,9 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 
+import fr.eni.ProjetJee.bo.ArticleVendu;
 import fr.eni.ProjetJee.bo.Enchere;
+import fr.eni.ProjetJee.bo.Utilisateur;
 import fr.eni.ProjetJee.dal.ArticleVenduDAO;
 import fr.eni.ProjetJee.dal.ConnectionProvider;
 import fr.eni.ProjetJee.dal.DALException;
@@ -22,6 +24,7 @@ public class EnchereDAOsqlServerImpl implements EnchereDAO {
 	private static final String SELECT_BY_INDEX = "SELECT * FROM ENCHERES WHERE date_enchere = ?, no_article = ?, no_utilisateur = ?";
 	private static final String SELECT_LAST = "SELECT TOP 1 * FROM ENCHERES WHERE no_article = ? ORDER BY date_enchere DESC";
 	private static final String DELETE_BY_USER = "DELETE FROM ENCHERES WHERE no_utilisateur = ?";
+	private static final String DELETE_BY_ID = "DELETE FROM ENCHERES WHERE no_article = ? AND no_utilisateur= ?";
 	
 	private static UtilisateursDAO utilisateurDAO = DAOFactory.getDAOUtilisateur();
 	private static ArticleVenduDAO articleVenduDAO = DAOFactory.getDAOArticleVendu();
@@ -116,6 +119,25 @@ public class EnchereDAOsqlServerImpl implements EnchereDAO {
 		} catch (Exception e) {
 			throw new DALException("Enchere selecteLast Error ", e);
 		}
+	}
+
+	@Override
+	public void deleteById(ArticleVendu article, Utilisateur utilisateur) throws DALException {
+try (Connection conn = ConnectionProvider.getConnection();) {
+			
+			//Préparer la requete
+			PreparedStatement stmt = conn.prepareStatement(DELETE_BY_ID);
+			stmt.setInt(1, article.getNoArticle());
+			stmt.setInt(2, utilisateur.getNoUtilisateur());
+			
+			//Executer la requete
+			stmt.executeUpdate();
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			throw new DALException("Enchere delete Error", e);
+		}
+		
 	}
 
 }
