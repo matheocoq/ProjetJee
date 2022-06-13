@@ -14,6 +14,7 @@ import fr.eni.ProjetJee.dal.UtilisateursDAO;
 public class UtilisateurDAOSqlServerImpl implements UtilisateursDAO {
 	
 	private static final String INSERT = "INSERT INTO Utilisateurs(pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur, active) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	private static final String INSERTHISTAURIQUE = "INSERT INTO HISTORIQUE_UTILISATEUR(nom, prenom, email, telephone, rue, code_postal, ville, credit) values (?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String SELECT_BY_ID = "SELECT * FROM UTILISATEURS WHERE no_utilisateur = ?";
 	private static final String SELECT_BY_LOGIN = "SELECT * FROM UTILISATEURS WHERE email = ? or pseudo = ?";
 	private static final String SELECT_ALL = "SELECT * FROM UTILISATEURS";
@@ -54,7 +55,32 @@ public class UtilisateurDAOSqlServerImpl implements UtilisateursDAO {
 			throw new DALException("Utilisateur insert Error ", e);
 		}		
 	}
-
+	
+	@Override
+	public void insertHistoriques(Utilisateur utilisateur) throws DALException {
+		try (Connection conn = ConnectionProvider.getConnection();) {
+			PreparedStatement stmt = conn.prepareStatement(INSERTHISTAURIQUE);
+			
+			// Faire les set(s)
+			//Préparer la requete
+			stmt.setString(1, utilisateur.getNom());
+			stmt.setString(2, utilisateur.getPrenom());
+			stmt.setString(3, utilisateur.getEmail());
+			stmt.setString(4, utilisateur.getTelephone());
+			stmt.setString(5, utilisateur.getRue());
+			stmt.setString(6, utilisateur.getCodePostal());
+			stmt.setString(7, utilisateur.getVille());
+			stmt.setInt(8, utilisateur.getCredit());
+			
+			//Executer la requete
+			stmt.executeUpdate();
+		
+		} catch (Exception e) {
+			throw new DALException("Utilisateur insert Error ", e);
+		}		
+		
+	}
+	
 	@Override
 	public Utilisateur selectById(Integer noUtilisateur) throws DALException {
 		try (Connection conn = ConnectionProvider.getConnection();) {
@@ -192,5 +218,10 @@ public class UtilisateurDAOSqlServerImpl implements UtilisateursDAO {
 		}		
 		return isDuplicated;
 	}
+
+	
+
+	
+	
 
 }

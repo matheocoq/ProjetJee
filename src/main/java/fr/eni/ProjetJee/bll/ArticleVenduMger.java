@@ -96,6 +96,14 @@ public class ArticleVenduMger {
 		}
 	}
 	
+	public void supprimerArticleVenduCree(Utilisateur user) throws BLLException {
+		try {
+			articleVenduDAO.deleteCreeByUtilisateur(user);
+		} catch (DALException e) {
+			throw new BLLException("supprimerArticleVendu Error ", e);
+		}
+	}
+	
 	public void majArticleVendu(ArticleVendu articleVendu) throws BLLException {
 		try {
 			articleVenduDAO.update(articleVendu);
