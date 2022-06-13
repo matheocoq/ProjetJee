@@ -24,7 +24,7 @@ public class RegisterServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		req.getRequestDispatcher("/WEB-INF/pages/register.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/pages/inscription.jsp").forward(req, resp);
 	}
 
 	@Override
@@ -47,7 +47,7 @@ public class RegisterServlet extends HttpServlet {
 			// on verifie la longueur du numero de tel et si le pseudo, l'email ou telephone existe déjà dans la base de données.
 			if(tel.length()<10 || userMgr.checkPseudoEmailTel(speudo,email,tel)) {
 				req.setAttribute("errorInscription", " Inscription incorrect.");
-				req.getRequestDispatcher("/WEB-INF/pages/register.jsp").forward(req, resp);
+				req.getRequestDispatcher("/WEB-INF/pages/inscription.jsp").forward(req, resp);
 			}else {
 				// on verifie si le mdp et la confirmation sont les mêmes
 				if(mdp.equals(confirmation)) {
@@ -66,7 +66,7 @@ public class RegisterServlet extends HttpServlet {
 					// le mot de passe et la confirmation doivent être identiques.
 					System.out.println("mdp et confirmation sont pas identiques!");
 					req.setAttribute("errorInscription", " Inscription incorrect.");
-					req.getRequestDispatcher("/WEB-INF/pages/register.jsp").forward(req, resp);
+					req.getRequestDispatcher("/WEB-INF/pages/inscription.jsp").forward(req, resp);
 				}
 			}
 		} catch (DALException e1) {
