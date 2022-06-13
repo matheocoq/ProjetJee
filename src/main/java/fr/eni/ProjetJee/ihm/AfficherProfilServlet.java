@@ -55,11 +55,11 @@ public class AfficherProfilServlet extends HttpServlet {
 				
 			} catch (NumberFormatException e) {
 				System.err.println("Id de l'utilisateur incorrect");
-				response.sendRedirect("/Projet_ENI-Encheres/accueil");
+				response.sendRedirect("/ProjetJee/accueil");
 			}
 		} catch (BLLException e) {
 			System.err.println(e.getMessage());
-			response.sendRedirect("/Projet_ENI-Encheres/accueil");
+			response.sendRedirect("/ProjetJee/accueil");
 		}
 	}
 

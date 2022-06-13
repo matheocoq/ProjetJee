@@ -48,7 +48,7 @@ public class ConnexionServlet extends HttpServlet {
 			Utilisateur userCo = utilisateurMger.verifConnexion(login, mdp);
 			System.out.println("connexion");
 			session.setAttribute("utilisateur", userCo);
-			response.sendRedirect("/Projet_ENI-Encheres/accueil");
+			response.sendRedirect("/ProjetJee/accueil");
 		} catch (BLLException e) {
 			System.err.println("Login ou mot de passe incorrect !!");
 			request.setAttribute("errorConnexion", true);
