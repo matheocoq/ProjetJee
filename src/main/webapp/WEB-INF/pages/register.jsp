@@ -40,7 +40,7 @@
   	
 	
 	<input type="submit" value="Créer">
-	<button onclick="window.location.href = 'http://localhost:8080/Projet_ENI-Encheres/accueil';">Annuler</button>
+	<button onclick="window.location.href = 'http://localhost:8080/ProjetJee/accueil';">Annuler</button>
 </form>
 
 <jsp:include page="footer/footer.jsp" />

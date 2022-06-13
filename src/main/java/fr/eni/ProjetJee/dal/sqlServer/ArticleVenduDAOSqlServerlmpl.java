@@ -30,9 +30,9 @@ public class ArticleVenduDAOSqlServerlmpl implements ArticleVenduDAO {
 	private static final String SELECTALL = "Select * from ARTICLES_VENDUS WHERE etat_vente='En cours' ORDER BY date_debut_encheres";
 	private static final String SELECT = "Select * from ARTICLES_VENDUS where no_article=?";
 	private static final String SELECTBYUTILISATEUR = "Select * from ARTICLES_VENDUS where no_utilisateur=?";
-	private static final String SELECTBYCATEGORIE = "Select * from ARTICLES_VENDUS where no_categorie=?";
-	private static final String SELECTBYCATEGORIENAME = "Select * from ARTICLES_VENDUS where no_categorie=? and nom_article LIKE ? ";
-	private static final String SELECTBYNAME = "Select * from ARTICLES_VENDUS where nom_article LIKE ? ";
+	private static final String SELECTBYCATEGORIE = "Select * from ARTICLES_VENDUS where no_categorie=? and etat_vente='En cours'";
+	private static final String SELECTBYCATEGORIENAME = "Select * from ARTICLES_VENDUS where no_categorie=? and nom_article LIKE ? and etat_vente='En cours'";
+	private static final String SELECTBYNAME = "Select * from ARTICLES_VENDUS where nom_article LIKE ? and etat_vente='En cours'";
 	private static final String DELETE = "DELETE FROM ARTICLES_VENDUS WHERE no_article=?;";
 	private static final String UPDATE = "UPDATE ARTICLES_VENDUS SET nom_article = ?, description = ? , date_debut_encheres = ?, date_fin_encheres = ?, prix_initial = ?, prix_vente = ?, no_utilisateur = ?, no_categorie = ? , no_retrait =? ,photo=? ,etat_vente = ? WHERE no_article=?;";
 
@@ -84,8 +84,8 @@ public class ArticleVenduDAOSqlServerlmpl implements ArticleVenduDAO {
 
 			if (res.next()) {
 				
-				 LocalDateTime date_debut_encheres = res.getDate("date_debut_encheres").toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
-				 LocalDateTime date_fin_encheres = res.getDate("date_fin_encheres").toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+				LocalDateTime date_debut_encheres = res.getTimestamp("date_debut_encheres").toLocalDateTime();
+				 LocalDateTime date_fin_encheres = res.getTimestamp("date_fin_encheres").toLocalDateTime();
 				 articlevendu = new ArticleVendu(res.getInt("no_article"),res.getString("nom_article"),res.getString("description"),date_debut_encheres,date_fin_encheres,res.getString("etat_vente"),res.getInt("prix_initial"),res.getInt("prix_vente"),res.getString("photo"),null,null,null,null);				
 				
 				UtilisateursDAO daoUtilisateur=(UtilisateursDAO) DAOFactory.getDAOUtilisateur();
@@ -95,12 +95,12 @@ public class ArticleVenduDAOSqlServerlmpl implements ArticleVenduDAO {
 				CategorieDAO daoCategorie=(CategorieDAO) DAOFactory.getDAOCategorie();
 				Categorie categorie = daoCategorie.selectById(res.getInt("no_categorie"));
 				articlevendu.setCategorie(categorie);
-				if(res.getInt("no_retrait")>=0) {
+				if(res.getInt("no_retrait")>0) {
 					RetraitDAO daoRetrait=(RetraitDAO) DAOFactory.getDAORetrait();
 					Retrait retrait = daoRetrait.selectById(res.getInt("no_retrait"));
 					articlevendu.setLieuRetrait(retrait);
 				}
-				if(res.getInt("no_gagnant")>=0) {
+				if(res.getInt("no_gagnant")>0) {
 					Utilisateur utilisateurGagnant = daoUtilisateur.selectById(res.getInt("no_gagnant"));
 					articlevendu.setGagnant(utilisateurGagnant);
 				}
@@ -129,30 +129,31 @@ public class ArticleVenduDAOSqlServerlmpl implements ArticleVenduDAO {
 			
 			//Recupérer l'identifiant créé
 			while(res.next()) {
-				 LocalDateTime date_debut_encheres = res.getDate("date_debut_encheres").toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
-				 LocalDateTime date_fin_encheres = res.getDate("date_fin_encheres").toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+				LocalDateTime date_debut_encheres = res.getTimestamp("date_debut_encheres").toLocalDateTime();
+				 LocalDateTime date_fin_encheres = res.getTimestamp("date_fin_encheres").toLocalDateTime();
 				 ArticleVendu articlevendu = new ArticleVendu(res.getInt("no_article"),res.getString("nom_article"),res.getString("description"),date_debut_encheres,date_fin_encheres,res.getString("etat_vente"),res.getInt("prix_initial"),res.getInt("prix_vente"),res.getString("photo"),null,null,null,null);				
-				
+				 
 				UtilisateursDAO daoUtilisateur=(UtilisateursDAO) DAOFactory.getDAOUtilisateur();
 				Utilisateur utilisateur = daoUtilisateur.selectById(res.getInt("no_utilisateur"));
+				
 				articlevendu.setUtilisateur(utilisateur);
 				
 				CategorieDAO daoCategorie=(CategorieDAO) DAOFactory.getDAOCategorie();
 				Categorie categorie = daoCategorie.selectById(res.getInt("no_categorie"));
 				articlevendu.setCategorie(categorie);
-				if(res.getInt("no_retrait")>=0) {
+				
+				if(res.getInt("no_retrait")>0) {
 					RetraitDAO daoRetrait=(RetraitDAO) DAOFactory.getDAORetrait();
 					Retrait retrait = daoRetrait.selectById(res.getInt("no_retrait"));
 					articlevendu.setLieuRetrait(retrait);
 				}
-				if(res.getInt("no_gagnant")>=0) {
+				if(res.getInt("no_gagnant")>0) {
 					Utilisateur utilisateurGagnant = daoUtilisateur.selectById(res.getInt("no_gagnant"));
 					articlevendu.setGagnant(utilisateurGagnant);
 				}
+			
 				articles.add(articlevendu);
 			}
-			
-				
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -178,8 +179,8 @@ public class ArticleVenduDAOSqlServerlmpl implements ArticleVenduDAO {
 			
 			//Recupérer l'identifiant créé
 			while(res.next()) {
-				 LocalDateTime date_debut_encheres = res.getDate("date_debut_encheres").toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
-				 LocalDateTime date_fin_encheres = res.getDate("date_fin_encheres").toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+				 LocalDateTime date_debut_encheres = res.getTimestamp("date_debut_encheres").toLocalDateTime();
+				 LocalDateTime date_fin_encheres = res.getTimestamp("date_fin_encheres").toLocalDateTime();
 				 ArticleVendu articlevendu = new ArticleVendu(res.getInt("no_article"),res.getString("nom_article"),res.getString("description"),date_debut_encheres,date_fin_encheres,res.getString("etat_vente"),res.getInt("prix_initial"),res.getInt("prix_vente"),res.getString("photo"),null,null,null,null);				
 				
 				UtilisateursDAO daoUtilisateur=(UtilisateursDAO) DAOFactory.getDAOUtilisateur();
@@ -189,12 +190,12 @@ public class ArticleVenduDAOSqlServerlmpl implements ArticleVenduDAO {
 				CategorieDAO daoCategorie=(CategorieDAO) DAOFactory.getDAOCategorie();
 				Categorie categorie = daoCategorie.selectById(res.getInt("no_categorie"));
 				articlevendu.setCategorie(categorie);
-				if(res.getInt("no_retrait")>=0) {
+				if(res.getInt("no_retrait")>0) {
 					RetraitDAO daoRetrait=(RetraitDAO) DAOFactory.getDAORetrait();
 					Retrait retrait = daoRetrait.selectById(res.getInt("no_retrait"));
 					articlevendu.setLieuRetrait(retrait);
 				}
-				if(res.getInt("no_gagnant")>=0) {
+				if(res.getInt("no_gagnant")>0) {
 					Utilisateur utilisateurGagnant = daoUtilisateur.selectById(res.getInt("no_gagnant"));
 					articlevendu.setGagnant(utilisateurGagnant);
 				}
@@ -226,8 +227,8 @@ ArrayList<ArticleVendu> articles =new ArrayList<ArticleVendu>();
 			
 			//Recupérer l'identifiant créé
 			while(res.next()) {
-				 LocalDateTime date_debut_encheres = res.getDate("date_debut_encheres").toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
-				 LocalDateTime date_fin_encheres = res.getDate("date_fin_encheres").toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+				LocalDateTime date_debut_encheres = res.getTimestamp("date_debut_encheres").toLocalDateTime();
+				 LocalDateTime date_fin_encheres = res.getTimestamp("date_fin_encheres").toLocalDateTime();
 				 ArticleVendu articlevendu = new ArticleVendu(res.getInt("no_article"),res.getString("nom_article"),res.getString("description"),date_debut_encheres,date_fin_encheres,res.getString("etat_vente"),res.getInt("prix_initial"),res.getInt("prix_vente"),res.getString("photo"),null,null,null,null);				
 				
 				UtilisateursDAO daoUtilisateur=(UtilisateursDAO) DAOFactory.getDAOUtilisateur();
@@ -237,12 +238,12 @@ ArrayList<ArticleVendu> articles =new ArrayList<ArticleVendu>();
 				CategorieDAO daoCategorie=(CategorieDAO) DAOFactory.getDAOCategorie();
 				Categorie categoriee = daoCategorie.selectById(res.getInt("no_categorie"));
 				articlevendu.setCategorie(categoriee);
-				if(res.getInt("no_retrait")>=0) {
+				if(res.getInt("no_retrait")>0) {
 					RetraitDAO daoRetrait=(RetraitDAO) DAOFactory.getDAORetrait();
 					Retrait retrait = daoRetrait.selectById(res.getInt("no_retrait"));
 					articlevendu.setLieuRetrait(retrait);
 				}
-				if(res.getInt("no_gagnant")>=0) {
+				if(res.getInt("no_gagnant")>0) {
 					Utilisateur utilisateurGagnant = daoUtilisateur.selectById(res.getInt("no_gagnant"));
 					articlevendu.setGagnant(utilisateurGagnant);
 				}
@@ -324,8 +325,8 @@ ArrayList<ArticleVendu> articles =new ArrayList<ArticleVendu>();
 			
 			//Recupérer l'identifiant créé
 			while(res.next()) {
-				 LocalDateTime date_debut_encheres = res.getDate("date_debut_encheres").toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
-				 LocalDateTime date_fin_encheres = res.getDate("date_fin_encheres").toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+				LocalDateTime date_debut_encheres = res.getTimestamp("date_debut_encheres").toLocalDateTime();
+				 LocalDateTime date_fin_encheres = res.getTimestamp("date_fin_encheres").toLocalDateTime();
 				 ArticleVendu articlevendu = new ArticleVendu(res.getInt("no_article"),res.getString("nom_article"),res.getString("description"),date_debut_encheres,date_fin_encheres,res.getString("etat_vente"),res.getInt("prix_initial"),res.getInt("prix_vente"),res.getString("photo"),null,null,null,null);				
 				
 				UtilisateursDAO daoUtilisateur=(UtilisateursDAO) DAOFactory.getDAOUtilisateur();
@@ -335,12 +336,12 @@ ArrayList<ArticleVendu> articles =new ArrayList<ArticleVendu>();
 				CategorieDAO daoCategorie=(CategorieDAO) DAOFactory.getDAOCategorie();
 				Categorie categoriee = daoCategorie.selectById(res.getInt("no_categorie"));
 				articlevendu.setCategorie(categoriee);
-				if(res.getInt("no_retrait")>=0) {
+				if(res.getInt("no_retrait")>0) {
 					RetraitDAO daoRetrait=(RetraitDAO) DAOFactory.getDAORetrait();
 					Retrait retrait = daoRetrait.selectById(res.getInt("no_retrait"));
 					articlevendu.setLieuRetrait(retrait);
 				}
-				if(res.getInt("no_gagnant")>=0) {
+				if(res.getInt("no_gagnant")>0) {
 					Utilisateur utilisateurGagnant = daoUtilisateur.selectById(res.getInt("no_gagnant"));
 					articlevendu.setGagnant(utilisateurGagnant);
 				}
@@ -372,8 +373,8 @@ ArrayList<ArticleVendu> articles =new ArrayList<ArticleVendu>();
 			
 			//Recupérer l'identifiant créé
 			while(res.next()) {
-				 LocalDateTime date_debut_encheres = res.getDate("date_debut_encheres").toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
-				 LocalDateTime date_fin_encheres = res.getDate("date_fin_encheres").toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+				LocalDateTime date_debut_encheres = res.getTimestamp("date_debut_encheres").toLocalDateTime();
+				 LocalDateTime date_fin_encheres = res.getTimestamp("date_fin_encheres").toLocalDateTime();
 				 ArticleVendu articlevendu = new ArticleVendu(res.getInt("no_article"),res.getString("nom_article"),res.getString("description"),date_debut_encheres,date_fin_encheres,res.getString("etat_vente"),res.getInt("prix_initial"),res.getInt("prix_vente"),res.getString("photo"),null,null,null,null);				
 				
 				UtilisateursDAO daoUtilisateur=(UtilisateursDAO) DAOFactory.getDAOUtilisateur();
@@ -383,12 +384,12 @@ ArrayList<ArticleVendu> articles =new ArrayList<ArticleVendu>();
 				CategorieDAO daoCategorie=(CategorieDAO) DAOFactory.getDAOCategorie();
 				Categorie categoriee = daoCategorie.selectById(res.getInt("no_categorie"));
 				articlevendu.setCategorie(categoriee);
-				if(res.getInt("no_retrait")>=0) {
+				if(res.getInt("no_retrait")>0) {
 					RetraitDAO daoRetrait=(RetraitDAO) DAOFactory.getDAORetrait();
 					Retrait retrait = daoRetrait.selectById(res.getInt("no_retrait"));
 					articlevendu.setLieuRetrait(retrait);
 				}
-				if(res.getInt("no_gagnant")>=0) {
+				if(res.getInt("no_gagnant")>0) {
 					Utilisateur utilisateurGagnant = daoUtilisateur.selectById(res.getInt("no_gagnant"));
 					articlevendu.setGagnant(utilisateurGagnant);
 				}
@@ -411,23 +412,108 @@ ArrayList<ArticleVendu> articles =new ArrayList<ArticleVendu>();
 			String checkbox, String ouvertes, String mesEnchere, String mesEnchereReporter, String mesVenteCours,
 			String mesVenteDebutees, String mesVentetTerminees) throws DALException {
 		
-ArrayList<ArticleVendu> articles =new ArrayList<ArticleVendu>();
+			ArrayList<ArticleVendu> articles =new ArrayList<ArticleVendu>();
 		
 		try(Connection conn = ConnectionProvider.getConnection();) {
-			String requete ="SELECT * FROM ARTICLES_VENDUS";
+			String requete ="SELECT * FROM ARTICLES_VENDUS INNER JOIN UTILISATEURS ON ARTICLES_VENDUS.no_utilisateur = UTILISATEURS.no_utilisateur ";
 			PreparedStatement stmt=null;
 			int nb=1;
+			if(checkbox.equals("achat")) {
+				if(mesEnchere!=null){
+					requete=requete+"INNER JOIN ENCHERES "
+								   +"ON ARTICLES_VENDUS.no_article = ENCHERES.no_article "
+								   +"WHERE (etat_vente = 'En cours' AND ENCHERES.no_utilisateur = ?) ";
+				}
+				if(mesEnchereReporter!=null){
+					if(mesEnchere!=null) {
+						requete=requete+"OR (etat_vente = 'Enchères terminées' AND no_gagnant = ? ) ";
+								
+					}else {
+						requete=requete+"WHERE (etat_vente = 'Enchères terminées' AND no_gagnant = ?) ";
+								
+					}
+				}
+				
+				if(ouvertes!=null){
+					if(mesEnchere!=null||mesEnchereReporter!=null) {
+						requete=requete+"OR (etat_vente = 'En cours') ";
+					}else {
+						requete=requete+"WHERE (etat_vente = 'En cours') ";
+					}
+				}
+			}else {
+				requete=requete+"WHERE ARTICLES_VENDUS.no_utilisateur = ? ";
+				if(mesVenteCours!=null){
+					
+					requete=requete+"AND etat_vente = 'En cours' ";
+				
+				}
+				if(mesVenteDebutees!=null){
+					if(mesVenteCours!=null) {
+						requete=requete+"OR etat_vente = 'Créée' ";
+					}else {
+						requete=requete+"AND etat_vente = 'Créée' ";
+					}
+					
+				}
+				if(mesVentetTerminees!=null){
+					if(mesVenteCours!=null || mesVenteDebutees!=null) {
+						requete=requete+"OR etat_vente = 'Enchères terminées' ";
+					}else {
+						requete=requete+"AND etat_vente = 'Enchères terminées' ";
+					}
+				}
+	
+			}
+			if(categorie!=0) {
+				if(checkbox.equals("vente") || mesEnchere!=null||mesEnchereReporter!=null ||ouvertes!=null) {
+					requete=requete+"AND no_categorie = ? ";
+				}
+				else {
+					requete=requete+"WHERE no_categorie = ? ";
+				}
+			}
 			
-			 stmt = conn.prepareStatement(SELECTBYNAME);
-			stmt.setString(1, name);
-			
+			if(name!=null){
+				if(checkbox.equals("vente") || categorie==0 ||mesEnchere!=null||mesEnchereReporter!=null ||ouvertes!=null) {
+					requete=requete+"AND nom_article LIKE ? ";
+				}
+				else {
+					requete=requete+"WHERE nom_article LIKE ? ";
+				}
+			}
+			 
+			 requete=requete+"ORDER BY date_debut_encheres ;";
 			//Executer la requete
+			 stmt = conn.prepareStatement(requete);
+			 if(checkbox.equals("achat")) {
+					if(mesEnchere!=null){
+						stmt.setInt(nb, utilisateur.getNoUtilisateur());
+						nb++;
+					}
+					if(mesEnchereReporter!=null){
+						stmt.setInt(nb, utilisateur.getNoUtilisateur());
+						nb++;
+					}
+				}else {
+					 stmt.setInt(nb, utilisateur.getNoUtilisateur());
+					 nb++;
+				}
+				if(categorie!=0) {
+					stmt.setInt(nb, categorie);
+					nb++;
+				}
+				
+				if(name!=null){
+					 stmt.setString(nb, "%"+name+"%");
+					 nb++;
+				}
 			ResultSet res= stmt.executeQuery();
 			
 			//Recupérer l'identifiant créé
 			while(res.next()) {
-				 LocalDateTime date_debut_encheres = res.getDate("date_debut_encheres").toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
-				 LocalDateTime date_fin_encheres = res.getDate("date_fin_encheres").toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+				LocalDateTime date_debut_encheres = res.getTimestamp("date_debut_encheres").toLocalDateTime();
+				 LocalDateTime date_fin_encheres = res.getTimestamp("date_fin_encheres").toLocalDateTime();
 				 ArticleVendu articlevendu = new ArticleVendu(res.getInt("no_article"),res.getString("nom_article"),res.getString("description"),date_debut_encheres,date_fin_encheres,res.getString("etat_vente"),res.getInt("prix_initial"),res.getInt("prix_vente"),res.getString("photo"),null,null,null,null);				
 				
 				UtilisateursDAO daoUtilisateur=(UtilisateursDAO) DAOFactory.getDAOUtilisateur();
@@ -437,12 +523,12 @@ ArrayList<ArticleVendu> articles =new ArrayList<ArticleVendu>();
 				CategorieDAO daoCategorie=(CategorieDAO) DAOFactory.getDAOCategorie();
 				Categorie categoriee = daoCategorie.selectById(res.getInt("no_categorie"));
 				articlevendu.setCategorie(categoriee);
-				if(res.getInt("no_retrait")>=0) {
+				if(res.getInt("no_retrait")>0) {
 					RetraitDAO daoRetrait=(RetraitDAO) DAOFactory.getDAORetrait();
 					Retrait retrait = daoRetrait.selectById(res.getInt("no_retrait"));
 					articlevendu.setLieuRetrait(retrait);
 				}
-				if(res.getInt("no_gagnant")>=0) {
+				if(res.getInt("no_gagnant")>0) {
 					Utilisateur utilisateurGagnant = daoUtilisateur.selectById(res.getInt("no_gagnant"));
 					articlevendu.setGagnant(utilisateurGagnant);
 				}

@@ -25,6 +25,6 @@
 				
 			<button class="btn btn-primary my-3">Connexion</button>
 		</form>
-		<a class="text-decoration-none text-secondary fw-bold" href="<%= request.getContextPath() %>/register">Crée un compte</a>
+		<a class="text-decoration-none text-secondary fw-bold" href="<%= request.getContextPath() %>/inscription">Crée un compte</a>
 	</div>
 <jsp:include page="footer/footer.jsp" />
