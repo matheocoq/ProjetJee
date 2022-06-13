@@ -4,7 +4,7 @@
 <%@page import="java.util.ArrayList"%>
 <span>Liste des Enchères</span>
 <span>Filtre :</span>
-<form action="/Projet_ENI-Encheres/" method="get">
+<form action="/ProjetJee/" method="get">
 <input name="nom" type="text">
 <label for="categorie-select">Categorie:</label>
 <select name="categorie" id="categorie-select">

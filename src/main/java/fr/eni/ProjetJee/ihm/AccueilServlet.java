@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.jasper.tagplugins.jstl.core.ForEach;
 
 import fr.eni.ProjetJee.bll.ArticleVenduMger;
 import fr.eni.ProjetJee.bll.BLLException;
@@ -69,6 +70,9 @@ public class AccueilServlet extends HttpServlet {
 				}
 				request.setAttribute("categories", categories);
 				request.setAttribute("articles", articles);
+				for(ArticleVendu a : articles) {
+					System.out.println(a.toString());
+				}
 				request.getRequestDispatcher("WEB-INF/pages/accueilNonCo.jsp").forward(request, response);
 			}
 		} catch (BLLException e) {

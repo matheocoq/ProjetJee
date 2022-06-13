@@ -30,9 +30,9 @@ public class ArticleVenduDAOSqlServerlmpl implements ArticleVenduDAO {
 	private static final String SELECTALL = "Select * from ARTICLES_VENDUS WHERE etat_vente='En cours' ORDER BY date_debut_encheres";
 	private static final String SELECT = "Select * from ARTICLES_VENDUS where no_article=?";
 	private static final String SELECTBYUTILISATEUR = "Select * from ARTICLES_VENDUS where no_utilisateur=?";
-	private static final String SELECTBYCATEGORIE = "Select * from ARTICLES_VENDUS where no_categorie=?";
-	private static final String SELECTBYCATEGORIENAME = "Select * from ARTICLES_VENDUS where no_categorie=? and nom_article LIKE ? ";
-	private static final String SELECTBYNAME = "Select * from ARTICLES_VENDUS where nom_article LIKE ? ";
+	private static final String SELECTBYCATEGORIE = "Select * from ARTICLES_VENDUS where no_categorie=? and etat_vente='En cours'";
+	private static final String SELECTBYCATEGORIENAME = "Select * from ARTICLES_VENDUS where no_categorie=? and nom_article LIKE ? and etat_vente='En cours'";
+	private static final String SELECTBYNAME = "Select * from ARTICLES_VENDUS where nom_article LIKE ? and etat_vente='En cours'";
 	private static final String DELETE = "DELETE FROM ARTICLES_VENDUS WHERE no_article=?;";
 	private static final String UPDATE = "UPDATE ARTICLES_VENDUS SET nom_article = ?, description = ? , date_debut_encheres = ?, date_fin_encheres = ?, prix_initial = ?, prix_vente = ?, no_utilisateur = ?, no_categorie = ? , no_retrait =? ,photo=? ,etat_vente = ? WHERE no_article=?;";
 
@@ -95,12 +95,12 @@ public class ArticleVenduDAOSqlServerlmpl implements ArticleVenduDAO {
 				CategorieDAO daoCategorie=(CategorieDAO) DAOFactory.getDAOCategorie();
 				Categorie categorie = daoCategorie.selectById(res.getInt("no_categorie"));
 				articlevendu.setCategorie(categorie);
-				if(res.getInt("no_retrait")>=0) {
+				if(res.getInt("no_retrait")>0) {
 					RetraitDAO daoRetrait=(RetraitDAO) DAOFactory.getDAORetrait();
 					Retrait retrait = daoRetrait.selectById(res.getInt("no_retrait"));
 					articlevendu.setLieuRetrait(retrait);
 				}
-				if(res.getInt("no_gagnant")>=0) {
+				if(res.getInt("no_gagnant")>0) {
 					Utilisateur utilisateurGagnant = daoUtilisateur.selectById(res.getInt("no_gagnant"));
 					articlevendu.setGagnant(utilisateurGagnant);
 				}
@@ -132,27 +132,28 @@ public class ArticleVenduDAOSqlServerlmpl implements ArticleVenduDAO {
 				LocalDateTime date_debut_encheres = res.getTimestamp("date_debut_encheres").toLocalDateTime();
 				 LocalDateTime date_fin_encheres = res.getTimestamp("date_fin_encheres").toLocalDateTime();
 				 ArticleVendu articlevendu = new ArticleVendu(res.getInt("no_article"),res.getString("nom_article"),res.getString("description"),date_debut_encheres,date_fin_encheres,res.getString("etat_vente"),res.getInt("prix_initial"),res.getInt("prix_vente"),res.getString("photo"),null,null,null,null);				
-				
+				 
 				UtilisateursDAO daoUtilisateur=(UtilisateursDAO) DAOFactory.getDAOUtilisateur();
 				Utilisateur utilisateur = daoUtilisateur.selectById(res.getInt("no_utilisateur"));
+				
 				articlevendu.setUtilisateur(utilisateur);
 				
 				CategorieDAO daoCategorie=(CategorieDAO) DAOFactory.getDAOCategorie();
 				Categorie categorie = daoCategorie.selectById(res.getInt("no_categorie"));
 				articlevendu.setCategorie(categorie);
-				if(res.getInt("no_retrait")>=0) {
+				System.out.println(res.getInt("no_gagnant"));
+				if(res.getInt("no_retrait")>0) {
 					RetraitDAO daoRetrait=(RetraitDAO) DAOFactory.getDAORetrait();
 					Retrait retrait = daoRetrait.selectById(res.getInt("no_retrait"));
 					articlevendu.setLieuRetrait(retrait);
 				}
-				if(res.getInt("no_gagnant")>=0) {
+				if(res.getInt("no_gagnant")>0) {
 					Utilisateur utilisateurGagnant = daoUtilisateur.selectById(res.getInt("no_gagnant"));
 					articlevendu.setGagnant(utilisateurGagnant);
 				}
+			
 				articles.add(articlevendu);
 			}
-			
-				
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -189,12 +190,12 @@ public class ArticleVenduDAOSqlServerlmpl implements ArticleVenduDAO {
 				CategorieDAO daoCategorie=(CategorieDAO) DAOFactory.getDAOCategorie();
 				Categorie categorie = daoCategorie.selectById(res.getInt("no_categorie"));
 				articlevendu.setCategorie(categorie);
-				if(res.getInt("no_retrait")>=0) {
+				if(res.getInt("no_retrait")>0) {
 					RetraitDAO daoRetrait=(RetraitDAO) DAOFactory.getDAORetrait();
 					Retrait retrait = daoRetrait.selectById(res.getInt("no_retrait"));
 					articlevendu.setLieuRetrait(retrait);
 				}
-				if(res.getInt("no_gagnant")>=0) {
+				if(res.getInt("no_gagnant")>0) {
 					Utilisateur utilisateurGagnant = daoUtilisateur.selectById(res.getInt("no_gagnant"));
 					articlevendu.setGagnant(utilisateurGagnant);
 				}
@@ -237,12 +238,12 @@ ArrayList<ArticleVendu> articles =new ArrayList<ArticleVendu>();
 				CategorieDAO daoCategorie=(CategorieDAO) DAOFactory.getDAOCategorie();
 				Categorie categoriee = daoCategorie.selectById(res.getInt("no_categorie"));
 				articlevendu.setCategorie(categoriee);
-				if(res.getInt("no_retrait")>=0) {
+				if(res.getInt("no_retrait")>0) {
 					RetraitDAO daoRetrait=(RetraitDAO) DAOFactory.getDAORetrait();
 					Retrait retrait = daoRetrait.selectById(res.getInt("no_retrait"));
 					articlevendu.setLieuRetrait(retrait);
 				}
-				if(res.getInt("no_gagnant")>=0) {
+				if(res.getInt("no_gagnant")>0) {
 					Utilisateur utilisateurGagnant = daoUtilisateur.selectById(res.getInt("no_gagnant"));
 					articlevendu.setGagnant(utilisateurGagnant);
 				}
@@ -335,12 +336,12 @@ ArrayList<ArticleVendu> articles =new ArrayList<ArticleVendu>();
 				CategorieDAO daoCategorie=(CategorieDAO) DAOFactory.getDAOCategorie();
 				Categorie categoriee = daoCategorie.selectById(res.getInt("no_categorie"));
 				articlevendu.setCategorie(categoriee);
-				if(res.getInt("no_retrait")>=0) {
+				if(res.getInt("no_retrait")>0) {
 					RetraitDAO daoRetrait=(RetraitDAO) DAOFactory.getDAORetrait();
 					Retrait retrait = daoRetrait.selectById(res.getInt("no_retrait"));
 					articlevendu.setLieuRetrait(retrait);
 				}
-				if(res.getInt("no_gagnant")>=0) {
+				if(res.getInt("no_gagnant")>0) {
 					Utilisateur utilisateurGagnant = daoUtilisateur.selectById(res.getInt("no_gagnant"));
 					articlevendu.setGagnant(utilisateurGagnant);
 				}
@@ -383,12 +384,12 @@ ArrayList<ArticleVendu> articles =new ArrayList<ArticleVendu>();
 				CategorieDAO daoCategorie=(CategorieDAO) DAOFactory.getDAOCategorie();
 				Categorie categoriee = daoCategorie.selectById(res.getInt("no_categorie"));
 				articlevendu.setCategorie(categoriee);
-				if(res.getInt("no_retrait")>=0) {
+				if(res.getInt("no_retrait")>0) {
 					RetraitDAO daoRetrait=(RetraitDAO) DAOFactory.getDAORetrait();
 					Retrait retrait = daoRetrait.selectById(res.getInt("no_retrait"));
 					articlevendu.setLieuRetrait(retrait);
 				}
-				if(res.getInt("no_gagnant")>=0) {
+				if(res.getInt("no_gagnant")>0) {
 					Utilisateur utilisateurGagnant = daoUtilisateur.selectById(res.getInt("no_gagnant"));
 					articlevendu.setGagnant(utilisateurGagnant);
 				}
@@ -437,12 +438,12 @@ ArrayList<ArticleVendu> articles =new ArrayList<ArticleVendu>();
 				CategorieDAO daoCategorie=(CategorieDAO) DAOFactory.getDAOCategorie();
 				Categorie categoriee = daoCategorie.selectById(res.getInt("no_categorie"));
 				articlevendu.setCategorie(categoriee);
-				if(res.getInt("no_retrait")>=0) {
+				if(res.getInt("no_retrait")>0) {
 					RetraitDAO daoRetrait=(RetraitDAO) DAOFactory.getDAORetrait();
 					Retrait retrait = daoRetrait.selectById(res.getInt("no_retrait"));
 					articlevendu.setLieuRetrait(retrait);
 				}
-				if(res.getInt("no_gagnant")>=0) {
+				if(res.getInt("no_gagnant")>0) {
 					Utilisateur utilisateurGagnant = daoUtilisateur.selectById(res.getInt("no_gagnant"));
 					articlevendu.setGagnant(utilisateurGagnant);
 				}
