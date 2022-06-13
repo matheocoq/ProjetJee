@@ -24,22 +24,9 @@ public class TestConnectionServlet extends HttpServlet {
 		
 		try {
 			UtilisateurMger utilisateurMger = UtilisateurMger.getInstance();
-			Utilisateur user = new Utilisateur("testCon", "test", "connexion", "email@gmail.com", "0651515166", "45", "44100", "Nantes", utilisateurMger.generateHash("monMdp"), 0);
+			Utilisateur user = new Utilisateur("bvrignaud", "baptiste", "vrignaud", "email2@gmail.com", "0651515146", "45 rue de la croix", "44100", "Nantes", utilisateurMger.generateHash("monMdp"), 100000000);
 			utilisateurMger.ajouterUtilisateur(user);
-			CategorieDAO categorieDAO = DAOFactory.getDAOCategorie();
-			Categorie u = new Categorie("Informatique");
-			Categorie u1 = new Categorie("Ameublement");
-			Categorie u2 = new Categorie("Sport&Loisir");
-			Categorie u3 = new Categorie("Vetement");
-			try {
-				categorieDAO.insert(u);
-				categorieDAO.insert(u1);
-				categorieDAO.insert(u2);
-				categorieDAO.insert(u3);
-			} catch (DALException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			
 		} catch (BLLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

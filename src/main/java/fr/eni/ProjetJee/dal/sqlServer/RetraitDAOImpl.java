@@ -19,6 +19,7 @@ public class RetraitDAOImpl implements RetraitDAO{
 	private static final String UPDATE = "UPDATE RETRAITS SET no_article=?,rue=?,code_postal=?,ville=? where no_retrait=?";
 	private final String DELETE = "DELETE FROM RETRAITS WHERE no_retrait=?";
 	private final String selectID = "Select * from RETRAITS where no_retrait=?";
+	private static final String SELECT_BY_ARTICLE = "Select * from RETRAITS where no_article = ?";
 	
 	@Override
 	public void insert(Retrait retrait) throws DALException {
@@ -229,6 +230,52 @@ public class RetraitDAOImpl implements RetraitDAO{
 			}
 		}
 		
+	}
+
+	@Override
+	public Retrait selectByArticle(Integer idArticle) throws DALException {
+		Retrait retrait = null;
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		
+		try {
+			//Ouverture de la connexion � la base
+			
+			conn = ConnectionProvider.getConnection();
+			
+			//Execution de la requ�te
+			stmt = conn.prepareStatement(SELECT_BY_ARTICLE);
+			stmt.setInt(1, idArticle);
+			
+			ResultSet rs = stmt.executeQuery();
+			
+			//Traitement du r�sultat
+			if (rs.next()) {
+				retrait = new Retrait(rs.getInt("no_retrait"), rs.getInt("no_article"),rs.getString("rue"), rs.getString("code_postal"), rs.getString("ville"));
+			}
+			
+		} catch (SQLException e) {
+			throw new DALException("Selection par ID impossible");
+		} finally {
+			//Fermmeture de la connexion � la base
+			if(conn!=null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if(stmt!=null) {
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		return retrait;
 	}
 
 }
