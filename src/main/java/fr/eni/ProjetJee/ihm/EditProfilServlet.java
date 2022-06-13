@@ -53,7 +53,7 @@ public class EditProfilServlet extends HttpServlet {
 		UtilisateurMger userMgr = UtilisateurMger.getInstance(); 
 		// on verifie la longueur du numero de tel et si le pseudo, l'email ou telephone existe déjà dans la base de données. 
 		try {
-			if(tel.length()<10 || userMgr.checkPseudoEmailTel(speudo, email, tel)) { 
+			if(tel.length()<10) { 
 				request.setAttribute("errorModification", " Modification incorrect."); 
 				request.getRequestDispatcher("/WEB-INF/pages/editProfil.jsp").forward(request, response); 
 			}else { 
@@ -92,9 +92,6 @@ public class EditProfilServlet extends HttpServlet {
 					} 
 				} 
 			}
-		} catch (DALException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (ServletException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
