@@ -99,6 +99,7 @@ public class DetailVenteServlet extends HttpServlet {
 					return;
 				}
 				
+				// Faire en mode transaction sql pour sécuriser le débit crédit des users.
 				if (enchere != null) {
 					Utilisateur ancienEnchereure = enchere.getNoUtilisateur();
 					ancienEnchereure.setCredit(enchere.getMontantEnchere() + ancienEnchereure.getCredit());

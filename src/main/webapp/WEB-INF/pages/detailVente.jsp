@@ -21,7 +21,7 @@
 			
 			${not empty propositionError ? "<div class='alert alert-danger mt-5 mb-3' role='alert'>Proposition incorrect !!</div>" : null}
 			
-			<p class=" mt-5">${ article.getNomArticle() }</p>
+			<p class="fw-bold mt-5">${ article.getNomArticle() }</p>
 			
 			<div class="row">
 				<div class="col-2">
