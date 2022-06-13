@@ -141,7 +141,7 @@ public class ArticleVenduDAOSqlServerlmpl implements ArticleVenduDAO {
 				CategorieDAO daoCategorie=(CategorieDAO) DAOFactory.getDAOCategorie();
 				Categorie categorie = daoCategorie.selectById(res.getInt("no_categorie"));
 				articlevendu.setCategorie(categorie);
-				System.out.println(res.getInt("no_gagnant"));
+				
 				if(res.getInt("no_retrait")>0) {
 					RetraitDAO daoRetrait=(RetraitDAO) DAOFactory.getDAORetrait();
 					Retrait retrait = daoRetrait.selectById(res.getInt("no_retrait"));
@@ -412,17 +412,102 @@ ArrayList<ArticleVendu> articles =new ArrayList<ArticleVendu>();
 			String checkbox, String ouvertes, String mesEnchere, String mesEnchereReporter, String mesVenteCours,
 			String mesVenteDebutees, String mesVentetTerminees) throws DALException {
 		
-ArrayList<ArticleVendu> articles =new ArrayList<ArticleVendu>();
+			ArrayList<ArticleVendu> articles =new ArrayList<ArticleVendu>();
 		
 		try(Connection conn = ConnectionProvider.getConnection();) {
-			String requete ="SELECT * FROM ARTICLES_VENDUS";
+			String requete ="SELECT * FROM ARTICLES_VENDUS INNER JOIN UTILISATEURS ON ARTICLES_VENDUS.no_utilisateur = UTILISATEURS.no_utilisateur ";
 			PreparedStatement stmt=null;
 			int nb=1;
+			if(checkbox.equals("achat")) {
+				if(mesEnchere!=null){
+					requete=requete+"INNER JOIN ENCHERES "
+								   +"ON ARTICLES_VENDUS.no_article = ENCHERES.no_article "
+								   +"WHERE (etat_vente = 'En cours' AND ENCHERES.no_utilisateur = ?) ";
+				}
+				if(mesEnchereReporter!=null){
+					if(mesEnchere!=null) {
+						requete=requete+"OR (etat_vente = 'Enchères terminées' AND no_gagnant = ? ) ";
+								
+					}else {
+						requete=requete+"WHERE (etat_vente = 'Enchères terminées' AND no_gagnant = ?) ";
+								
+					}
+				}
+				
+				if(ouvertes!=null){
+					if(mesEnchere!=null||mesEnchereReporter!=null) {
+						requete=requete+"OR (etat_vente = 'En cours') ";
+					}else {
+						requete=requete+"WHERE (etat_vente = 'En cours') ";
+					}
+				}
+			}else {
+				requete=requete+"WHERE ARTICLES_VENDUS.no_utilisateur = ? ";
+				if(mesVenteCours!=null){
+					
+					requete=requete+"AND etat_vente = 'En cours' ";
+				
+				}
+				if(mesVenteDebutees!=null){
+					if(mesVenteCours!=null) {
+						requete=requete+"OR etat_vente = 'Créée' ";
+					}else {
+						requete=requete+"AND etat_vente = 'Créée' ";
+					}
+					
+				}
+				if(mesVentetTerminees!=null){
+					if(mesVenteCours!=null || mesVenteDebutees!=null) {
+						requete=requete+"OR etat_vente = 'Enchères terminées' ";
+					}else {
+						requete=requete+"AND etat_vente = 'Enchères terminées' ";
+					}
+				}
+	
+			}
+			if(categorie!=0) {
+				if(checkbox.equals("vente") || mesEnchere!=null||mesEnchereReporter!=null ||ouvertes!=null) {
+					requete=requete+"AND no_categorie = ? ";
+				}
+				else {
+					requete=requete+"WHERE no_categorie = ? ";
+				}
+			}
 			
-			 stmt = conn.prepareStatement(SELECTBYNAME);
-			stmt.setString(1, name);
-			
+			if(name!=null){
+				if(checkbox.equals("vente") || categorie==0 ||mesEnchere!=null||mesEnchereReporter!=null ||ouvertes!=null) {
+					requete=requete+"AND nom_article LIKE ? ";
+				}
+				else {
+					requete=requete+"WHERE nom_article LIKE ? ";
+				}
+			}
+			 
+			 requete=requete+"ORDER BY date_debut_encheres ;";
 			//Executer la requete
+			 stmt = conn.prepareStatement(requete);
+			 if(checkbox.equals("achat")) {
+					if(mesEnchere!=null){
+						stmt.setInt(nb, utilisateur.getNoUtilisateur());
+						nb++;
+					}
+					if(mesEnchereReporter!=null){
+						stmt.setInt(nb, utilisateur.getNoUtilisateur());
+						nb++;
+					}
+				}else {
+					 stmt.setInt(nb, utilisateur.getNoUtilisateur());
+					 nb++;
+				}
+				if(categorie!=0) {
+					stmt.setInt(nb, categorie);
+					nb++;
+				}
+				
+				if(name!=null){
+					 stmt.setString(nb, "%"+name+"%");
+					 nb++;
+				}
 			ResultSet res= stmt.executeQuery();
 			
 			//Recupérer l'identifiant créé
