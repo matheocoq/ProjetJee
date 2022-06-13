@@ -84,8 +84,8 @@ public class ArticleVenduDAOSqlServerlmpl implements ArticleVenduDAO {
 
 			if (res.next()) {
 				
-				 LocalDateTime date_debut_encheres = res.getDate("date_debut_encheres").toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
-				 LocalDateTime date_fin_encheres = res.getDate("date_fin_encheres").toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+				LocalDateTime date_debut_encheres = res.getTimestamp("date_debut_encheres").toLocalDateTime();
+				 LocalDateTime date_fin_encheres = res.getTimestamp("date_fin_encheres").toLocalDateTime();
 				 articlevendu = new ArticleVendu(res.getInt("no_article"),res.getString("nom_article"),res.getString("description"),date_debut_encheres,date_fin_encheres,res.getString("etat_vente"),res.getInt("prix_initial"),res.getInt("prix_vente"),res.getString("photo"),null,null,null,null);				
 				
 				UtilisateursDAO daoUtilisateur=(UtilisateursDAO) DAOFactory.getDAOUtilisateur();
@@ -129,8 +129,8 @@ public class ArticleVenduDAOSqlServerlmpl implements ArticleVenduDAO {
 			
 			//Recupérer l'identifiant créé
 			while(res.next()) {
-				 LocalDateTime date_debut_encheres = res.getDate("date_debut_encheres").toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
-				 LocalDateTime date_fin_encheres = res.getDate("date_fin_encheres").toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+				LocalDateTime date_debut_encheres = res.getTimestamp("date_debut_encheres").toLocalDateTime();
+				 LocalDateTime date_fin_encheres = res.getTimestamp("date_fin_encheres").toLocalDateTime();
 				 ArticleVendu articlevendu = new ArticleVendu(res.getInt("no_article"),res.getString("nom_article"),res.getString("description"),date_debut_encheres,date_fin_encheres,res.getString("etat_vente"),res.getInt("prix_initial"),res.getInt("prix_vente"),res.getString("photo"),null,null,null,null);				
 				
 				UtilisateursDAO daoUtilisateur=(UtilisateursDAO) DAOFactory.getDAOUtilisateur();
@@ -178,8 +178,8 @@ public class ArticleVenduDAOSqlServerlmpl implements ArticleVenduDAO {
 			
 			//Recupérer l'identifiant créé
 			while(res.next()) {
-				 LocalDateTime date_debut_encheres = res.getDate("date_debut_encheres").toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
-				 LocalDateTime date_fin_encheres = res.getDate("date_fin_encheres").toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+				 LocalDateTime date_debut_encheres = res.getTimestamp("date_debut_encheres").toLocalDateTime();
+				 LocalDateTime date_fin_encheres = res.getTimestamp("date_fin_encheres").toLocalDateTime();
 				 ArticleVendu articlevendu = new ArticleVendu(res.getInt("no_article"),res.getString("nom_article"),res.getString("description"),date_debut_encheres,date_fin_encheres,res.getString("etat_vente"),res.getInt("prix_initial"),res.getInt("prix_vente"),res.getString("photo"),null,null,null,null);				
 				
 				UtilisateursDAO daoUtilisateur=(UtilisateursDAO) DAOFactory.getDAOUtilisateur();
@@ -226,8 +226,8 @@ ArrayList<ArticleVendu> articles =new ArrayList<ArticleVendu>();
 			
 			//Recupérer l'identifiant créé
 			while(res.next()) {
-				 LocalDateTime date_debut_encheres = res.getDate("date_debut_encheres").toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
-				 LocalDateTime date_fin_encheres = res.getDate("date_fin_encheres").toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+				LocalDateTime date_debut_encheres = res.getTimestamp("date_debut_encheres").toLocalDateTime();
+				 LocalDateTime date_fin_encheres = res.getTimestamp("date_fin_encheres").toLocalDateTime();
 				 ArticleVendu articlevendu = new ArticleVendu(res.getInt("no_article"),res.getString("nom_article"),res.getString("description"),date_debut_encheres,date_fin_encheres,res.getString("etat_vente"),res.getInt("prix_initial"),res.getInt("prix_vente"),res.getString("photo"),null,null,null,null);				
 				
 				UtilisateursDAO daoUtilisateur=(UtilisateursDAO) DAOFactory.getDAOUtilisateur();
@@ -324,8 +324,8 @@ ArrayList<ArticleVendu> articles =new ArrayList<ArticleVendu>();
 			
 			//Recupérer l'identifiant créé
 			while(res.next()) {
-				 LocalDateTime date_debut_encheres = res.getDate("date_debut_encheres").toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
-				 LocalDateTime date_fin_encheres = res.getDate("date_fin_encheres").toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+				LocalDateTime date_debut_encheres = res.getTimestamp("date_debut_encheres").toLocalDateTime();
+				 LocalDateTime date_fin_encheres = res.getTimestamp("date_fin_encheres").toLocalDateTime();
 				 ArticleVendu articlevendu = new ArticleVendu(res.getInt("no_article"),res.getString("nom_article"),res.getString("description"),date_debut_encheres,date_fin_encheres,res.getString("etat_vente"),res.getInt("prix_initial"),res.getInt("prix_vente"),res.getString("photo"),null,null,null,null);				
 				
 				UtilisateursDAO daoUtilisateur=(UtilisateursDAO) DAOFactory.getDAOUtilisateur();
@@ -372,8 +372,8 @@ ArrayList<ArticleVendu> articles =new ArrayList<ArticleVendu>();
 			
 			//Recupérer l'identifiant créé
 			while(res.next()) {
-				 LocalDateTime date_debut_encheres = res.getDate("date_debut_encheres").toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
-				 LocalDateTime date_fin_encheres = res.getDate("date_fin_encheres").toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+				LocalDateTime date_debut_encheres = res.getTimestamp("date_debut_encheres").toLocalDateTime();
+				 LocalDateTime date_fin_encheres = res.getTimestamp("date_fin_encheres").toLocalDateTime();
 				 ArticleVendu articlevendu = new ArticleVendu(res.getInt("no_article"),res.getString("nom_article"),res.getString("description"),date_debut_encheres,date_fin_encheres,res.getString("etat_vente"),res.getInt("prix_initial"),res.getInt("prix_vente"),res.getString("photo"),null,null,null,null);				
 				
 				UtilisateursDAO daoUtilisateur=(UtilisateursDAO) DAOFactory.getDAOUtilisateur();
@@ -426,8 +426,8 @@ ArrayList<ArticleVendu> articles =new ArrayList<ArticleVendu>();
 			
 			//Recupérer l'identifiant créé
 			while(res.next()) {
-				 LocalDateTime date_debut_encheres = res.getDate("date_debut_encheres").toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
-				 LocalDateTime date_fin_encheres = res.getDate("date_fin_encheres").toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+				LocalDateTime date_debut_encheres = res.getTimestamp("date_debut_encheres").toLocalDateTime();
+				 LocalDateTime date_fin_encheres = res.getTimestamp("date_fin_encheres").toLocalDateTime();
 				 ArticleVendu articlevendu = new ArticleVendu(res.getInt("no_article"),res.getString("nom_article"),res.getString("description"),date_debut_encheres,date_fin_encheres,res.getString("etat_vente"),res.getInt("prix_initial"),res.getInt("prix_vente"),res.getString("photo"),null,null,null,null);				
 				
 				UtilisateursDAO daoUtilisateur=(UtilisateursDAO) DAOFactory.getDAOUtilisateur();
