@@ -17,7 +17,7 @@ public class UtilisateurDAOSqlServerImpl implements UtilisateursDAO {
 	private static final String SELECT_BY_ID = "SELECT * FROM UTILISATEURS WHERE no_utilisateur = ?";
 	private static final String SELECT_BY_LOGIN = "SELECT * FROM UTILISATEURS WHERE email = ? or pseudo = ?";
 	private static final String SELECT_ALL = "SELECT * FROM UTILISATEURS";
-	private static final String UPDATE = "UPDATE UTILISATEURS set pseudo = ?, nom = ?, prenom = ?, email = ?, telephone = ?, rue = ?, code_postal = ?, ville = ?, mot_de_passe = ?, credit = ?, administrateur = ?, active = ? where no_utilisateur =?";
+	private static final String UPDATE = "UPDATE UTILISATEURS set pseudo = ?, nom = ?, prenom = ?, email = ?, telephone = ?, rue = ?, code_postal = ?, ville = ?, mot_de_passe = ?, credit = ?, administrateur = ?, active = ? WHERE no_utilisateur = ?";
 	private static final String DELETE = "DELETE FROM UTILISATEURS WHERE noUtilisateur = ?";
 	private static final String CHECK_UNIQUE = "SELECT pseudo,email,telephone FROM UTILISATEURS WHERE pseudo = ? or email=? or telephone=?";
 
@@ -40,6 +40,7 @@ public class UtilisateurDAOSqlServerImpl implements UtilisateursDAO {
 			stmt.setInt(10, utilisateur.getCredit());
 			stmt.setBoolean(11, utilisateur.getAdministrateur());
 			stmt.setBoolean(12, utilisateur.getActiver());
+			
 			
 			//Executer la requete
 			stmt.executeUpdate();
@@ -116,13 +117,13 @@ public class UtilisateurDAOSqlServerImpl implements UtilisateursDAO {
 			stmt.setBoolean(11, utilisateur.getAdministrateur());
 			stmt.setBoolean(12, utilisateur.getActiver());
 			stmt.setInt(13, utilisateur.getNoUtilisateur());
-			//System.out.println("user modifié : "+utilisateur.getNoUtilisateur());
+			
 			//Executer la requete
 			stmt.executeUpdate();
 			//System.out.println("MAJ Ok");
 		} catch (Exception e) {
 			// TODO: handle exception
-			//System.out.println("ICI MAJ USER");
+			System.err.println(e.getMessage());
 			throw new DALException("Utilisateur update Error", e);
 		}
 	}

@@ -81,7 +81,7 @@
 				<div class="row mt-3">
 					<div class="col offset-5">
 						<button class="btn btn-primary me-1" >Valider</button>
-						<a class="text-decoration-none btn btn-secondary" >Annuler</a>
+						<a href="<%= request.getContextPath() %>/accueil" class="text-decoration-none btn btn-secondary" >Annuler</a>
 					</div>
 				</div>
 				

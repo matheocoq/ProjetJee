@@ -1,6 +1,7 @@
 package fr.eni.ProjetJee.bo;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class ArticleVendu {
 	private int noArticle;
@@ -16,6 +17,9 @@ public class ArticleVendu {
 	private Retrait lieuRetrait;
 	private Categorie categorie;
 	private Utilisateur gagnant;
+	
+	private static final DateTimeFormatter DF = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+	static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/L/Y");
 	
 	public ArticleVendu(int noArticle, String nomArticle, String description, LocalDateTime dateDebutEncheres,
 			LocalDateTime dateFinEncheres, String etatVente,int miseAPrix,int prixVente, String photo, Utilisateur utilisateur,
@@ -38,7 +42,6 @@ public class ArticleVendu {
 	public ArticleVendu(String nomArticle, String description, LocalDateTime dateDebutEncheres,
 			LocalDateTime dateFinEncheres, String etatVente,int miseAPrix,int prixVente, String photo, Utilisateur utilisateur,
 			Retrait lieuRetrait, Categorie categorie) {
-		this.noArticle = noArticle;
 		this.nomArticle = nomArticle;
 		this.description = description;
 		this.dateDebutEncheres = dateDebutEncheres;
@@ -87,6 +90,10 @@ public class ArticleVendu {
 
 	public LocalDateTime getDateFinEncheres() {
 		return dateFinEncheres;
+	}
+	
+	public String getDateFinEncheresFormat() {
+		return dateFinEncheres.format(formatter);
 	}
 
 	public void setDateFinEncheres(LocalDateTime dateFinEncheres) {

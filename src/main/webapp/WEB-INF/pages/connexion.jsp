@@ -1,5 +1,5 @@
 <jsp:include page="header/header.jsp" />
-	<div class="container">
+	<div class="container" style="max-width: 500px">
 		<form action="" method="post">
 		
 			${not empty errorConnexion ? "<div class='alert alert-danger mb-4' role='alert'>Authentification incorrect !!</div>" : null}

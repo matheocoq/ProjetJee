@@ -26,6 +26,16 @@ public class RetraitManager {
 		daoRetrait = DAOFactory.getDAORetrait();
 	}
 	
+	public Retrait getRetraitByArticle(int idArticle) throws BLLException {
+		Retrait retrait = null;
+		try {
+			retrait = daoRetrait.selectByArticle(idArticle);
+		} catch (DALException e) {
+			System.err.println(e.getMessage());
+		}
+		return retrait;
+	}
+	
 	public List<Retrait> getRetraits() throws BLLException{
 		List<Retrait> retraits = new ArrayList<>();
 		try {
