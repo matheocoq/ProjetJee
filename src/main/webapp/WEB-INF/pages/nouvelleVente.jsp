@@ -16,7 +16,7 @@
 		<div class="col-9">
 		
 			<h5 style="text-align: center">Nouvelle vente</h5>
-			<form action="" method="post">
+			<form action="<%= request.getContextPath() %>/NouvelleVente" method="post">
 				<div class="form-group mt-3">
 					<label for="article">Article</label>
 					<input type="text" class="form-control" name="article" id="article" >
