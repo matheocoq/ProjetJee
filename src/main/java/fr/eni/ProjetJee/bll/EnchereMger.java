@@ -1,6 +1,7 @@
 package fr.eni.ProjetJee.bll;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 import fr.eni.ProjetJee.bo.ArticleVendu;
 import fr.eni.ProjetJee.bo.Enchere;
@@ -42,6 +43,22 @@ public class EnchereMger {
 		}
 	}
 	
+	public ArrayList<Enchere> enchereByArticle(ArticleVendu ArticleVendu) throws BLLException {
+		try {
+			return enchereDAO.selectEnchereByArticle(ArticleVendu);
+		} catch (DALException e) {
+			throw new BLLException("enchereByIndex Error ", e);
+		}
+	}
+	
+	public ArrayList<Enchere> enchereByUser(Utilisateur user) throws BLLException {
+		try {
+			return enchereDAO.selectEnchereByUser(user);
+		} catch (DALException e) {
+			throw new BLLException("enchereByIndex Error ", e);
+		}
+	}
+	
 	public Enchere lastEnchereByArticle(int noArticleVendu) throws BLLException {
 		try {
 			return enchereDAO.selecteLast(noArticleVendu);
@@ -65,7 +82,13 @@ public class EnchereMger {
 			throw new BLLException("supprimerEncheresByUser Error ", e);
 		}
 	}
-	public void supprimerEncheresByUserSup(int noUtilisateur) throws BLLException{
-		
+	
+	public void supprimerEncheresByArticle(ArticleVendu article) throws BLLException {
+		try {
+			enchereDAO.deleteByArticle(article);
+		} catch (DALException e) {
+			throw new BLLException("supprimerEncheresByUser Error ", e);
+		}
 	}
+
 }
