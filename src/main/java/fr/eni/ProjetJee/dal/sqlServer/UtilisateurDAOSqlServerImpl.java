@@ -221,6 +221,33 @@ public class UtilisateurDAOSqlServerImpl implements UtilisateursDAO {
 		return isDuplicated;
 	}
 
+	@Override
+	public boolean checkPseudoEmailTelModif(String speudo, String email, String tel) throws DALException {
+		
+		int nbLignes =0;
+		try (Connection conn = ConnectionProvider.getConnection();) {
+			PreparedStatement stmt = conn.prepareStatement(CHECK_UNIQUE);
+			
+		
+			//Préparer la requete
+			stmt.setString(1, speudo);
+			stmt.setString(2, email);
+			stmt.setString(3, tel);
+			
+			
+			
+			//Executer la requete
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				nbLignes++;
+			}
+			
+		} catch (Exception e) {
+			throw new DALException("check unique Error ", e);
+		}		
+		return nbLignes==1;
+	}
+
 	
 
 	

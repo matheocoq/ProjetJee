@@ -8,7 +8,7 @@
 	
 	${not empty errorModification ? "<div class='alert alert-danger mb-4' role='alert'>Modification incorrect !!</div>" : null }
 	<br><br>
-	${not empty infosNewMdp ? "<div class='alert alert-success' role='alert'> Nouveau mot de passe ok !!</div>" : null }
+	${not empty infosNewMdp ? "<div class='alert alert-danger mb-4' role='alert'> Nouveau mot de passe ok !!</div>" : null }
 	<br>
 	
 	<%

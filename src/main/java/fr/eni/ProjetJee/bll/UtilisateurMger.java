@@ -124,4 +124,8 @@ public class UtilisateurMger {
 		return utilisateurDAO.checkPseudoEmailTel(pseudo, email, tel);
 	}
 
+	public boolean checkPseudoEmailTelModif(String pseudo,String email,String tel) throws DALException {
+		
+		return utilisateurDAO.checkPseudoEmailTelModif(pseudo, email, tel);
+	}
 }

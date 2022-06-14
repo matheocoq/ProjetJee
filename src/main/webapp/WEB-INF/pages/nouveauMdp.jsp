@@ -3,6 +3,8 @@
 <jsp:include page="header/headerRegister.jsp" />
 
 <form action="http://localhost:8080/ProjetJee/nouveauMdp" method="post">
+
+	
 	<label for="newMdp">Nouveau mot de passe :  </label>
   	<input type="password" id="newMdp" name="newMdp"  pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{12,}$" title="Doit contenir au moins une lettre majuscule,une minscule et au moins un chiffre, un caractère spécial et au minimum 12 caractères"> 
   	<label for="confirmation">Confirmation :  </label>
