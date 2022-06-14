@@ -423,7 +423,7 @@ ArrayList<ArticleVendu> articles =new ArrayList<ArticleVendu>();
 			int nb=1;
 			if(checkbox.equals("achat")) {
 				if(mesEnchere!=null){
-					requete=requete+"INNER JOIN ENCHERES "
+					requete=requete+"LEFT JOIN ENCHERES "
 								   +"ON ARTICLES_VENDUS.no_article = ENCHERES.no_article "
 								   +"WHERE (etat_vente = 'En cours' AND ENCHERES.no_utilisateur = ?) ";
 				}
@@ -499,18 +499,18 @@ ArrayList<ArticleVendu> articles =new ArrayList<ArticleVendu>();
 						stmt.setInt(nb, utilisateur.getNoUtilisateur());
 						nb++;
 					}
-				}else {
-					 stmt.setInt(nb, utilisateur.getNoUtilisateur());
-					 nb++;
-				}
-				if(categorie!=0) {
-					stmt.setInt(nb, categorie);
-					nb++;
-				}
-				if(name!=""){
-					 stmt.setString(nb, "%"+name+"%");
-					 nb++;
-				}
+			}else {
+				stmt.setInt(nb, utilisateur.getNoUtilisateur());
+				nb++;
+			}
+			if(categorie!=0) {
+				stmt.setInt(nb, categorie);
+				nb++;
+			}
+			if(name!=""){
+				stmt.setString(nb, "%"+name+"%");
+				nb++;
+			}
 			ResultSet res= stmt.executeQuery();
 			
 			//Recupérer l'identifiant créé

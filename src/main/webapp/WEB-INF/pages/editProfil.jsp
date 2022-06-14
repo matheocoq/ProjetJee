@@ -46,7 +46,7 @@
 	</div>
 	
 	<input type="submit" value="Enregistrer">
-	<button onclick="window.location.href = 'http://localhost:8080/ProjetJee/accueil';">Supprimer mon compte</button>
+	<button onclick="window.location.href = '<%=request.getContextPath()%>/supprimer';">Supprimer mon compte</button>
 </form>
 
 <jsp:include page="footer/footer.jsp" />

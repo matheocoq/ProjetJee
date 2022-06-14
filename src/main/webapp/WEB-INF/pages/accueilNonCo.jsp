@@ -11,6 +11,7 @@
     <option value="Toute">Toute</option>
     <%
 		ArrayList<Categorie> categories= (ArrayList<Categorie>)request.getAttribute("categories");
+        
 		for (Categorie catgorie : categories) {
 	%>
     	<option value="<%=catgorie.getNoCategorie() %>"><%=catgorie.getLibelle() %></option>
@@ -23,7 +24,11 @@
 <div class="fiche-produits">
 	<%
 		ArrayList<ArticleVendu> articles= (ArrayList<ArticleVendu>)request.getAttribute("articles");
+	out.println();
+	if(articles.size()>0){
+		
 		for (ArticleVendu article : articles) {
+		
 	%>
 		<div class="article">
 		<img alt="" src="<%= article.getPhoto() %>">
@@ -34,6 +39,14 @@
 		</div>
     <%
 		}
-    %>
+	}
+    else{
+    	
+    
+	%>
+	<span>Aucun article trouvée</span>
+	<%
+		}
+	%>
 </div>
 <jsp:include page="footer/footer.jsp" />

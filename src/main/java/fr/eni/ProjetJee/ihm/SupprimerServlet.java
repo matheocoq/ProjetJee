@@ -23,7 +23,7 @@ import fr.eni.ProjetJee.bo.Utilisateur;
 /**
  * Servlet implementation class SupprimerServlet
  */
-@WebServlet("/SupprimerServlet")
+@WebServlet("/supprimer")
 public class SupprimerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -31,14 +31,14 @@ public class SupprimerServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int idUtilisateur = Integer.parseInt(request.getParameter("user"));
-		HttpSession session = request.getSession(false);
+		
+		Utilisateur user = (Utilisateur) request.getSession().getAttribute("utilisateur");
 		
 		UtilisateurMger utilisateurMger = UtilisateurMger.getInstance();
 		ArticleVenduMger articleMger = ArticleVenduMger.getInstance();
 		EnchereMger enchereMger = EnchereMger.getInstance();
 		try {
-			Utilisateur user = utilisateurMger.utilisateurById(idUtilisateur);
+			
 			
 			//supression article cree
 			articleMger.supprimerArticleVenduCree(user);
@@ -77,6 +77,11 @@ public class SupprimerServlet extends HttpServlet {
 			//ajout dans l'historique et suppression de l'utilisateur
 			utilisateurMger.ajouterUtilisateurHistorique(user);
 			utilisateurMger.supprimerUtilisateur(user.getNoUtilisateur());
+			HttpSession session = request.getSession(false);
+			if (session != null && session.getAttribute("utilisateur") != null) {
+				session.invalidate();
+			}
+			response.sendRedirect("/ProjetJee/accueil");
 			
 		} catch (BLLException e) {
 			// TODO Auto-generated catch block
