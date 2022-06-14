@@ -27,5 +27,12 @@ $(".boutonRadio").click(function() {
 });
 
 
-let btnRefresh = document.querySelector("#btnRefresh")
-console.log(btnRefresh)
+let Debut = document.querySelector("#dateDebut")
+let Fin = document.querySelector("#dateFin")
+
+Debut.addEventListener('change', (e) => {
+  	let dateDebut = moment(Debut.value)
+	Fin.value = moment(dateDebut).add(1, 'days').format('YYYY-MM-DD')
+	Fin.min = moment(dateDebut).add(1, 'days').format('YYYY-MM-DD')
+});
+

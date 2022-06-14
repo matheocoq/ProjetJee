@@ -43,7 +43,7 @@ public class ConnexionServlet extends HttpServlet {
 		String mdp = request.getParameter("mdp");
 		try {
 			HttpSession session = request.getSession();
-			session.setMaxInactiveInterval(10*60);
+			session.setMaxInactiveInterval(5*60);
 			UtilisateurMger utilisateurMger = UtilisateurMger.getInstance();
 			Utilisateur userCo = utilisateurMger.verifConnexion(login, mdp);
 			System.out.println("connexion");

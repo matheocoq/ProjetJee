@@ -50,12 +50,12 @@
 				
 				<div class="form-group mt-3">
 					<label for="dateDebut">Date de début *</label>
-					<input type="date" name="dateDebut" id="dateDebut" class="form-control" value="${ dateNow }" min="${ dateNow }">
+					<input type="date" name="dateDebut" id="dateDebut" class="form-control dateDebut" value="${ dateNow }" min="${ dateNow }">
 				</div>
 				
 				<div class="form-group mt-3">
 					<label for="dateFin">Date de Fin *</label>
-					<input type="date" name="dateFin" id="dateFin" class="form-control" value="${ dateNow }" min="${ dateNow }">
+					<input type="date" name="dateFin" id="dateFin" class="form-control dateFin" value="${ dateNow }" min="${ dateNow }">
 				</div>
 				
 				<hr>

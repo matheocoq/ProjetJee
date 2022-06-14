@@ -57,20 +57,26 @@ public class DetailVenteServlet extends HttpServlet {
 				ArticleVendu article = articleVenduMger.articleVenduById(idArticleVendue);
 				Retrait retrait = retraitMger.getRetraitByArticle(idArticleVendue);
 				
+				if (article == null) {
+					response.sendRedirect("/ProjetJee/accueil");
+					return;
+				}
+				
 				String etatEnchere = article.getEtatVente();
 				
 				request.setAttribute("enchere", enchere);
 				request.setAttribute("article", article);
 				request.setAttribute("retrait", retrait);
 				
-				if (propositionError != null) {
-					request.setAttribute("propositionError", true);
-				}
+				
 				if (etatEnchere.equalsIgnoreCase("Créée") || etatEnchere.equalsIgnoreCase("En cours")) {
+					if (propositionError != null) {
+						request.setAttribute("propositionError", true);
+					}
 					request.getRequestDispatcher("/WEB-INF/pages/detailVente.jsp").forward(request, response);
 				} else {
-					
-					if ((article.getGagnant() != null && utilisateur.getNoUtilisateur() != article.getGagnant().getNoUtilisateur()) || (utilisateur.getNoUtilisateur() != article.getUtilisateur().getNoUtilisateur())) {
+
+					if (((article.getGagnant() != null && utilisateur.getNoUtilisateur() != article.getGagnant().getNoUtilisateur()) || article.getGagnant() == null) && (utilisateur.getNoUtilisateur() != article.getUtilisateur().getNoUtilisateur())) {
 						response.sendRedirect("/ProjetJee/accueil");
 						return;
 					}
