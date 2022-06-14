@@ -25,3 +25,7 @@ $(".boutonRadio").click(function() {
 	}
   	
 });
+
+
+let btnRefresh = document.querySelector("#btnRefresh")
+console.log(btnRefresh)

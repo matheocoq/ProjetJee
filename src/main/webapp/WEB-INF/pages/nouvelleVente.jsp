@@ -10,10 +10,9 @@
 <div class="container">
 	<div class="row">
 		<div class="col-3">
-			<img alt="" src="resources/imgTestNouvelleVente.jpg">
-			<p>IMAGE</p>
+			<img alt="" src="${pageContext.request.contextPath}/resources/imgTestNouvelleVente.jpg">
 		</div>
-		<div class="col-9">
+		<div class="col-8 offset-1">
 		
 			<h5 style="text-align: center">Nouvelle vente</h5>
 			<form action="<%= request.getContextPath() %>/NouvelleVente" method="post">
