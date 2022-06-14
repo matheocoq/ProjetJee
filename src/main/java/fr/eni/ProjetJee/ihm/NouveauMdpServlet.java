@@ -46,7 +46,7 @@ public class NouveauMdpServlet extends HttpServlet {
 			} 								 
 			// on redirectionné vers la page de modification de profil
 			
-			request.setAttribute("errorModification", "Nouveau mot de passe pris en compte.");
+			request.setAttribute("infosNewMdp", "Nouveau mot de passe pris en compte.");
 			response.sendRedirect("http://localhost:8080/ProjetJee/editProfil"); 
 		}else { 
 			// le nouveau mot de passe et la confirmation doivent être identiques. 

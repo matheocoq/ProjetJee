@@ -15,6 +15,7 @@
 		Utilisateur user = (Utilisateur)request.getSession().getAttribute("utilisateur");
 	%>
 	<div class="modifInscription">
+		<p>Test css</p>
 		<label for="pseudo">Pseudo :  </label>
   		<input type="text" id="pseudo" name="pseudo"  required="required" value="<%= user.getPseudo()%>"> 
   		<label for="nom">Nom :  </label>
