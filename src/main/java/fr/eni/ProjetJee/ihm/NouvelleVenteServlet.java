@@ -94,6 +94,12 @@ public class NouvelleVenteServlet extends HttpServlet {
 				LocalDateTime dateTimeDebut = LocalDateTime.parse(dateDebut + " 00:00", DTF);
 				LocalDateTime dateTimeFin = LocalDateTime.parse(dateFin + " 00:00", DTF);
 				
+				if (dateTimeDebut.isAfter(dateTimeFin)) {
+					request.setAttribute("nouvelleVenteError", true);
+					request.getRequestDispatcher("/WEB-INF/pages/nouvelleVente.jsp").forward(request, response);
+					return;
+				}
+				
 				Categorie categorie = categorieMger.getCategorieById(idCategorie);
 				Retrait retrait = new Retrait(rue, codePostal, ville);
 				ArticleVendu articleVendu = new ArticleVendu(article, description, dateTimeDebut, dateTimeFin, "Créée", prix, 0, photo, utilisateur, retrait, categorie);				

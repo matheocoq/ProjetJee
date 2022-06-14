@@ -67,7 +67,7 @@
 		<img alt="" src="<%= article.getPhoto() %>">
 		<a href="${pageContext.request.contextPath}/DetailVente?article=<%= article.getNoArticle() %>"><%= article.getNomArticle() %></a>
 		<span>Prix : <%= article.getPrixDeVente() %></span>
-		<span>Fin de l'enchère: <%= article.getDateFinEncheres() %></span>
+		<span>Fin de l'enchère: <%= article.getDateFinEncheresFormat() %></span>
 		<a href="${pageContext.request.contextPath}/AfficherProfil?user=<%= article.getUtilisateur().getNoUtilisateur() %>">Vendeur : <%= article.getUtilisateur().getPseudo() %></span>
 		</div>
     <%

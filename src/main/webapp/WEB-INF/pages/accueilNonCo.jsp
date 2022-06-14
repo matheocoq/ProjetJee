@@ -34,7 +34,7 @@
 		<img alt="" src="<%= article.getPhoto() %>">
 		<span><%= article.getNomArticle() %></span>
 		<span>Prix : <%= article.getPrixDeVente() %></span>
-		<span>Fin de l'enchère: <%= article.getDateFinEncheres() %></span>
+		<span>Fin de l'enchère: <%= article.getDateFinEncheresFormat() %></span>
 		<span>Vendeur : <%= article.getUtilisateur().getPseudo() %></span>
 		</div>
     <%
