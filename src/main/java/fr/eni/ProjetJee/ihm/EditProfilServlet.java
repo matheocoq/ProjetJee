@@ -31,12 +31,11 @@ public class EditProfilServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("Modification du profil!!!"); 
-				// on verifie les champs uniques et s'il ya un nouveau mot de passe  
-			 
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException { 
+		
 		// recuperation de tous les champs 
 		String speudo = request.getParameter("pseudo"); 
+		System.out.println("Le new speudo : "+speudo);
 		String nom = request.getParameter("nom"); 
 		String prenom = request.getParameter("prenom"); 
 		String email = request.getParameter("email"); 
@@ -45,52 +44,66 @@ public class EditProfilServlet extends HttpServlet {
 		String codePostal = request.getParameter("codePostal"); 
 		String ville = request.getParameter("ville"); 
 		String mdp = request.getParameter("mdp"); 
-		String newMdp = request.getParameter("newMdp"); 
-		String confirmation = request.getParameter("confirmation"); 
+		String bddMdp = request.getParameter("hashMdp");
 		int noUser = Integer.parseInt(request.getParameter("noUser"));
-		System.out.println("Le no user : "+noUser);
-		
 		UtilisateurMger userMgr = UtilisateurMger.getInstance(); 
+		Utilisateur ancienUser = (Utilisateur)request.getSession().getAttribute("utilisateur");
+		System.out.println("ancien");
+		System.out.println(ancienUser.toString());
 		// on verifie la longueur du numero de tel et si le pseudo, l'email ou telephone existe déjà dans la base de données. 
 		try {
-			if(tel.length()<10) { 
+			if(!tel.isEmpty() && tel.length()<10) { 
 				request.setAttribute("errorModification", " Modification incorrect."); 
 				request.getRequestDispatcher("/WEB-INF/pages/editProfil.jsp").forward(request, response); 
 			}else { 
-				// Apres les verifications, on regarde si ya pas un new mot de passe 
-				if(newMdp.isEmpty()) { 
-					System.out.println("Dans ce cas");
-					Utilisateur user = new Utilisateur(noUser,speudo, nom, prenom, email, tel, rue, codePostal, ville, userMgr.generateHash(mdp), 0,false); 
-					try { 
-						userMgr.majUtilisateur(user); 
-						request.getSession().setAttribute("utilisateur", user); 
-					} catch (BLLException e) { 
-						// TODO Auto-generated catch block 
-						e.printStackTrace(); 
-					} 			 
-					// on redirectionné vers la page d'acceuil du user connecté 
-					response.sendRedirect("http://localhost:8080/ProjetJee/editProfil"); 
-				}else { 
-					// s'il ya un new mot de passe, on sauve le user avec le new mdp 
-					if(newMdp.equals(confirmation)) { 
-						
-						Utilisateur user = new Utilisateur(noUser, speudo, nom, prenom, email, tel, rue, codePostal, ville, userMgr.generateHash(newMdp), 0,false); 
+				if(!ancienUser.getPseudo().equals(speudo) || !ancienUser.getTelephone().equals(tel) || !ancienUser.getEmail().equals(email)) {
+					System.out.println("Je suis dans ce cas des uniques modif :");
+					try {
+						if(userMgr.checkPseudoEmailTelModif(speudo,email,tel)){
+							/*if(userMgr.compareHashPassword(mdp,bddMdp)) { 
+								Utilisateur user = new Utilisateur(noUser,speudo, nom, prenom, email, tel, rue, codePostal, ville, userMgr.generateHash(mdp), ancienUser.getCredit(),false); 
+								try { 
+									userMgr.majUtilisateur(user); 
+									request.getSession().setAttribute("utilisateur", user); 
+								} catch (BLLException e) { 
+									// TODO Auto-generated catch block 
+									e.printStackTrace(); 
+								} 			 
+								// on va redirectionné vers la page d'acceuil du user connecté 
+								// informer que les infos ont été modifié
+								response.sendRedirect("http://localhost:8080/ProjetJee/editProfil"); 
+							}else {
+								request.setAttribute("errorModification", " Modification incorrect."); 
+								request.getRequestDispatcher("/WEB-INF/pages/register.jsp").forward(request, response);
+							}*/
+						}else {
+							request.setAttribute("errorModification", " Modification incorrect."); 
+							request.getRequestDispatcher("/WEB-INF/pages/editProfil.jsp").forward(request, response);
+						}
+					} catch (DALException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+					//On regarde si le mot de passe saisie est correct 
+					if(userMgr.compareHashPassword(mdp,bddMdp)) { 
+						Utilisateur user = new Utilisateur(noUser,speudo, nom, prenom, email, tel, rue, codePostal, ville, userMgr.generateHash(mdp), ancienUser.getCredit(),false); 
 						try { 
 							userMgr.majUtilisateur(user); 
 							request.getSession().setAttribute("utilisateur", user); 
 						} catch (BLLException e) { 
 							// TODO Auto-generated catch block 
 							e.printStackTrace(); 
-						} 								 
-						// on redirectionné vers la page d'acceuil du user connecté 
+						} 			 
+						// on va redirectionné vers la page d'acceuil du user connecté 
+						// informer que les infos ont été modifié
 						response.sendRedirect("http://localhost:8080/ProjetJee/editProfil"); 
-					}else { 
-						// le mot de passe et la confirmation doivent être identiques. 
-						System.out.println("mdp et confirmation sont pas identiques!"); 
+					}else {
 						request.setAttribute("errorModification", " Modification incorrect."); 
-						request.getRequestDispatcher("/WEB-INF/pages/register.jsp").forward(request, response); 
-					} 
-				} 
+						request.getRequestDispatcher("/WEB-INF/pages/register.jsp").forward(request, response);
+					}
+				
+				
 			}
 		} catch (ServletException e) {
 			// TODO Auto-generated catch block

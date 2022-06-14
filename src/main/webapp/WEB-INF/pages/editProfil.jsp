@@ -8,6 +8,8 @@
 	
 	${not empty errorModification ? "<div class='alert alert-danger mb-4' role='alert'>Modification incorrect !!</div>" : null }
 	<br><br>
+	${not empty infosNewMdp ? "<div class='alert alert-danger mb-4' role='alert'> Nouveau mot de passe ok !!</div>" : null }
+	<br>
 	
 	<%
 		Utilisateur user = (Utilisateur)request.getSession().getAttribute("utilisateur");
@@ -24,7 +26,7 @@
   		<input type="email" id="email" name="email"  required="required" value="<%= user.getEmail()%>"><br><br>
  
  		<label for="tel">Teléphone :  </label>
-  		<input type="tel" id="tel" name="tel"  required="required" value="<%= user.getTelephone()%>"> 
+  		<input type="tel" id="tel" name="tel" value="<%= user.getTelephone()%>"> 
   		<label for="rue">Rue :  </label>
   		<input type="text" id="rue" name="rue"  required="required" value="<%= user.getRue()%>"><br><br>
   	
@@ -34,12 +36,10 @@
   		<input type="text" id="ville" name="ville"  required="required" value="<%= user.getVille()%>"><br><br>
 	
 		<label for="mdp">Mot de passe actuel :  </label>
-  		<input type="password" id="mdp" name="mdp"  required="required" value="<%= user.getMotDePasse()%>"> <br><br>
-	
-		<label for="newMdp">Nouveau mot de passe :  </label>
-  		<input type="password" id="newMdp" name="newMdp"  pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{12,}$" title="Doit contenir au moins une lettre majuscule,une minscule et au moins un chiffre, un caractère spécial et au minimum 12 caractères"> 
-  		<label for="confirmation">Confirmation :  </label>
-  		<input type="password" id="confirmation" name="confirmation" pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{12,}$" title="Doit contenir au moins une lettre majuscule,une minsculeet au moins un chiffre, un caractère spécial et au minimum 12 caractères"><br><br>
+  		<input type="password" id="mdp" name="mdp"  required="required" pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{12,}$">
+  		<a href="http://localhost:8080/ProjetJee/nouveauMdp">nouveau mot de passe?</a> <br>
+  		<br>
+		<input type="hidden" id="hashMdp" name="hashMdp" value="<%= user.getMotDePasse()%>">
 		<label for="credit" > Crédit : <%= user.getCredit() %> </label>
 		<input type="hidden" name="noUser" value="<%= user.getNoUtilisateur()%>">
 		<br><br>
