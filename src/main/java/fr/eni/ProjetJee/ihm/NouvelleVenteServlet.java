@@ -99,7 +99,6 @@ public class NouvelleVenteServlet extends HttpServlet {
 				ArticleVendu articleVendu = new ArticleVendu(article, description, dateTimeDebut, dateTimeFin, "Créée", prix, 0, photo, utilisateur, retrait, categorie);				
 				
 				articleVenduMger.ajouterArticleVendu(articleVendu);
-				retrait.setNo_article(articleVendu.getNoArticle());
 				retraitMger.addRetraits(retrait);
 				articleVendu.setLieuRetrait(retrait);
 				articleVenduMger.majArticleVendu(articleVendu);

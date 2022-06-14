@@ -52,7 +52,7 @@ public class DetailVenteServlet extends HttpServlet {
 				String propositionError = request.getParameter("propositionError");
 				Enchere enchere = encherMger.lastEnchereByArticle(idArticleVendue);
 				ArticleVendu article = articleVenduMger.articleVenduById(idArticleVendue);
-				Retrait retrait = retraitMger.getRetraitByArticle(idArticleVendue);
+				Retrait retrait = article.getLieuRetrait();
 				
 				request.setAttribute("enchere", enchere);
 				request.setAttribute("article", article);
