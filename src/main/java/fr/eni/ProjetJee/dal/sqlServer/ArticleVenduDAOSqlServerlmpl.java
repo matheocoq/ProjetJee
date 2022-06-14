@@ -297,7 +297,14 @@ ArrayList<ArticleVendu> articles =new ArrayList<ArticleVendu>();
 			stmt.setInt(6, article.getPrixDeVente());
 			stmt.setInt(7, article.getUtilisateur().getNoUtilisateur());
 			stmt.setInt(8, article.getCategorie().getNoCategorie());
-			stmt.setInt(9, article.getLieuRetrait().getNoRetrait());
+			if(article.getLieuRetrait()==null) {
+				System.out.println("je passe dans le null");
+				stmt.setNull(9,(Integer) null);
+			}
+			else {
+				stmt.setInt(9, article.getLieuRetrait().getNoRetrait());
+			}
+			
 			stmt.setString(10, article.getPhoto());
 			stmt.setString(11, article.getEtatVente());
 			stmt.setInt(12, article.getNoArticle());

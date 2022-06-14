@@ -15,9 +15,11 @@ import org.apache.jasper.tagplugins.jstl.core.ForEach;
 import fr.eni.ProjetJee.bll.ArticleVenduMger;
 import fr.eni.ProjetJee.bll.BLLException;
 import fr.eni.ProjetJee.bll.EnchereMger;
+import fr.eni.ProjetJee.bll.RetraitManager;
 import fr.eni.ProjetJee.bll.UtilisateurMger;
 import fr.eni.ProjetJee.bo.ArticleVendu;
 import fr.eni.ProjetJee.bo.Enchere;
+import fr.eni.ProjetJee.bo.Retrait;
 import fr.eni.ProjetJee.bo.Utilisateur;
 
 /**
@@ -37,29 +39,9 @@ public class SupprimerServlet extends HttpServlet {
 		UtilisateurMger utilisateurMger = UtilisateurMger.getInstance();
 		ArticleVenduMger articleMger = ArticleVenduMger.getInstance();
 		EnchereMger enchereMger = EnchereMger.getInstance();
+		RetraitManager retraitMger = RetraitManager.getInstance();
 		try {
-			
-			
-			//supression article cree
-			articleMger.supprimerArticleVenduCree(user);
-			//supprimer article en cours
-			ArrayList<ArticleVendu> articles=articleMger.articleVenduEnCoursById(user);
-			for (ArticleVendu articleVendu : articles) {
-				Enchere enchere= enchereMger.lastEnchereByArticle(articleVendu.getNoArticle());
-				ArrayList<Enchere> encheres =enchereMger.enchereByArticle(articleVendu);
-				if(enchere==null) {
-					articleMger.supprimerArticleVendu(articleVendu.getNoArticle());
-				}
-				else {
-					 int montant =  enchere.getMontantEnchere() + enchere.getNoUtilisateur().getCredit();
-					 enchere.getNoUtilisateur().setCredit(montant);
-					 utilisateurMger.majUtilisateur(enchere.getNoUtilisateur());
-					 enchereMger.supprimerEncheresByArticle(articleVendu);
-					 articleMger.supprimerArticleVendu(articleVendu.getNoArticle());
-				}
-			
-			}
-			//supprime enchere
+			//supprime enchere OK
 			ArrayList<ArticleVendu> articlesEnchere =articleMger.articleVenduUserEnchere(user);
 			for (ArticleVendu articleVendu : articlesEnchere) {
 				Enchere enchereGagner = enchereMger.lastEnchereByArticle(articleVendu.getNoArticle());
@@ -74,8 +56,64 @@ public class SupprimerServlet extends HttpServlet {
 				}
 			}
 			
-			//ajout dans l'historique et suppression de l'utilisateur
-			utilisateurMger.ajouterUtilisateurHistorique(user);
+			//supression article cree
+			ArrayList<ArticleVendu> listeArticle=articleMger.articleVenduByUtilisateur(user);
+			for (ArticleVendu article : listeArticle) {
+				if(article.getEtatVente().equals("Créée")) {
+					if(article.getLieuRetrait()!=null) {
+						retraitMger.removeRetrait(article.getLieuRetrait().getNoRetrait());
+					}
+				
+					articleMger.supprimerArticleVendu(article.getNoArticle());
+				}
+				if(article.getEtatVente().equals("En cours")) {
+					Enchere enchere= enchereMger.lastEnchereByArticle(article.getNoArticle());
+					if(enchere==null) {
+						if(article.getLieuRetrait()!=null) {
+							retraitMger.removeRetrait(article.getLieuRetrait().getNoRetrait());
+						}
+					
+						articleMger.supprimerArticleVendu(article.getNoArticle());
+					}
+					else {
+						 int montant =  enchere.getMontantEnchere() + enchere.getNoUtilisateur().getCredit();
+						 enchere.getNoUtilisateur().setCredit(montant);
+						 utilisateurMger.majUtilisateur(enchere.getNoUtilisateur());
+						 enchereMger.supprimerEncheresByArticle(article);
+						 if(article.getLieuRetrait()!=null) {
+								retraitMger.removeRetrait(article.getLieuRetrait().getNoRetrait());
+						 }
+						
+						 articleMger.supprimerArticleVendu(article.getNoArticle());
+					}
+				}
+				if(article.getEtatVente().equals("Enchères terminées")) {
+					 if(article.getGagnant()!=null) {
+			
+						int montant =  article.getPrixDeVente() + article.getGagnant().getCredit();
+						article.getGagnant().setCredit(montant);
+						utilisateurMger.majUtilisateur(article.getGagnant());
+						
+					 }
+					 enchereMger.supprimerEncheresByArticle(article);
+					 if(article.getLieuRetrait()!=null) {
+							retraitMger.removeRetrait(article.getLieuRetrait().getNoRetrait());
+					 }
+				
+					 articleMger.supprimerArticleVendu(article.getNoArticle());
+				}
+				if(article.getEtatVente().equals("Retrait effectué")) {
+					enchereMger.supprimerEncheresByArticle(article);
+					 if(article.getLieuRetrait()!=null) {
+							retraitMger.removeRetrait(article.getLieuRetrait().getNoRetrait());
+					 }
+					
+					 articleMger.supprimerArticleVendu(article.getNoArticle());
+				}
+			}
+			
+			// suppression de l'utilisateur
+			
 			utilisateurMger.supprimerUtilisateur(user.getNoUtilisateur());
 			HttpSession session = request.getSession(false);
 			if (session != null && session.getAttribute("utilisateur") != null) {

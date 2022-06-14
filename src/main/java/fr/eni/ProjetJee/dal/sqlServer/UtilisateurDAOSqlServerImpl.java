@@ -19,7 +19,7 @@ public class UtilisateurDAOSqlServerImpl implements UtilisateursDAO {
 	private static final String SELECT_BY_LOGIN = "SELECT * FROM UTILISATEURS WHERE email = ? or pseudo = ?";
 	private static final String SELECT_ALL = "SELECT * FROM UTILISATEURS";
 	private static final String UPDATE = "UPDATE UTILISATEURS set pseudo = ?, nom = ?, prenom = ?, email = ?, telephone = ?, rue = ?, code_postal = ?, ville = ?, mot_de_passe = ?, credit = ?, administrateur = ?, active = ? WHERE no_utilisateur = ?";
-	private static final String DELETE = "DELETE FROM UTILISATEURS WHERE noUtilisateur = ?";
+	private static final String DELETE = "DELETE FROM UTILISATEURS WHERE no_utilisateur = ?";
 	private static final String CHECK_UNIQUE = "SELECT pseudo,email,telephone FROM UTILISATEURS WHERE pseudo = ? or email=? or telephone=?";
 
 	@Override
