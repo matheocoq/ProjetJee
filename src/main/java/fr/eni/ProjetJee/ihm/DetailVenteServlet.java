@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.jasper.tagplugins.jstl.core.If;
+
 import fr.eni.ProjetJee.bll.ArticleVenduMger;
 import fr.eni.ProjetJee.bll.BLLException;
 import fr.eni.ProjetJee.bll.EnchereMger;
@@ -48,11 +50,14 @@ public class DetailVenteServlet extends HttpServlet {
 		
 		try {
 			try {
+				Utilisateur utilisateur = (Utilisateur) request.getSession().getAttribute("utilisateur");
 				Integer idArticleVendue = Integer.parseInt(request.getParameter("article"));
 				String propositionError = request.getParameter("propositionError");
 				Enchere enchere = encherMger.lastEnchereByArticle(idArticleVendue);
 				ArticleVendu article = articleVenduMger.articleVenduById(idArticleVendue);
 				Retrait retrait = retraitMger.getRetraitByArticle(idArticleVendue);
+				
+				String etatEnchere = article.getEtatVente();
 				
 				request.setAttribute("enchere", enchere);
 				request.setAttribute("article", article);
@@ -61,8 +66,26 @@ public class DetailVenteServlet extends HttpServlet {
 				if (propositionError != null) {
 					request.setAttribute("propositionError", true);
 				}
+				if (etatEnchere.equalsIgnoreCase("Créée") || etatEnchere.equalsIgnoreCase("En cours")) {
+					request.getRequestDispatcher("/WEB-INF/pages/detailVente.jsp").forward(request, response);
+				} else {
+					
+					if ((article.getGagnant() != null && utilisateur.getNoUtilisateur() != article.getGagnant().getNoUtilisateur()) || (utilisateur.getNoUtilisateur() != article.getUtilisateur().getNoUtilisateur())) {
+						response.sendRedirect("/ProjetJee/accueil");
+						return;
+					}
+					
+					if (article.getGagnant() != null && utilisateur.getNoUtilisateur() != article.getGagnant().getNoUtilisateur()) {
+						request.setAttribute("gagnant", article.getGagnant().getPseudo());
+					} 
+					
+					if (etatEnchere.equalsIgnoreCase("Retrait effectué")) {
+						request.setAttribute("retraitE", true);
+					}
+					
+					request.getRequestDispatcher("/WEB-INF/pages/enchereGagne.jsp").forward(request, response);
+				}
 				
-				request.getRequestDispatcher("/WEB-INF/pages/detailVente.jsp").forward(request, response);
 			} catch (BLLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
