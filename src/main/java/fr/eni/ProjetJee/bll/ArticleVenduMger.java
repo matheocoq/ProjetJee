@@ -79,6 +79,24 @@ public class ArticleVenduMger {
 		}
 	}
 	
+	public ArrayList<ArticleVendu> articleVenduEnCoursById(Utilisateur user) throws BLLException {
+		try {
+			// (DALE -> mettre id de la categorie en parametre pas la categorie en entier)
+			return articleVenduDAO.selectEnCourById(user);
+		} catch (DALException e) {
+			throw new BLLException("articleVenduEnCoursById Error ", e);
+		}
+	}
+	
+	public ArrayList<ArticleVendu> articleVenduUserEnchere(Utilisateur user) throws BLLException {
+		try {
+			// (DALE -> mettre id de la categorie en parametre pas la categorie en entier)
+			return articleVenduDAO.selectUserEnchere(user);
+		} catch (DALException e) {
+			throw new BLLException("articleVenduEnCoursById Error ", e);
+		}
+	}
+	
 	public ArrayList<ArticleVendu> articleVenduByName(String name) throws BLLException {
 		try {
 			// (DALE -> mettre id de la categorie en parametre pas la categorie en entier)
