@@ -18,10 +18,5 @@
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 </head>
 <body>
-<div>
-<span>ENI-Enchère</span>
-<a>Enchère</a>
-<a>Vendre un article</a>
-<a>Mon profil</a>
-<a href="/ProjetJee/Deconnexion">Déconexion</a>
-</div>
+
+<jsp:include page="navBar.jsp" />

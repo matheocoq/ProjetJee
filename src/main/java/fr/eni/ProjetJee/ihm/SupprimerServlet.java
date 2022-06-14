@@ -35,7 +35,7 @@ public class SupprimerServlet extends HttpServlet {
 			Utilisateur user = utilisateurMger.utilisateurById(idUtilisateur);
 			utilisateurMger.ajouterUtilisateurHistorique(user);
 			articleMger.supprimerArticleVenduCree(user);
-			enchereMger.supprimerEncheresById(null, user)
+			enchereMger.supprimerEncheresById(null, user);
 			
 		} catch (BLLException e) {
 			// TODO Auto-generated catch block
