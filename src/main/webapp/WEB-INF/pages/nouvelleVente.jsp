@@ -17,17 +17,17 @@
 			<h5 style="text-align: center">Nouvelle vente</h5>
 			<form action="<%= request.getContextPath() %>/NouvelleVente" method="post">
 				<div class="form-group mt-3">
-					<label for="article">Article</label>
+					<label for="article">Article *</label>
 					<input type="text" class="form-control" name="article" id="article" >
 				</div>
 				
 				<div class="form-floating mt-3">
 				  <textarea class="form-control" placeholder="Description" name="description" id="description"></textarea>
-				  <label for="description">Description</label>
+				  <label for="description">Description *</label>
 				</div>
 				
 				<div class="mt-3">
-					<label for="categorie">Catégorie</label>
+					<label for="categorie">Catégorie *</label>
 					<select class="form-select" name="categorie" id="categorie">
 					  <option selected></option>
 					  
@@ -44,17 +44,17 @@
 				</div>
 				
 				<div class="form-group mt-3">
-					<label for="prix">Mise à prix</label>
+					<label for="prix">Mise à prix *</label>
 					<input type="number" min="0" max="" class="form-control" name="prix" id="prix" >
 				</div>
 				
 				<div class="form-group mt-3">
-					<label for="dateDebut">Date de début</label>
+					<label for="dateDebut">Date de début *</label>
 					<input type="date" name="dateDebut" id="dateDebut" class="form-control" value="${ dateNow }" min="${ dateNow }">
 				</div>
 				
 				<div class="form-group mt-3">
-					<label for="dateFin">Date de Fin</label>
+					<label for="dateFin">Date de Fin *</label>
 					<input type="date" name="dateFin" id="dateFin" class="form-control" value="${ dateNow }" min="${ dateNow }">
 				</div>
 				
