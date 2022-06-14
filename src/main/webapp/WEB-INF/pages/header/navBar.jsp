@@ -28,7 +28,7 @@ bottom: 0;
 						</li>
 						<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/NouvelleVente">Vendre
 								un article</a></li>
-						<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/editProfil">Mon
+						<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/AfficherProfil?user=${utilisateur.getNoUtilisateur()} ">Mon
 								profil</a></li>
 						<li class="nav-item"><a class="nav-link"
 							href="<%=request.getContextPath()%>/Deconnexion">Déconexion</a></li>

@@ -59,15 +59,16 @@
 <div class="fiche-produits">
 	<%
 		ArrayList<ArticleVendu> articles= (ArrayList<ArticleVendu>)request.getAttribute("articles");
-	    if(articles!=null){
+	    if(articles.size()>0){
 		for (ArticleVendu article : articles) {
+		
 	%>
 		<div class="article">
 		<img alt="" src="<%= article.getPhoto() %>">
-		<a href="${pageContext.request.contextPath}/"><%= article.getNomArticle() %></a>
+		<a href="${pageContext.request.contextPath}/DetailVente?article=<%= article.getNoArticle() %>"><%= article.getNomArticle() %></a>
 		<span>Prix : <%= article.getPrixDeVente() %></span>
 		<span>Fin de l'enchère: <%= article.getDateFinEncheres() %></span>
-		<a href="">Vendeur : <%= article.getUtilisateur().getPseudo() %></span>
+		<a href="${pageContext.request.contextPath}/AfficherProfil?user=<%= article.getUtilisateur().getNoUtilisateur() %>">Vendeur : <%= article.getUtilisateur().getPseudo() %></span>
 		</div>
     <%
 		}
