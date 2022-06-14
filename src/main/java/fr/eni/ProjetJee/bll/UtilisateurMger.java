@@ -110,7 +110,7 @@ public class UtilisateurMger {
 		return generatedPassword;
 	}
 	
-	private boolean compareHashPassword(String inputMdp, String bddMdp) {
+	public boolean compareHashPassword(String inputMdp, String bddMdp) {
 		String generatedPassword = this.generateHash(inputMdp);	
 		if(bddMdp.equals(generatedPassword)) {
 			return true;

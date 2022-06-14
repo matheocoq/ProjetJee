@@ -65,7 +65,7 @@ public class RegisterServlet extends HttpServlet {
 					resp.sendRedirect("http://localhost:8080/ProjetJee/");
 				}else {
 					// le mot de passe et la confirmation doivent être identiques.
-					System.out.println("mdp et confirmation sont pas identiques!");
+					//System.out.println("mdp et confirmation sont pas identiques!");
 					req.setAttribute("errorInscription", " Inscription incorrect.");
 					req.getRequestDispatcher("/WEB-INF/pages/inscription.jsp").forward(req, resp);
 				}

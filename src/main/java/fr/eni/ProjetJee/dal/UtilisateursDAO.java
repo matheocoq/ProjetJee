@@ -14,4 +14,5 @@ public interface UtilisateursDAO {
 	void update(Utilisateur utilisateur) throws DALException;
 	void delete(Integer noUtilisateur) throws DALException;
 	boolean checkPseudoEmailTel(String speudo,String email,String tel) throws DALException;
+	
 }
