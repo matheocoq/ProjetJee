@@ -19,7 +19,7 @@ public class ArticleVendu {
 	private Utilisateur gagnant;
 	
 	private static final DateTimeFormatter DF = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-	static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+	static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 	
 	public ArticleVendu(int noArticle, String nomArticle, String description, LocalDateTime dateDebutEncheres,
 			LocalDateTime dateFinEncheres, String etatVente,int miseAPrix,int prixVente, String photo, Utilisateur utilisateur,
