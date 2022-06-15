@@ -12,7 +12,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col-3">
-			<img alt="" src="${pageContext.request.contextPath}/resources/imgTestNouvelleVente.jpg">
+			<img class="imgArticle" alt="" src="${pageContext.request.contextPath}/resources/imgTestNouvelleVente.jpg">
 		</div>
 		<div class="col-8 offset-1">
 		<c:choose>

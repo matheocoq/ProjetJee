@@ -29,7 +29,7 @@ public class NouvelleVenteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	private static final DateTimeFormatter DF = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-	private static final DateTimeFormatter DTF = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+	private static final DateTimeFormatter DTF = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
 	
 	private CategorieMger categorieMger;
 	private RetraitManager retraitMger;
@@ -60,8 +60,8 @@ public class NouvelleVenteServlet extends HttpServlet {
 			}
 
 			request.setAttribute("categorieList", categorieList);
-			request.setAttribute("dateNow", DF.format(now));
-			request.setAttribute("dateFin", DF.format(fin));
+			request.setAttribute("dateNow", DTF.format(now));
+			request.setAttribute("dateFin", DTF.format(fin));
 			request.getRequestDispatcher("/WEB-INF/pages/nouvelleVente.jsp").forward(request, response);
 		} catch (BLLException e) {
 			System.err.println(e.getMessage());
@@ -78,8 +78,7 @@ public class NouvelleVenteServlet extends HttpServlet {
 			try {
 				Utilisateur utilisateur = (Utilisateur) request.getSession().getAttribute("utilisateur");
 				
-				LocalDate now = LocalDate.now();
-				LocalDateTime nowTime = LocalDateTime.parse(now + " 00:00", DTF);
+				LocalDateTime nowTime = LocalDateTime.now();
 				String article = request.getParameter("article");
 				String description = request.getParameter("description");
 				Integer idCategorie = Integer.parseInt(request.getParameter("categorie"));
@@ -98,10 +97,10 @@ public class NouvelleVenteServlet extends HttpServlet {
 					return;
 				}
 				
-				LocalDateTime dateTimeDebut = LocalDateTime.parse(dateDebut + " 00:00", DTF);
-				LocalDateTime dateTimeFin = LocalDateTime.parse(dateFin + " 00:00", DTF);
+				LocalDateTime dateTimeDebut = LocalDateTime.parse(dateDebut, DTF);
+				LocalDateTime dateTimeFin = LocalDateTime.parse(dateFin, DTF);
 				
-				if (dateTimeDebut.isAfter(dateTimeFin) || nowTime.isAfter(dateTimeDebut) ) {
+				if (dateTimeDebut.isAfter(dateTimeFin)) {
 					System.err.println("Un ou plusieur champ innatendu !!");
 					response.sendRedirect("/ProjetJee/NouvelleVente?nouvelleVenteError=true");
 					return;

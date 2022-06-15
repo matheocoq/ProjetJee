@@ -1,5 +1,10 @@
 @charset "UTF-8";
 
+
+a {
+	text-decoration: none;
+}
+
 .white {
 	color: #F9F9F9
 }
