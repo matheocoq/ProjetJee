@@ -14,7 +14,7 @@ bottom: 0;
 
 <nav class="navbar navbar-expand-lg bg-light mb-2">
 	<div class="container-fluid">
-		<a class="navbar-brand" href="<%=request.getContextPath()%>/accueil">ENI-Enchère</a>
+		<a class="navbar-brand p-0" href="${pageContext.request.contextPath}/accueil"><img alt="" class="imgLogo" src="${pageContext.request.contextPath}/resources/logoENIEncheres.png"></a>
 		<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
 			data-bs-target="#navbarNav" aria-controls="navbarNav"
 			aria-expanded="false" aria-label="Toggle navigation">
@@ -26,9 +26,9 @@ bottom: 0;
 					<ul class="navbar-nav">
 						<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/accueil">Accueil</a>
 						</li>
-						<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/NouvelleVente">Vendre
+						<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/NouvelleVente">Vendre
 								un article</a></li>
-						<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/AfficherProfil?user=${utilisateur.getNoUtilisateur()} ">Mon
+						<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/AfficherProfil?user=${utilisateur.getNoUtilisateur()} ">Mon
 								profil</a></li>
 						<li class="nav-item"><a class="nav-link"
 							href="<%=request.getContextPath()%>/Deconnexion">Déconexion</a></li>
@@ -37,7 +37,7 @@ bottom: 0;
 				<c:otherwise>
 					<ul class="navbar-nav">
 						<li class="nav-item"><a class="nav-link"
-							href="<%=request.getContextPath()%>/Connexion">S'insrire - Se Connecter</a></li>
+							href="${pageContext.request.contextPath}/Connexion">S'insrire - Se Connecter</a></li>
 					</ul>
 				</c:otherwise>
 			</c:choose>

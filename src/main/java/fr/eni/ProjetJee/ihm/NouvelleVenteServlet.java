@@ -1,6 +1,7 @@
 package fr.eni.ProjetJee.ihm;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -52,10 +53,15 @@ public class NouvelleVenteServlet extends HttpServlet {
 		
 		try {
 			LocalDateTime now = LocalDateTime.now();
+			LocalDateTime fin = now.plusDays(1);
 			List<Categorie> categorieList = categorieMger.getCategories();
+			if (request.getParameter("nouvelleVenteError") != null) {
+				request.setAttribute("nouvelleVenteError", true);
+			}
 
 			request.setAttribute("categorieList", categorieList);
 			request.setAttribute("dateNow", DF.format(now));
+			request.setAttribute("dateFin", DF.format(fin));
 			request.getRequestDispatcher("/WEB-INF/pages/nouvelleVente.jsp").forward(request, response);
 		} catch (BLLException e) {
 			System.err.println(e.getMessage());
@@ -72,6 +78,8 @@ public class NouvelleVenteServlet extends HttpServlet {
 			try {
 				Utilisateur utilisateur = (Utilisateur) request.getSession().getAttribute("utilisateur");
 				
+				LocalDate now = LocalDate.now();
+				LocalDateTime nowTime = LocalDateTime.parse(now + " 00:00", DTF);
 				String article = request.getParameter("article");
 				String description = request.getParameter("description");
 				Integer idCategorie = Integer.parseInt(request.getParameter("categorie"));
@@ -86,17 +94,16 @@ public class NouvelleVenteServlet extends HttpServlet {
 				
 				if ("".equals(article) || "".equals(description) || "".equals(dateDebut) || "".equals(dateFin) || "".equals(rue) || "".equals(codePostal) || "".equals(ville)) {
 					System.err.println("Un ou plusieur champ innatendu !!");
-					request.setAttribute("nouvelleVenteError", true);
-					request.getRequestDispatcher("/WEB-INF/pages/nouvelleVente.jsp").forward(request, response);
+					response.sendRedirect("/ProjetJee/NouvelleVente?nouvelleVenteError=true");
 					return;
 				}
 				
 				LocalDateTime dateTimeDebut = LocalDateTime.parse(dateDebut + " 00:00", DTF);
 				LocalDateTime dateTimeFin = LocalDateTime.parse(dateFin + " 00:00", DTF);
 				
-				if (dateTimeDebut.isAfter(dateTimeFin)) {
-					request.setAttribute("nouvelleVenteError", true);
-					request.getRequestDispatcher("/WEB-INF/pages/nouvelleVente.jsp").forward(request, response);
+				if (dateTimeDebut.isAfter(dateTimeFin) || nowTime.isAfter(dateTimeDebut) ) {
+					System.err.println("Un ou plusieur champ innatendu !!");
+					response.sendRedirect("/ProjetJee/NouvelleVente?nouvelleVenteError=true");
 					return;
 				}
 				
@@ -110,7 +117,7 @@ public class NouvelleVenteServlet extends HttpServlet {
 				articleVenduMger.majArticleVendu(articleVendu);
 		
 				System.out.println("" + articleVendu.getNomArticle() + " à été ajouté avec succes !!");
-				response.sendRedirect("/ProjetJee/NouvelleVente");
+				response.sendRedirect("/ProjetJee/accueil");
 				
 			} catch (BLLException e) {
 				System.err.println(e.getMessage());
@@ -118,8 +125,7 @@ public class NouvelleVenteServlet extends HttpServlet {
 			}
 		} catch (NumberFormatException e) {
 			System.err.println("Le prix attendu ou la catégorie est incorrect !!");
-			request.setAttribute("nouvelleVenteError", true);
-			request.getRequestDispatcher("/WEB-INF/pages/nouvelleVente.jsp").forward(request, response);
+			response.sendRedirect("/ProjetJee/NouvelleVente?nouvelleVenteError=true");
 		}
 	}
 
