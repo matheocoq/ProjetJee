@@ -39,7 +39,7 @@
 	</div>
   	<div class="saveNewInscription">
   		<input type="submit" value="Créer  ">
-		<button onclick="window.location.href = 'http://localhost:8080/ProjetJee/accueil';">Annuler</button>
+		<button onclick="window.location.href = 'http://localhost:8080/ProjetJee/accueil';" style="transform: translateX(70px);">Annuler</button>
   	</div>
 	
 	
