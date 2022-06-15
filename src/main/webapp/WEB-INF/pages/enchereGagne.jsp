@@ -5,7 +5,7 @@
 <%@ page import="fr.eni.ProjetJee.bo.Utilisateur"%>
 
 <%@ page import="java.util.List"%>
-<jsp:include page="header/headerConnecter.jsp" />
+<jsp:include page="header/header.jsp" />
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 

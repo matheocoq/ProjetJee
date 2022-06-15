@@ -1,5 +1,5 @@
 <%@ page import="fr.eni.ProjetJee.bo.Utilisateur"%>
-<jsp:include page="header/headerConnecter.jsp" />
+<jsp:include page="header/header.jsp" />
 <div class="container" style="max-width: 500px">
 	<div class="my-4">
 		<div class="row">

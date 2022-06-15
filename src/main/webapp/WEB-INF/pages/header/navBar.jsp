@@ -20,11 +20,11 @@ bottom: 0;
 			aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
-		<div class="collapse navbar-collapse" id="navbarNav">
+		<div class="collapse navbar-collapse" id="navbarNav" >
 			<c:choose>
 				<c:when test="${!empty sessionScope.utilisateur}">
 					<ul class="navbar-nav">
-						<li class="nav-item"><a class="nav-link" href="#">Enchère</a>
+						<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/accueil">Accueil</a>
 						</li>
 						<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/NouvelleVente">Vendre
 								un article</a></li>

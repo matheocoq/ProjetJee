@@ -4,3 +4,13 @@
 	display: block;
 	width: 50%;
 }
+
+.navbar-collapse{
+	flex-grow: 0 !important;
+}
+
+.titre-accueil{
+	display: block;
+    text-align: center;
+    font-size: 50px;
+}
