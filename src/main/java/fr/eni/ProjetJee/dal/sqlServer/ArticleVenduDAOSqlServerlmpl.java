@@ -455,22 +455,27 @@ ArrayList<ArticleVendu> articles =new ArrayList<ArticleVendu>();
 				requete=requete+"WHERE ARTICLES_VENDUS.no_utilisateur = ? ";
 				if(mesVenteCours!=null){
 					
-					requete=requete+"AND etat_vente = 'En cours' ";
+					requete=requete+"AND ( etat_vente = 'En cours' ";
 				
 				}
 				if(mesVenteDebutees!=null){
 					if(mesVenteCours!=null) {
 						requete=requete+"OR etat_vente = 'Créée' ";
 					}else {
-						requete=requete+"AND etat_vente = 'Créée' ";
+						requete=requete+"AND ( etat_vente = 'Créée' ";
 					}
 					
 				}
 				if(mesVentetTerminees!=null){
 					if(mesVenteCours!=null || mesVenteDebutees!=null) {
-						requete=requete+"OR etat_vente = 'Enchères terminées' ";
+						requete=requete+"OR etat_vente = 'Enchères terminées') ";
 					}else {
-						requete=requete+"AND etat_vente = 'Enchères terminées' ";
+						requete=requete+"AND ( etat_vente = 'Enchères terminées') ";
+					}
+				}
+				else {
+					if(mesVenteCours!=null || mesVenteDebutees!=null ) {
+						requete=requete+")";
 					}
 				}
 	
