@@ -8,10 +8,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <div class="container">
-<h3 class="text-center mb-4">Nouvelle vente</h3>
+<h3 class="text-center mb-4 titre-accueil">Nouvelle vente</h3>
 	<div class="">
 		<div style="display: inline-block;width: 33%;">
-			<img class="imgArticle" alt="" src="${pageContext.request.contextPath}/resources/imgTestNouvelleVente.jpg">
+			<img class="shadow-sm imgArticle" alt="" src="${pageContext.request.contextPath}/resources/imgTestNouvelleVente.jpg">
 		</div>
 		<div style="transform: translateY(-172px);">
 			
@@ -20,7 +20,7 @@
 			
 			<form action="<%= request.getContextPath() %>/NouvelleVente" method="post">
 				<div class="">
-					<div style="display: inline-block;width: 33%;">
+					<div style="display: inline-block;width: 33%;" class="shadow-sm">
 						<p class="text-center fw-bold m-0">Retrait</p>
 						
 						<div class="form-group">

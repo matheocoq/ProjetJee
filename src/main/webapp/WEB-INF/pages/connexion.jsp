@@ -2,7 +2,7 @@
 	<div class="container">
 		
 		
-			<h3 class="text-center mt-5">S'authentifier</h3>
+			<h3 class="text-center mt-5 titre-accueil">S'authentifier</h3>
 			<p>Afin de pouvoir faire des enchères sur ce site, vous devez vous authentifier. Si vous n'en possédez pas, vous devez créer un compte</p>
 		
 			
