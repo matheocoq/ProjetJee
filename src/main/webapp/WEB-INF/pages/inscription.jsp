@@ -37,10 +37,12 @@
 		<br><br>
 	
 	</div>
-  	
+  	<div class="saveInscription">
+  		<input type="submit" value="Créer">
+		<button onclick="window.location.href = 'http://localhost:8080/ProjetJee/accueil';">Annuler</button>
+  	</div>
 	
-	<input type="submit" value="Créer">
-	<button onclick="window.location.href = 'http://localhost:8080/ProjetJee/accueil';">Annuler</button>
+	
 </form>
 
 <jsp:include page="footer/footer.jsp" />

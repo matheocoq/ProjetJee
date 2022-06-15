@@ -14,6 +14,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/moment-with-locales.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/script.js" defer="defer"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style1.css" />
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 </head>
 <body>
