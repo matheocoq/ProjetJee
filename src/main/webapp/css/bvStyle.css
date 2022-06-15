@@ -101,9 +101,6 @@
 }
 
 .imgArticle {
-	border: solid;
-	border-width: 0.1em;
-	border-color: #3FACF9;
 	border-radius: 30px;
 	max-width: 300px;
     width: 100%;

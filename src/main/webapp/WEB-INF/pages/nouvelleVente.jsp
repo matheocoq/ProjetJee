@@ -13,7 +13,7 @@
 			<img class="shadow-sm imgArticle" alt="" src="${pageContext.request.contextPath}/resources/imgTestNouvelleVente.jpg">
 		</div>
 		<div class="col-8 offset-1">
-			<h3 class="text-center mb-4">Nouvelle vente</h3>
+			<h3 class="text-center mt-3 mb-4">Nouvelle vente</h3>
 			
 			${not empty nouvelleVenteError ? "<div class='alert alert-danger mb-4' role='alert'>Authentification incorrect !!</div>" : null}
 			
