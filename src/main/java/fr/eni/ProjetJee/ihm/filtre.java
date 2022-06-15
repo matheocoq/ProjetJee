@@ -34,7 +34,8 @@ public class filtre implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 		Object seesion = ((HttpServletRequest) request).getSession().getAttribute("utilisateur");
-		if(httpRequest.getServletPath().toLowerCase().contains("accueil")|| httpRequest.getServletPath().toLowerCase()=="" || httpRequest.getServletPath().toLowerCase().contains("connexion") || httpRequest.getServletPath().toLowerCase().contains("inscription") ||seesion!=null)
+		System.out.println(httpRequest.getServletPath());
+		if(httpRequest.getServletPath().toLowerCase().contains("accueil")|| httpRequest.getServletPath().toLowerCase()=="" || httpRequest.getServletPath().toLowerCase().contains("connexion") || httpRequest.getServletPath().toLowerCase().contains("inscription") || httpRequest.getServletPath().toUpperCase().contains("logoENIEncheres") || seesion!=null)
 		{
 			
 			//Laissons passer la requête vers la ressource qui est autorisée
