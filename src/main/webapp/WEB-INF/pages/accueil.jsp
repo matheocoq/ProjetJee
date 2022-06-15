@@ -1,8 +1,9 @@
-<jsp:include page="header/headerConnecter.jsp" />
+<jsp:include page="header/header.jsp" />
 <%@ page import="fr.eni.ProjetJee.bo.Categorie" %>
 <%@ page import="fr.eni.ProjetJee.bo.ArticleVendu" %>
 <%@page import="java.util.ArrayList"%>
-<span>Liste des Enchères</span>
+<span class="titre-accueil" >Liste des Enchères</span>
+<div class="container" >
 <span>Filtre :</span>
 <form action="/ProjetJee/" method="get">
 <input name="nom" type="text">
@@ -81,5 +82,6 @@
     <%
 		}
     %>
+</div>
 </div>
 <jsp:include page="footer/footer.jsp" />

@@ -5,7 +5,7 @@
 <%@ page import="fr.eni.ProjetJee.bo.Utilisateur"%>
 
 <%@ page import="java.util.List"%>
-<jsp:include page="header/headerConnecter.jsp" />
+<jsp:include page="header/header.jsp" />
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
@@ -16,7 +16,7 @@
 		</div>
 		<div class="col-8 offset-1">
 		
-			<h5 style="text-align: center">Détail vente</h5>
+			<h5 class="titre-accueil">Détail vente</h5>
 			
 			${not empty propositionError ? "<div class='alert alert-danger mt-5 mb-3' role='alert'>Proposition incorrect !!</div>" : null}
 			

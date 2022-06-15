@@ -56,7 +56,7 @@ public class SupprimerServlet extends HttpServlet {
 				}
 			}
 			
-			//supression article cree
+		
 			ArrayList<ArticleVendu> listeArticle=articleMger.articleVenduByUtilisateur(user);
 			for (ArticleVendu article : listeArticle) {
 				if(article.getEtatVente().equals("Créée")) {
