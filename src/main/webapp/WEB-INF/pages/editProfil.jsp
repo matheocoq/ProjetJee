@@ -15,7 +15,7 @@
 		Utilisateur user = (Utilisateur)request.getSession().getAttribute("utilisateur");
 	%>
 	<div class="modifInscription">
-		<p>Test css</p>
+		
 		<label for="pseudo">Pseudo :  </label>
   		<input type="text" id="pseudo" name="pseudo"  required="required" value="<%= user.getPseudo()%>"> 
   		<label for="nom">Nom :  </label>
@@ -41,13 +41,17 @@
   		<a href="http://localhost:8080/ProjetJee/nouveauMdp">nouveau mot de passe?</a> <br>
   		<br>
 		<input type="hidden" id="hashMdp" name="hashMdp" value="<%= user.getMotDePasse()%>">
+		
 		<label for="credit" > Crédit : <%= user.getCredit() %> </label>
 		<input type="hidden" name="noUser" value="<%= user.getNoUtilisateur()%>">
 		<br><br>
+		
+	</div>
+	<div class="saveEditProfil" >
+		<input type="submit" value="Enregistrer">
+		<button onclick="window.location.href = '<%=request.getContextPath()%>/supprimer';">Supprimer mon compte</button>
 	</div>
 	
-	<input type="submit" value="Enregistrer">
-	<button onclick="window.location.href = '<%=request.getContextPath()%>/supprimer';">Supprimer mon compte</button>
 </form>
 
 <jsp:include page="footer/footer.jsp" />
