@@ -1,5 +1,6 @@
 <%@ page import="fr.eni.ProjetJee.bo.Utilisateur"%>
 <jsp:include page="header/header.jsp" />
+
 <div class="container" style="max-width: 500px">
 	<div class="my-4">
 		<div class="row">
@@ -68,7 +69,8 @@
 				<p>${ user.getVille() }</p>
 			</div>
 		</div>
-		${not empty owner ? "<a href='/ProjetJee/editProfil' class='text-decoration-none btn btn-outline-secondary mt-3' style='display: block; margin: auto'>Modifier</a>" : null }
+		
+		${not empty owner ? "<a href='/ProjetJee/editProfil' class='text-decoration-none btn btn-green mt-3' style='display: block; margin: auto'>Modifier</a>" : null }
 		
 	</div>
 </div>

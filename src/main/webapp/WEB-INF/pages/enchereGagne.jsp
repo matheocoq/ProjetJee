@@ -17,15 +17,13 @@
 		<div class="col-8 offset-1">
 		<c:choose>
 			<c:when test="${empty gagnant}">
-				<h5 style="text-align: center">Vous avez remporté la vente</h5>
+				<h5 class="text-center" >Vous avez remporté la vente</h5>
 			</c:when>
 			<c:otherwise>
-				<h5 style="text-align: center">${ gagnant } a remporté la vente</h5>
+				<h5 class="text-center" >${ gagnant } a remporté la vente</h5>
 			</c:otherwise>
 		</c:choose>
 				
-			
-			
 			${not empty propositionError ? "<div class='alert alert-danger mt-5 mb-3' role='alert'>Proposition incorrect !!</div>" : null}
 			
 			<p class="fw-bold mt-5">${ article.getNomArticle() }</p>

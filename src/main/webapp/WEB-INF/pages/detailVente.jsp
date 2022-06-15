@@ -12,11 +12,11 @@
 <div class="container">
 	<div class="row">
 		<div class="col-3">
-			<img alt="" src="${pageContext.request.contextPath}/resources/imgTestNouvelleVente.jpg">
+			<img class="imgArticle" alt="" src="${pageContext.request.contextPath}/resources/imgTestNouvelleVente.jpg">
 		</div>
 		<div class="col-8 offset-1">
 		
-			<h5 class="titre-accueil">Détail vente</h5>
+			<h3 class="text-center">Détail vente</h3>
 			
 			${not empty propositionError ? "<div class='alert alert-danger mt-5 mb-3' role='alert'>Proposition incorrect !!</div>" : null}
 			
