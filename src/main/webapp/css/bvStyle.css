@@ -101,16 +101,24 @@
 }
 
 .imgArticle {
-	border: solid;
 	border-width: 0.1em;
 	border-color: #3FACF9;
 	border-radius: 30px;
 	max-width: 300px;
-    width: 100%;
-    max-height: 212px;
-    height: 100%;
+    max-height: 300px;
     display: block;
-    margin-top: 3rem;
+}
+
+.article-info{
+	display: inline-block;
+    margin-left: 20px;
+    padding-top: 2% !important;
+    padding-bottom: 2% !important;
+    padding: 7%;
+    width: 62%
+}
+.info-vente-cree{
+	
 }
 
 .border-book {

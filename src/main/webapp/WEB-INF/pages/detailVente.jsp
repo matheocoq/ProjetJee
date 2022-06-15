@@ -23,78 +23,78 @@
 			<p class="fw-bold mt-5">${ article.getNomArticle() }</p>
 			
 			<div class="row">
-				<div class="col-2">
+				<div class="col-4">
 					<p>Déscription : </p>
 				</div>
-				<div class="col-10">
+				<div class="col-8">
 					<p>${ article.getDescription() }</p>
 				</div>
 			</div>	
 			
 			<div class="row">
-				<div class="col-2">
+				<div class="col-4">
 					<p>Catégorie : </p>
 				</div>
-				<div class="col-10">
+				<div class="col-8">
 					<p>${ article.getCategorie().getLibelle() }</p>
 				</div>
 			</div>			
 			
 			<div class="row">
-				<div class="col-2">
+				<div class="col-4">
 					<p>Meilleur offre : </p>
 				</div>
-				<div class="col-10">
+				<div class="col-8">
 					<p>${enchere.getMontantEnchere()} ${ not empty enchere ? " pts par " : null} ${enchere.getNoUtilisateur().getPseudo()} </p>
 				</div>
 			</div>
 			
 			<div class="row">
-				<div class="col-2">
+				<div class="col-4">
 					<p>Mise à prix : </p>
 				</div>
-				<div class="col-10">
+				<div class="col-8">
 					<p>${ article.getMiseAPrix() } points</p>
 				</div>
 			</div>
 			
 			<div class="row">
-				<div class="col-2">
+				<div class="col-4">
 					<p>Fin de l'enchère : </p>
 				</div>
-				<div class="col-10">
+				<div class="col-8">
 					<p>${ article.getDateFinEncheresFormat() }</p>
 				</div>
 			</div>
 			
 			<div class="row">
-				<div class="col-2">
+				<div class="col-4">
 					<p>Retrait : </p>
 				</div>
-				<div class="col-10">
+				<div class="col-8">
 					<p class="mb-0">${ retrait.getRue() }</p>
 					<p>${ retrait.getCodePostal() } ${ retrait.getVille() }</p>
 				</div>
 			</div>
 			
 			<div class="row">
-				<div class="col-2">
+				<div class="col-4">
 					<p>Vendeur : </p>
 				</div>
-				<div class="col-10">
+				<div class="col-8">
 					<p>${ article.getUtilisateur().getPseudo() }</p>
 				</div>
 			</div>
 			
 			<form action="<%= request.getContextPath() %>/DetailVente?article=${ article.getNoArticle() }" method="post">
 				<div class="row mt-5">
-					<div class="col-2">
+					<div class="col-3">
 						<p>Ma proposition : </p>
 					</div>
-					<div class="col-5" style="max-width: 200px">
+					<div class="col-4" style="max-width: 200px">
 						<input class="form-control" name="proposition" type="number" min="${ not empty enchere ? enchere.getMontantEnchere() +1 : article.getMiseAPrix() +1 }" value="${ not empty enchere ? enchere.getMontantEnchere() +1 : article.getMiseAPrix() +1 }" />
 					</div>
-					<div class="col-5">
+					<div class="col-4">
 						<button class="btn btn-primary">Enchérir</button>
 					</div>
 				</div>
