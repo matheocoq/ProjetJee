@@ -53,12 +53,12 @@
 						</div>
 						
 						<div class="form-group mt-3">
-							<label for="dateDebut">Date de début *</label>
+							<label for="dateDebut">Date et heure de début *</label>
 							<input type="datetime-local" name="dateDebut" id="dateDebut" class="form-control dateDebut" value="${ dateNow }" min="${ dateNow }">
 						</div>
 						
 						<div class="form-group mt-3">
-							<label for="dateFin">Date de Fin *</label>
+							<label for="dateFin">Date et heure de Fin *</label>
 							<input type="datetime-local" name="dateFin" id="dateFin" class="form-control dateFin" value="${ dateFin }" min="${ dateFin }">
 						</div>
 					</div>
