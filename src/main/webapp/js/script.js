@@ -32,7 +32,8 @@ let Fin = document.querySelector("#dateFin")
 
 Debut.addEventListener('change', (e) => {
   	let dateDebut = moment(Debut.value)
-	Fin.value = moment(dateDebut).add(1, 'days').format('YYYY-MM-DD')
-	Fin.min = moment(dateDebut).add(1, 'days').format('YYYY-MM-DD')
+	console.log(moment(dateDebut).add(1, 'days').format('YYYY-MM-DDTHH:MM'))
+	Fin.value = moment(dateDebut).add(1, 'days').format('YYYY-MM-DDTHH:MM')
+	Fin.min = moment(dateDebut).add(1, 'days').format('YYYY-MM-DDTHH:MM')
 });
 
