@@ -17,6 +17,10 @@ public class CategorieMger {
 	
 	private static CategorieMger instance;
 	
+	/**
+	 * Singleton qui permet ainsi la création d'un seul objet (CategorieMger)
+	 * @return une instance de CategorieMger
+	 */
 	public static CategorieMger getInstance() {
 		if(instance == null) {
 			instance = new CategorieMger();
@@ -24,10 +28,18 @@ public class CategorieMger {
 		return instance;
 	}
 	
+	/**
+	 * Récupere l'interface commune à tout les implémentations de CategorieDAO
+	 */
 	private CategorieMger() {
 		categorieDAO = DAOFactory.getDAOCategorie();
 	}
 	
+	/**
+	 * ajouterCategorie permet l'ajout d'une nouvelle catégorie en dans la BDD
+	 * @param categorie
+	 * @throws BLLException
+	 */
 	public void ajouterCategorie(Categorie categorie) throws BLLException {
 		try {
 			categorieDAO.insert(categorie);
@@ -36,6 +48,11 @@ public class CategorieMger {
 		}
 	}
 	
+	/**
+	 * getCategories
+	 * @return la liste de toute les catégories
+	 * @throws BLLException
+	 */
 	public List<Categorie> getCategories() throws BLLException{
 		List<Categorie> categories = new ArrayList<>();
 		try {
@@ -47,6 +64,11 @@ public class CategorieMger {
 		return categories;
 	}
 	
+	/**
+	 * updateCategorie permet de modifier les informations d'un catégorie stocker en BDD
+	 * @param categorie
+	 * @throws BLLException
+	 */
 	public void updateCategorie(Categorie categorie) throws BLLException{
 		try {
 			categorieDAO.update(categorie);
@@ -54,9 +76,13 @@ public class CategorieMger {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 	}
 	
+	/**
+	 * removeCategorie permet la suppression d'une catégorie en fonction de son ID
+	 * @param no_categorie
+	 * @throws BLLException
+	 */
 	public void removeCategorie(int no_categorie) throws BLLException{
 		try {
 			categorieDAO.delete(no_categorie);
@@ -66,6 +92,12 @@ public class CategorieMger {
 		}
 	}
 	
+	/**
+	 * getCategorieById
+	 * @param noCategorie
+	 * @return une catégorie en fonction de l'ID renseigné 
+	 * @throws BLLException
+	 */
 	public Categorie getCategorieById(int noCategorie) throws BLLException{
 		Categorie categorie = null;
 		try {
