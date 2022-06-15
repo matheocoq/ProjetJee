@@ -5,7 +5,12 @@
 	width: 50%;
 }
 
-p.modifInscription{
-	color : blue;
-	
+.navbar-collapse{
+	flex-grow: 0 !important;
+}
+
+.titre-accueil{
+	display: block;
+    text-align: center;
+    font-size: 50px;
 }
