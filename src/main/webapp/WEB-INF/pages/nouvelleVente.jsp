@@ -16,7 +16,7 @@
 		<div style="transform: translateY(-172px);">
 			
 			
-			${not empty nouvelleVenteError ? "<div class='alert alert-danger mb-4' role='alert'>Authentification incorrect !!</div>" : null}
+			${not empty nouvelleVenteError ? "<div class='alert alert-danger mb-4' role='alert'>Un ou plusieur champ innatendu !!</div>" : null}
 			
 			<form action="<%= request.getContextPath() %>/NouvelleVente" method="post">
 				<div class="">
@@ -75,12 +75,12 @@
 						
 						<div class="form-group ">
 							<label for="dateDebut">Date de début *</label>
-							<input type="date" name="dateDebut" id="dateDebut" class="form-control dateDebut" value="${ dateNow }" min="${ dateNow }">
+							<input type="datetime-local" name="dateDebut" id="dateDebut" class="form-control dateDebut" value="${ dateNow }" min="${ dateNow }">
 						</div>
 						
 						<div class="form-group ">
 							<label for="dateFin">Date de Fin *</label>
-							<input type="date" name="dateFin" id="dateFin" class="form-control dateFin" value="${ dateFin }" min="${ dateFin }">
+							<input type="datetime-local" name="dateFin" id="dateFin" class="form-control dateFin" value="${ dateFin }" min="${ dateFin }">
 						</div>
 					</div>
 					
