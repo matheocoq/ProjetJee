@@ -16,8 +16,10 @@ import org.apache.jasper.tagplugins.jstl.core.ForEach;
 import fr.eni.ProjetJee.bll.ArticleVenduMger;
 import fr.eni.ProjetJee.bll.BLLException;
 import fr.eni.ProjetJee.bll.CategorieMger;
+import fr.eni.ProjetJee.bll.EnchereMger;
 import fr.eni.ProjetJee.bo.ArticleVendu;
 import fr.eni.ProjetJee.bo.Categorie;
+import fr.eni.ProjetJee.bo.Enchere;
 import fr.eni.ProjetJee.bo.Utilisateur;
 import fr.eni.ProjetJee.dal.DALException;
 
@@ -33,6 +35,7 @@ public class AccueilServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		CategorieMger categorieMger = CategorieMger.getInstance();
 		ArticleVenduMger articleVenduMger = ArticleVenduMger.getInstance();
+		EnchereMger enchereMger = EnchereMger.getInstance();
 		ArrayList<ArticleVendu> articles=null;
 		 try {
 			List<Categorie> categories = categorieMger.getCategories();
@@ -50,6 +53,7 @@ public class AccueilServlet extends HttpServlet {
 					String mesVenteDebutees= request.getParameter("mesVenteDebutees");
 					String mesVentetTerminees= request.getParameter("mesVentetTerminees");
 					articles=articleVenduMger.filtreCo(categorie ,name ,(Utilisateur) seesion ,checkbox ,ouvertes ,mesEnchere,mesEnchereReporter,mesVenteCours,mesVenteDebutees,mesVentetTerminees);
+					
 				}
 				else {
 					articles=articleVenduMger.allArticleVendu();
@@ -67,6 +71,15 @@ public class AccueilServlet extends HttpServlet {
 				}
 				else {
 					articles=articleVenduMger.allArticleVendu();
+				}
+				for (ArticleVendu article : articles) {
+				   Enchere enchere=	enchereMger.lastEnchereByArticle(article.getNoArticle());
+				   if(enchere!=null) {
+					   article.setPrixDeVente(enchere.getMontantEnchere());
+				   }
+				   else {
+					   article.setPrixDeVente(article.getMiseAPrix());
+				   }
 				}
 				request.setAttribute("categories", categories);
 				request.setAttribute("articles", articles);

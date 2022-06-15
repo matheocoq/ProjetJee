@@ -4,14 +4,16 @@
 <%@page import="java.util.ArrayList"%>
 <span class="titre-accueil" >Liste des Enchères</span>
 <div class="container" >
-<span>Filtre :</span>
-<form action="/ProjetJee/" method="get">
-<input name="nom" type="text">
-<label for="categorie-select">Categorie:</label>
-<select name="categorie" id="categorie-select">
-    <option value="0">Toute</option>
+<span class="filtre-titre">Filtre :</span>
+<form action="/ProjetJee/" method="get" class="form-filtre">
+<div style="display: inline-block;margin-top: 35px;">
+<input style="display:inline-block;" class="bandeau-recherche" name="nom" type="text"  placeholder="Recherche par mots-clé">
+<label style="margin-left: 94px;"for="categorie-select">Categorie:</label>
+<select style="border:0px;" name="categorie" id="categorie-select">
+    <option value="Toute">Toute</option>
     <%
 		ArrayList<Categorie> categories= (ArrayList<Categorie>)request.getAttribute("categories");
+        
 		for (Categorie catgorie : categories) {
 	%>
     	<option value="<%=catgorie.getNoCategorie() %>"><%=catgorie.getLibelle() %></option>
@@ -20,6 +22,7 @@
     %>
 </select>
 <div>
+	<div style="display: inline-block;">
       <input type="radio" id="radioAchat" name="radioAchat" value="achat" class="boutonRadio" checked>
       <label for="radioAchat">Achat</label>
       <div>
@@ -36,7 +39,8 @@
 	      	<label for="mesEnchereReporter">Mes enchères remportées</label>
   	  	</div>
   	  </div>
-
+	</div>
+	<div style="display: inline-block;margin-left: 80px;">
       <input type="radio" id="radioVente" name="radioAchat" value="vente" class="boutonRadio">
       <label for="radioVente">Mes Ventes</label>
       
@@ -54,8 +58,11 @@
 	      	<label for="mesVentetTerminees">Mes ventes terminées</label>
   	  	</div>
   	  </div>
+  	  </div>
 </div>
-<button value=true name="rechercher" >Rechercher</button>
+</div>
+
+<button style="float: right; margin-top: 48px;" class="bouton" value=true name="rechercher">Rechercher</button>
 </form>
 <div class="fiche-produits">
 	<%
@@ -65,11 +72,16 @@
 		
 	%>
 		<div class="article">
-		<img alt="" src="<%= article.getPhoto() %>">
-		<a href="${pageContext.request.contextPath}/DetailVente?article=<%= article.getNoArticle() %>"><%= article.getNomArticle() %></a>
-		<span>Prix : <%= article.getPrixDeVente() %></span>
-		<span>Fin de l'enchère: <%= article.getDateFinEncheresFormat() %></span>
-		<a href="${pageContext.request.contextPath}/AfficherProfil?user=<%= article.getUtilisateur().getNoUtilisateur() %>">Vendeur : <%= article.getUtilisateur().getPseudo() %></span>
+		<div>
+		<img class="article-image" alt="" src="${pageContext.request.contextPath}/resources/logoENI.svg">
+		</div>
+		<div>
+		<a class="article-nom" href="${pageContext.request.contextPath}/DetailVente?article=<%= article.getNoArticle() %>"><%= article.getNomArticle() %></a>
+		<span style="margin-top: 15px;">Prix : <%= article.getPrixDeVente() %></span>
+		<span style="margin-bottom: 15px;">Fin de l'enchère: <%= article.getDateFinEncheresFormat() %></span>
+		<span style="display: inline-block;">Vendeur : </span><a href="${pageContext.request.contextPath}/AfficherProfil?user=<%= article.getUtilisateur().getNoUtilisateur() %>"><%= article.getUtilisateur().getPseudo() %></a>
+		
+		</div>
 		</div>
     <%
 		}
