@@ -14,7 +14,7 @@ bottom: 0;
 
 <nav class="navbar navbar-expand-lg bg-light mb-2">
 	<div class="container-fluid">
-		<a class="navbar-brand" href="${pageContext.request.contextPath}/accueil"><img alt="" class="imgLogo" src="${pageContext.request.contextPath}/resources/logoENIEncheres.png"></a>
+		<a class="navbar-brand p-0" href="${pageContext.request.contextPath}/accueil"><img alt="" class="imgLogo" src="${pageContext.request.contextPath}/resources/logoENIEncheres.png"></a>
 		<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
 			data-bs-target="#navbarNav" aria-controls="navbarNav"
 			aria-expanded="false" aria-label="Toggle navigation">

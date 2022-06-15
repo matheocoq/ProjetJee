@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<jsp:include page="header/headerRegister.jsp" />
+<jsp:include page="header/header.jsp" />
 
 <form action="http://localhost:8080/ProjetJee/nouveauMdp" method="post">
 
