@@ -37,8 +37,8 @@
 		<br><br>
 	
 	</div>
-  	<div class="saveInscription">
-  		<input type="submit" value="Créer">
+  	<div class="saveNewInscription">
+  		<input type="submit" value="Créer  ">
 		<button onclick="window.location.href = 'http://localhost:8080/ProjetJee/accueil';">Annuler</button>
   	</div>
 	
