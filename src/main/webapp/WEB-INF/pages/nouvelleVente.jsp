@@ -15,6 +15,9 @@
 		<div class="col-8 offset-1">
 		
 			<h5 style="text-align: center">Nouvelle vente</h5>
+			
+			${not empty nouvelleVenteError ? "<div class='alert alert-danger mb-4' role='alert'>Un ou plusieurs champs incorrects !!</div>" : null}
+			
 			<form action="<%= request.getContextPath() %>/NouvelleVente" method="post">
 				<div class="form-group mt-3">
 					<label for="article">Article *</label>
@@ -55,7 +58,7 @@
 				
 				<div class="form-group mt-3">
 					<label for="dateFin">Date de Fin *</label>
-					<input type="date" name="dateFin" id="dateFin" class="form-control dateFin" value="${ dateNow }" min="${ dateNow }">
+					<input type="date" name="dateFin" id="dateFin" class="form-control dateFin" value="${ dateFin }" min="${ dateFin }">
 				</div>
 				
 				<hr>
