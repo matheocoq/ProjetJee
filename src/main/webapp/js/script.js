@@ -41,16 +41,19 @@ getDateTime()
 	
 window.setInterval(function () {
 	getDateTime()
-}, 100);
+}, 500);
 
 
 let Debut = document.querySelector("#dateDebut")
 let Fin = document.querySelector("#dateFin")
 
-Debut.addEventListener('change', (e) => {
-  	let dateDebut = moment(Debut.value)
-	Fin.value = moment(dateDebut).add(1, 'days').format('YYYY-MM-DDTHH:mm')
-	Fin.min = moment(dateDebut).add(1, 'days').format('YYYY-MM-DDTHH:mm')
-});
+if (Debut != null) {
+	Debut.addEventListener('change', (e) => {
+	  	let dateDebut = moment(Debut.value)
+		Fin.value = moment(dateDebut).add(1, 'days').format('YYYY-MM-DDTHH:mm')
+		Fin.min = moment(dateDebut).add(1, 'days').format('YYYY-MM-DDTHH:mm')
+	});
+}
+
 
 
