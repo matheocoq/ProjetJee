@@ -37,6 +37,10 @@ public class EnchereDAOsqlServerImpl implements EnchereDAO {
 	private static UtilisateursDAO utilisateurDAO = DAOFactory.getDAOUtilisateur();
 	private static ArticleVenduDAO articleVenduDAO = DAOFactory.getDAOArticleVendu();
 
+	/**
+	 * Cette méthode permet d'inserer une enchère passé en paramètre.
+	 * @param  enchere est l'enchère à insérer.
+	 */
 	@Override
 	public void insert(Enchere enchere) throws DALException {
 		try (Connection conn = ConnectionProvider.getConnection();) {
@@ -49,8 +53,6 @@ public class EnchereDAOsqlServerImpl implements EnchereDAO {
 			stmt.setInt(2, enchere.getMontantEnchere());
 			stmt.setInt(3, enchere.getNoArticle().getNoArticle());
 			stmt.setInt(4, enchere.getNoUtilisateur().getNoUtilisateur());
-			
-			
 			//Executer la requete
 			stmt.executeUpdate();
 			
@@ -60,6 +62,13 @@ public class EnchereDAOsqlServerImpl implements EnchereDAO {
 		}	
 	}
 
+	/**
+	 * Cette méthode permet de selectionner une enchère dont la date de l'enchère,le numéro de l'utilisateur et le numéro de l'article
+	 * correspondent à ceux passé en paramètre.
+	 * @param dateEnchere est la date de l'enchère.
+	 * @param noUtilisateur est le numéro de l'utilisateur.
+	 * @param noArticleVendu est le numéro de l'article.
+	 */
 	@Override
 	public Enchere selecteByIndex(LocalDateTime dateEnchere, Integer noUtilisateur, Integer noArticleVendu)
 			throws DALException {
@@ -87,6 +96,10 @@ public class EnchereDAOsqlServerImpl implements EnchereDAO {
 		}
 	}
 
+	/**
+	 * Cette méthode permet de supprimer les enchères dont le numéro d'utilisateur correspont à celui passé en paramètre.
+	 * @param  noUtilisateur est le numéro de l'utilisateur.
+	 */
 	@Override
 	public void delete(Integer noUtilisateur) throws DALException {
 		try (Connection conn = ConnectionProvider.getConnection();) {
@@ -104,6 +117,10 @@ public class EnchereDAOsqlServerImpl implements EnchereDAO {
 		}
 	}
 
+	/**
+	 * Cette méthode permet de récuperer la dernièr enchère de l'utilisateur dont le numéro de l'article est passé en paramètre.
+	 * @param  noArticleVendu est le numéro de l'article.
+	 */
 	@Override
 	public Enchere selecteLast(Integer noArticleVendu) throws DALException {
 		try (Connection conn = ConnectionProvider.getConnection();) {
@@ -129,9 +146,14 @@ public class EnchereDAOsqlServerImpl implements EnchereDAO {
 		}
 	}
 
+	/**
+	 * Cette méthode permet de supprimer l'enchère dont l'article et l'utilisateur sont passé en paramètre.
+	 * @param  article est l'article.
+	 * @param  utilisateur est l'utilisateur.
+	 */
 	@Override
 	public void deleteById(ArticleVendu article, Utilisateur utilisateur) throws DALException {
-try (Connection conn = ConnectionProvider.getConnection();) {
+		try (Connection conn = ConnectionProvider.getConnection();) {
 			
 			//Préparer la requete
 			PreparedStatement stmt = conn.prepareStatement(DELETE_BY_ID);
@@ -148,6 +170,10 @@ try (Connection conn = ConnectionProvider.getConnection();) {
 		
 	}
 
+	/**
+	 * Cette méthode permet de récuperer l'enchère dont l'article utilisé lors de l'enchère est passé en paramètre.
+	 * @param  article est l'article.
+	 */
 	@Override
 	public ArrayList<Enchere> selectEnchereByArticle(ArticleVendu article) throws DALException {
 		try (Connection conn = ConnectionProvider.getConnection();) {
@@ -173,6 +199,10 @@ try (Connection conn = ConnectionProvider.getConnection();) {
 		}
 	}
 
+	/**
+	 * Cette méthode permet de supprimer l'enchère dont l'article utilisé lors de l'enchère est passé en paramètre.
+	 * @param  article est l'article.
+	 */
 	@Override
 	public void deleteByArticle(ArticleVendu article) throws DALException {
 		try (Connection conn = ConnectionProvider.getConnection();) {
@@ -191,6 +221,10 @@ try (Connection conn = ConnectionProvider.getConnection();) {
 		}
 	}
 
+	/**
+	 * Cette méthode permet de récuperer l'enchère dont l'utilisateur qui a fait l'enchère est passé en paramètre.
+	 * @param  user est l'utilisateur.
+	 */
 	@Override
 	public ArrayList<Enchere> selectEnchereByUser(Utilisateur user) throws DALException {
 		try (Connection conn = ConnectionProvider.getConnection();) {
