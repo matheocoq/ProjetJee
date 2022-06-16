@@ -10,7 +10,7 @@
 <input style="display:inline-block;" class="bandeau-recherche" name="nom" type="text"  placeholder="Recherche par mots-clé">
 <label style="margin-left: 94px;"for="categorie-select">Categorie:</label>
 <select style="border:0px;" name="categorie" id="categorie-select">
-    <option value="Toute">Toute</option>
+    <option value="0">Toute</option>
     <%
 		ArrayList<Categorie> categories= (ArrayList<Categorie>)request.getAttribute("categories");
         

@@ -58,6 +58,18 @@ public class AccueilServlet extends HttpServlet {
 				else {
 					articles=articleVenduMger.allArticleVendu();
 				}
+				for (ArticleVendu article : articles) {
+					   Enchere enchere=	enchereMger.lastEnchereByArticle(article.getNoArticle());
+					   if(enchere!=null) {
+						   
+						   article.setPrixDeVente(enchere.getMontantEnchere());
+					   }
+					   else {
+						  
+						   article.setPrixDeVente(article.getMiseAPrix());
+					   }
+					 
+			    }
 				request.setAttribute("categories", categories);
 				request.setAttribute("articles", articles);
 				request.getRequestDispatcher("WEB-INF/pages/accueil.jsp").forward(request, response);
@@ -75,16 +87,20 @@ public class AccueilServlet extends HttpServlet {
 				for (ArticleVendu article : articles) {
 				   Enchere enchere=	enchereMger.lastEnchereByArticle(article.getNoArticle());
 				   if(enchere!=null) {
+					   
 					   article.setPrixDeVente(enchere.getMontantEnchere());
 				   }
 				   else {
+					  
 					   article.setPrixDeVente(article.getMiseAPrix());
 				   }
+				 
 				}
 				request.setAttribute("categories", categories);
 				request.setAttribute("articles", articles);
 				request.getRequestDispatcher("WEB-INF/pages/accueilNonCo.jsp").forward(request, response);
 			}
+			
 		} catch (BLLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

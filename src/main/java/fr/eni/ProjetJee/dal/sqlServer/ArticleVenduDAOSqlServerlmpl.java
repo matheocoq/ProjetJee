@@ -39,6 +39,10 @@ public class ArticleVenduDAOSqlServerlmpl implements ArticleVenduDAO {
 	private static final String DELETECREE = "DELETE FROM ARTICLES_VENDUS WHERE where no_utilisateur=? AND etat_vente = 'Créée'";
 	private static final String UPDATE = "UPDATE ARTICLES_VENDUS SET nom_article = ?, description = ? , date_debut_encheres = ?, date_fin_encheres = ?, prix_initial = ?, prix_vente = ?, no_utilisateur = ?, no_categorie = ? , no_retrait =? ,photo=? ,etat_vente = ? WHERE no_article=?;";
 
+	/**
+	 * Cette méthode permet d'inserer un artcile vendu dans la base de données.
+	 * @param  article  est l'article à inserer.
+	 */
 	@Override
 	public void insert(ArticleVendu article) throws DALException {
 			try(Connection conn = ConnectionProvider.getConnection();) {
@@ -71,6 +75,10 @@ public class ArticleVenduDAOSqlServerlmpl implements ArticleVenduDAO {
 		
 	}
 
+	/**
+	 * Cette méthode permet de selectionner un artcile vendu dans la base de données sur base de l'id donné.
+	 * @param  id  est l'id de l'article à selectionner.
+	 */
 	@Override
 	public ArticleVendu select(int id) throws DALException {
 		ArticleVendu articlevendu = null;
@@ -118,6 +126,9 @@ public class ArticleVenduDAOSqlServerlmpl implements ArticleVenduDAO {
 		
 	}
 
+	/**
+	 * Cette méthode permet de recuperer la liste de tous les artciles vendus dans la base de données.
+	 */
 	@Override
 	public ArrayList<ArticleVendu> select() throws DALException {
 		ArrayList<ArticleVendu> articles =new ArrayList<ArticleVendu>();
@@ -167,6 +178,10 @@ public class ArticleVenduDAOSqlServerlmpl implements ArticleVenduDAO {
 		return articles;
 	}
 
+	/**
+	 * Cette méthode permet de selectionner un artcile vendu dans la base de données sur base de l'utilisateur.
+	 * @param  utilisateur  est l'utilisateur ayant vendu l'article.
+	 */
 	@Override
 	public ArrayList<ArticleVendu> selectByUtilisateur(Utilisateur utilisateur) throws DALException {
 		
@@ -216,9 +231,13 @@ public class ArticleVenduDAOSqlServerlmpl implements ArticleVenduDAO {
 		return articles;
 	}
 
+	/**
+	 * Cette méthode permet de selectionner un artcile vendu dans la base de données sur base de sa catégorie.
+	 * @param  categorie  est la catégorie.
+	 */
 	@Override
 	public ArrayList<ArticleVendu> selectByCategorie(int categorie) throws DALException {
-ArrayList<ArticleVendu> articles =new ArrayList<ArticleVendu>();
+		ArrayList<ArticleVendu> articles =new ArrayList<ArticleVendu>();
 		
 		try(Connection conn = ConnectionProvider.getConnection();) {
 			
@@ -264,6 +283,10 @@ ArrayList<ArticleVendu> articles =new ArrayList<ArticleVendu>();
 		return articles;
 	}
 
+	/**
+	 * Cette méthode permet de supprimer un artcile vendu dans la base de données sur base de son id.
+	 * @param  id  est l'id de l'article à supprimer.
+	 */
 	@Override
 	public void delete(int id) throws DALException {
 		
@@ -281,6 +304,10 @@ ArrayList<ArticleVendu> articles =new ArrayList<ArticleVendu>();
 		
 	}
 
+	/**
+	 * Cette méthode permet de mettre à jour un artcile vendu dans la base de données.
+	 * @param  article est l'article à mettre à jour.
+	 */
 	@Override
 	public void update(ArticleVendu article) throws DALException {
 		
@@ -308,11 +335,8 @@ ArrayList<ArticleVendu> articles =new ArrayList<ArticleVendu>();
 			stmt.setString(10, article.getPhoto());
 			stmt.setString(11, article.getEtatVente());
 			stmt.setInt(12, article.getNoArticle());
-			
-			
 			//Executer la requete
 			stmt.executeUpdate();
-			
 		
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -320,6 +344,11 @@ ArrayList<ArticleVendu> articles =new ArrayList<ArticleVendu>();
 		}
 	}
 
+	/**
+	 * Cette méthode permet de selectionner un ou les artcile(s) vendu dans la base de données sur base de sa catégorie et du nom.
+	 * @param  categorie  est la catégorie de l'article.
+	 * @param  name  est le nom de l'article.
+	 */
 	@Override
 	public ArrayList<ArticleVendu> selectByCategorieName(int categorie, String name) throws DALException {
 		ArrayList<ArticleVendu> articles =new ArrayList<ArticleVendu>();
@@ -369,6 +398,11 @@ ArrayList<ArticleVendu> articles =new ArrayList<ArticleVendu>();
 		return articles;
 	}
 
+	
+	/**
+	 * Cette méthode permet de sélectionner un ou les artcile(s) vendu dans la base de données par le nom donné.
+	 * @param  name est l'article .
+	 */
 	@Override
 	public ArrayList<ArticleVendu> selectByName(String name) throws DALException {
 		ArrayList<ArticleVendu> articles =new ArrayList<ArticleVendu>();
@@ -417,6 +451,12 @@ ArrayList<ArticleVendu> articles =new ArrayList<ArticleVendu>();
 		return articles;
 	}
 
+	/**
+	 * Cette méthode permet de récuperer un ou les artcile(s) vendu(s) dans la base de données sur base de la catégorie,le nom et l'utilisateur.
+	 * @param  catégorie est la catégorie de l'article.
+	 * @param  name est le nom de l'article.
+	 * @param  utilisateur est l'utilisateur de l'article.
+	 */
 	@Override
 	public ArrayList<ArticleVendu> selectByRecherche(int categorie, String name, Utilisateur utilisateur,
 			String checkbox, String ouvertes, String mesEnchere, String mesEnchereReporter, String mesVenteCours,
@@ -562,6 +602,10 @@ ArrayList<ArticleVendu> articles =new ArrayList<ArticleVendu>();
 		
 	}
 
+	/**
+	 * Cette méthode permet de supprimer un ou les artcile(s) vendu dans la base de données sur base de l'utilisateur.
+	 * @param  utilisateur est l'utilisateur.
+	 */
 	@Override
 	public void deleteCreeByUtilisateur(Utilisateur utilisateur) throws DALException {
 			try(Connection conn = ConnectionProvider.getConnection();) {
@@ -577,6 +621,10 @@ ArrayList<ArticleVendu> articles =new ArrayList<ArticleVendu>();
 		}
 	}
 
+	/**
+	 * Cette méthode permet de sélectionner un artcile vendu dans la base de données sur base de l'utilisateur et dont l'etat est en cours.
+	 * @param  utilisateur est l'utilisateur.
+	 */
 	@Override
 	public ArrayList<ArticleVendu> selectEnCourById(Utilisateur utilisateur) throws DALException {
 		ArrayList<ArticleVendu> articles =new ArrayList<ArticleVendu>();
@@ -625,9 +673,13 @@ ArrayList<ArticleVendu> articles =new ArrayList<ArticleVendu>();
 		return articles;
 	}
 
+	/**
+	 * Cette méthode permet de sélectionner un artcile vendu sur base de l'utilisateur et dont l'etat est en cours.
+	 * @param  utilisateur est l'utilisateur.
+	 */
 	@Override
 	public ArrayList<ArticleVendu> selectUserEnchere(Utilisateur utilisateur) throws DALException {
-ArrayList<ArticleVendu> articles =new ArrayList<ArticleVendu>();
+		ArrayList<ArticleVendu> articles =new ArrayList<ArticleVendu>();
 		
 		try(Connection conn = ConnectionProvider.getConnection();) {
 			
