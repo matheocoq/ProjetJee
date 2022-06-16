@@ -139,7 +139,7 @@ public class ArticleVenduMger {
 	/**
 	 * articleVenduUserEnchere
 	 * @param user
-	 * @return ???
+	 * @return les articles ou l'utilisateur a fait une enchère
 	 * @throws BLLException
 	 */
 	public ArrayList<ArticleVendu> articleVenduUserEnchere(Utilisateur user) throws BLLException {
@@ -154,7 +154,7 @@ public class ArticleVenduMger {
 	/**
 	 * articleVenduByName
 	 * @param name
-	 * @return 
+	 * @return article par mot clé
 	 * @throws BLLException
 	 */
 	public ArrayList<ArticleVendu> articleVenduByName(String name) throws BLLException {
@@ -209,7 +209,7 @@ public class ArticleVenduMger {
 	 * filtreNonCo
 	 * @param categorie
 	 * @param nom
-	 * @return ???
+	 * @return filtre de la page non connecté
 	 * @throws BLLException
 	 */
 	public ArrayList<ArticleVendu> filtreNonCo(String categorie,String nom) throws BLLException{
@@ -233,7 +233,22 @@ public class ArticleVenduMger {
 		}
 		
 	}
-	
+	/**
+	 * filtreCo
+	 * @param categorie
+	 * @param name
+	 * @param utilisateur
+	 * @param checkbox
+	 * @param ouvertes
+	 * @param mesEnchere
+	 * @param mesEnchereReporter
+	 * @param mesVenteCours
+	 * @param mesVenteDebutees
+	 * @param mesVentetTerminees
+	 * @return filtre de la page connecté
+	 * @throws NumberFormatException
+	 * @throws DALException
+	 */
 	public ArrayList<ArticleVendu> filtreCo(String categorie , String name , Utilisateur utilisateur ,String checkbox , String ouvertes , String mesEnchere,String mesEnchereReporter,String mesVenteCours,String mesVenteDebutees,String mesVentetTerminees) throws NumberFormatException, DALException{
 			
 				

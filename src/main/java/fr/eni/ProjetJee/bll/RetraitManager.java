@@ -15,6 +15,10 @@ public class RetraitManager {
 	
 	private static RetraitManager instance;
 	
+	/**
+	 * Singleton qui permet ainsi la création d'un seul objet (RetraitManager)
+	 * @return une instance de RetraitManager
+	 */
 	public static RetraitManager getInstance() {
 		if(instance == null) {
 			instance = new RetraitManager();
@@ -22,12 +26,18 @@ public class RetraitManager {
 		return instance;
 	}
 	
+	/**
+	 * Récupere l'interface commune à tout les implémentations de RetraitDAO
+	 */
 	private RetraitManager() {
 		daoRetrait = DAOFactory.getDAORetrait();
 	}
 	
-
-	
+	/**
+	 * getRetraits
+	 * @return la liste de tout les retraits
+	 * @throws BLLException
+	 */
 	public List<Retrait> getRetraits() throws BLLException{
 		List<Retrait> retraits = new ArrayList<>();
 		try {
@@ -39,6 +49,11 @@ public class RetraitManager {
 		return retraits;
 	}
 	
+	/**
+	 * addRetraits permet d'ajouter un retrait dans la BDD
+	 * @param retrait
+	 * @throws BLLException
+	 */
 	public void addRetraits(Retrait retrait) throws BLLException{
 		try {
 			daoRetrait.insert(retrait);
@@ -48,6 +63,11 @@ public class RetraitManager {
 		}
 	}
 	
+	/**
+	 * updateRetrait permet de mettre à jour les information d'un retrait en fonction de son ID
+	 * @param retrait
+	 * @throws BLLException
+	 */
 	public void updateRetrait(Retrait retrait) throws BLLException{
 		try {
 			daoRetrait.update(retrait);
@@ -58,6 +78,11 @@ public class RetraitManager {
 		
 	}
 	
+	/**
+	 * removeRetrait permet de supprimer un retrait en fonction de son ID
+	 * @param no_retrait
+	 * @throws BLLException
+	 */
 	public void removeRetrait(int no_retrait) throws BLLException{
 		try {
 			daoRetrait.delete(no_retrait);
@@ -67,6 +92,12 @@ public class RetraitManager {
 		}
 	}
 	
+	/**
+	 * getArticleById
+	 * @param noRetrait
+	 * @return l'article associé a un retrait en fonction de l'ID du retrait.
+	 * @throws BLLException
+	 */
 	public Retrait getArticleById(int noRetrait) throws BLLException{
 		Retrait retrait = null;
 		try {
