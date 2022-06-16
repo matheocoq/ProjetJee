@@ -491,6 +491,9 @@ public class ArticleVenduDAOSqlServerlmpl implements ArticleVenduDAO {
 						requete=requete+"WHERE (etat_vente = 'En cours') ";
 					}
 				}
+				if(ouvertes==null && mesEnchereReporter==null && mesEnchere==null) {
+					requete=requete+"WHERE (etat_vente = 'En cours') ";
+				}
 			}else {
 				requete=requete+"WHERE ARTICLES_VENDUS.no_utilisateur = ? ";
 				if(mesVenteCours!=null){
