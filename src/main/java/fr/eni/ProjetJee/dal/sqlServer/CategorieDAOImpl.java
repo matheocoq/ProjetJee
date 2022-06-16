@@ -200,8 +200,8 @@ public class CategorieDAOImpl implements CategorieDAO{
 	}
 
 	/**
-	 * Cette méthode permet de supprimer une catégorie sur base du numero passé en paramètre.
-	 * @param  no_categorie est la catégorie à mettre à jour.
+	 * Cette méthode permet de supprimer une catégorie sur base du numero de categorie passé en paramètre.
+	 * @param  no_categorie est le numero de la catégorie à supprimer.
 	 */
 	@Override
 	public void delete(Integer no_categorie) throws DALException {

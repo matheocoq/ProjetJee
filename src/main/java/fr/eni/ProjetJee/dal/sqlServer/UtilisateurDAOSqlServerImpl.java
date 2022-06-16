@@ -22,6 +22,10 @@ public class UtilisateurDAOSqlServerImpl implements UtilisateursDAO {
 	private static final String DELETE = "DELETE FROM UTILISATEURS WHERE no_utilisateur = ?";
 	private static final String CHECK_UNIQUE = "SELECT pseudo,email,telephone FROM UTILISATEURS WHERE pseudo = ? or email=?";
 
+	/**
+	 * Cette méthode permet d'inserer l'utilisateur passé en paramètre.
+	 * @param  utilisateur est l'utilisateur à insérer.
+	 */
 	@Override
 	public void insert(Utilisateur utilisateur) throws DALException {
 		try (Connection conn = ConnectionProvider.getConnection();) {
@@ -57,6 +61,10 @@ public class UtilisateurDAOSqlServerImpl implements UtilisateursDAO {
 		}		
 	}
 	
+	/**
+	 * Cette méthode permet d'inserer l'historique de l'utilisateur passé en paramètre.
+	 * @param  utilisateur est l'utilisateur dont on veut insérer l'historique.
+	 */
 	@Override
 	public void insertHistoriques(Utilisateur utilisateur) throws DALException {
 		try (Connection conn = ConnectionProvider.getConnection();) {
@@ -82,6 +90,10 @@ public class UtilisateurDAOSqlServerImpl implements UtilisateursDAO {
 		
 	}
 	
+	/**
+	 * Cette méthode permet de récuperer l'utilisateur dont le numero est passé en paramètre.
+	 * @param  noUtilisateur est le numéro de l'utilisateur à récuperer.
+	 */
 	@Override
 	public Utilisateur selectById(Integer noUtilisateur) throws DALException {
 		try (Connection conn = ConnectionProvider.getConnection();) {
@@ -103,6 +115,9 @@ public class UtilisateurDAOSqlServerImpl implements UtilisateursDAO {
 		}	
 	}
 
+	/**
+	 * Cette méthode permet de recuperer tous les utilisateurs dans la base de données.
+	 */
 	@Override
 	public List<Utilisateur> selectAll() throws DALException {
 		try (Connection conn = ConnectionProvider.getConnection();) {
@@ -124,6 +139,10 @@ public class UtilisateurDAOSqlServerImpl implements UtilisateursDAO {
 		}
 	}
 
+	/**
+	 * Cette méthode permet de mettre à jour l'utilisateur passé en paramètre.
+	 * @param  utilisateur est l'utilisateur à mettre à jour.
+	 */
 	@Override
 	public void update(Utilisateur utilisateur) throws DALException {
 		try (Connection conn = ConnectionProvider.getConnection();) {
@@ -154,6 +173,10 @@ public class UtilisateurDAOSqlServerImpl implements UtilisateursDAO {
 		}
 	}
 
+	/**
+	 * Cette méthode permet de supprimer l'utilisateur dont le numero est passé en paramètre.
+	 * @param  noUtilisateur est le numero l'utilisateur à supprimer.
+	 */
 	@Override
 	public void delete(Integer noUtilisateur) throws DALException {
 		// Faire une transaction pour supprimer de la table Utilisateur et ajouter à la table archive Utilisateurs
@@ -173,6 +196,10 @@ public class UtilisateurDAOSqlServerImpl implements UtilisateursDAO {
 		}
 	}
 
+	/**
+	 * Cette méthode permet de récuperer l'utilisateur dont le pseudo ou l'émail est passé en paramètre.
+	 * @param  login soit le speudo ou l'émail de l'utilisateur à récuperer.
+	 */
 	@Override
 	public Utilisateur selectByLogin(String login) throws DALException {
 		try (Connection conn = ConnectionProvider.getConnection();) {
@@ -195,6 +222,11 @@ public class UtilisateurDAOSqlServerImpl implements UtilisateursDAO {
 		}
 	}
 
+	/**
+	 * Cette méthode permet de verifier l'unicité du speudo et l'émail dans la base de données.
+	 * @param  speudo est le speudo à vérifier.
+	 * @param  email est l'émail à vérifier.
+	 */
 	@Override
 	public boolean checkPseudoEmail(String speudo, String email) throws DALException {
 		boolean isDuplicated = false; 
@@ -218,6 +250,12 @@ public class UtilisateurDAOSqlServerImpl implements UtilisateursDAO {
 		return isDuplicated;
 	}
 
+	/**
+	 * Cette méthode permet de verifier l'unicité du speudo et l'émail dans la 
+	 * base de données lors d'une modification du profil d'un utilisateur.
+	 * @param  speudo est le speudo à vérifier.
+	 * @param  email est l'émail à vérifier.
+	 */
 	@Override
 	public boolean checkPseudoEmailModif(String speudo, String email) throws DALException {
 		
@@ -242,10 +280,5 @@ public class UtilisateurDAOSqlServerImpl implements UtilisateursDAO {
 		}		
 		return nbLignes==1;
 	}
-
-	
-
-	
-	
 
 }

@@ -20,7 +20,10 @@ public class RetraitDAOImpl implements RetraitDAO{
 	private final String DELETE = "DELETE FROM RETRAITS WHERE no_retrait=?";
 	private final String selectID = "Select * from RETRAITS where no_retrait=?";
 	
-	
+	/**
+	 * Cette méthode permet d'inserer un rétrait dans la base de données.
+	 * @param  retrait  est le retrait à inserer.
+	 */
 	@Override
 	public void insert(Retrait retrait) throws DALException {
 		
@@ -62,6 +65,10 @@ public class RetraitDAOImpl implements RetraitDAO{
 		}
 	}
 
+	/**
+	 * Cette méthode permet de selectionner un rétrait sur base du numero de retrait.
+	 * @param  no_retrait est le numero du retrait à selectionner.
+	 */
 	@Override
 	public Retrait selectById(Integer no_retrait) throws DALException {
 		Retrait retrait = null;
@@ -109,6 +116,9 @@ public class RetraitDAOImpl implements RetraitDAO{
 
 	}
 
+	/**
+	 * Cette méthode permet de selectionner tous les rétraits dans la base de données.
+	 */
 	@Override
 	public List<Retrait> selectAll() throws DALException {
 		List<Retrait> allRetraits = new ArrayList<>();
@@ -148,6 +158,10 @@ public class RetraitDAOImpl implements RetraitDAO{
 		return allRetraits;
 	}
 
+	/**
+	 * Cette méthode permet de mettre à jour un rétrait.
+	 * @param  retrait est le retrait à mettre à jour.
+	 */
 	@Override
 	public void update(Retrait retrait) throws DALException {
 		Connection conn = null;
@@ -192,6 +206,10 @@ public class RetraitDAOImpl implements RetraitDAO{
 		
 	}
 
+	/**
+	 * Cette méthode permet de supprimer un rétrait sur base du numéro de retrait passé en paramètre.
+	 * @param  no_retrait est le numéro du retrait à supprimer.
+	 */
 	@Override
 	public void delete(Integer no_retrait) throws DALException {
 		Connection conn = null;
