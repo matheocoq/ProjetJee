@@ -468,7 +468,7 @@ public class ArticleVenduDAOSqlServerlmpl implements ArticleVenduDAO {
 			String requete ="SELECT * FROM ARTICLES_VENDUS INNER JOIN UTILISATEURS ON ARTICLES_VENDUS.no_utilisateur = UTILISATEURS.no_utilisateur ";
 			PreparedStatement stmt=null;
 			int nb=1;
-			if(checkbox.equals("achat")) {
+			if("achat".equals(checkbox)) {
 				if(mesEnchere!=null){
 					requete=requete+"LEFT JOIN ENCHERES "
 								   +"ON ARTICLES_VENDUS.no_article = ENCHERES.no_article "
@@ -521,7 +521,7 @@ public class ArticleVenduDAOSqlServerlmpl implements ArticleVenduDAO {
 	
 			}
 			if(categorie!=0) {
-				if(checkbox.equals("vente") || mesEnchere!=null||mesEnchereReporter!=null ||ouvertes!=null) {
+				if("vente".equals(checkbox) || mesEnchere!=null||mesEnchereReporter!=null ||ouvertes!=null) {
 					requete=requete+"AND no_categorie = ? ";
 				}
 				else {
@@ -530,7 +530,7 @@ public class ArticleVenduDAOSqlServerlmpl implements ArticleVenduDAO {
 			}
 			
 			if(name!=""){
-				if(checkbox.equals("vente") || categorie==0 ||mesEnchere!=null||mesEnchereReporter!=null ||ouvertes!=null) {
+				if("vente".equals(checkbox) || categorie==0 ||mesEnchere!=null||mesEnchereReporter!=null ||ouvertes!=null) {
 					requete=requete+"AND nom_article LIKE ? ";
 				}
 				else {
@@ -542,7 +542,7 @@ public class ArticleVenduDAOSqlServerlmpl implements ArticleVenduDAO {
 			//Executer la requete
 			 System.out.println(requete);
 			 stmt = conn.prepareStatement(requete);
-			 if(checkbox.equals("achat")) {
+			 if("achat".equals(checkbox)) {
 					if(mesEnchere!=null){
 						stmt.setInt(nb, utilisateur.getNoUtilisateur());
 						nb++;
