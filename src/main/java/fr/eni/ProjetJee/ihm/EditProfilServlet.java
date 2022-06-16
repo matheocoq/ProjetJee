@@ -1,6 +1,8 @@
 package fr.eni.ProjetJee.ihm;
 
 import java.io.IOException;
+
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -63,20 +65,21 @@ public class EditProfilServlet extends HttpServlet {
 							if(userMgr.compareHashPassword(mdp,bddMdp)) { 
 								prenom = prenom.substring(0, 1).toUpperCase()+prenom.substring(1);
 								Utilisateur user = new Utilisateur(noUser,speudo, nom.toUpperCase(), prenom, email, tel, rue, codePostal, ville.toUpperCase(), userMgr.generateHash(mdp), ancienUser.getCredit(),false); 
-								System.out.println("Test : "+user.getNom());
 								try { 
 									userMgr.majUtilisateur(user); 
 									request.getSession().setAttribute("utilisateur", user); 
 								} catch (BLLException e) { 
 									// TODO Auto-generated catch block 
-									e.printStackTrace(); 
+									//e.printStackTrace(); 
+									System.err.println("erreur mise à jour de l'utilisateur");
 								} 			 
 								// on va redirectionné vers la page d'acceuil du user connecté 
 								// informer que les infos ont été modifié
-								response.sendRedirect("http://localhost:8080/ProjetJee/editProfil"); 
+						
+								response.sendRedirect("http://localhost:8080/ProjetJee/AfficherProfil?user="+noUser); 
 							}else {
 								request.setAttribute("errorModification", " Modification incorrect."); 
-								request.getRequestDispatcher("/WEB-INF/pages/register.jsp").forward(request, response);
+								request.getRequestDispatcher("/WEB-INF/pages/editProfil.jsp").forward(request, response);
 							}
 						}else {
 							request.setAttribute("errorModification", " Modification incorrect."); 
@@ -85,6 +88,8 @@ public class EditProfilServlet extends HttpServlet {
 					} catch (DALException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
+						request.setAttribute("errorModification", " Modification incorrect."); 
+						request.getRequestDispatcher("/WEB-INF/pages/editProfil.jsp").forward(request, response);
 					}
 				}else {
 					//On regarde si le mot de passe saisie est correct 
@@ -100,10 +105,11 @@ public class EditProfilServlet extends HttpServlet {
 						} 			 
 						// on va redirectionné vers la page d'acceuil du user connecté 
 						// informer que les infos ont été modifié
-						response.sendRedirect("http://localhost:8080/ProjetJee/editProfil"); 
+						
+						response.sendRedirect("http://localhost:8080/ProjetJee/AfficherProfil?user="+noUser); 
 					}else {
 						request.setAttribute("errorModification", " Modification incorrect."); 
-						request.getRequestDispatcher("/WEB-INF/pages/register.jsp").forward(request, response);
+						request.getRequestDispatcher("/WEB-INF/pages/editProfil.jsp").forward(request, response);
 					}
 				}
 				

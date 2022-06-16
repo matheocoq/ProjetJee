@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import fr.eni.ProjetJee.bll.BLLException;
 import fr.eni.ProjetJee.bll.UtilisateurMger;
@@ -58,8 +59,12 @@ public class NouveauMdpServlet extends HttpServlet {
 				} 								 
 				// on redirectionné vers la page de modification de profil
 				
-				request.setAttribute("infosNewMdp", "Nouveau mot de passe pris en compte.");
-				response.sendRedirect("http://localhost:8080/ProjetJee/editProfil"); 
+				//request.setAttribute("infosNewMdp", "Nouveau mot de passe pris en compte.");
+				HttpSession session = request.getSession(false);
+				if (session != null && session.getAttribute("utilisateur") != null) {
+					session.invalidate();
+				}
+				response.sendRedirect("http://localhost:8080/ProjetJee/Connexion"); 
 			}else { 
 				// le nouveau mot de passe et la confirmation doivent être identiques. 
 				request.setAttribute("newMdpError", " Nouveau mot de passe incorrect."); 
