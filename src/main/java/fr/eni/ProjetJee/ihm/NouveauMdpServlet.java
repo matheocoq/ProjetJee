@@ -42,6 +42,10 @@ public class NouveauMdpServlet extends HttpServlet {
 		if(userMgr.compareHashPassword(actuelMdp, user.getMotDePasse())) {
 			
 			System.out.println("mot de passe actuel ok");
+			if(actuelMdp.equals(newMdp)) {
+				request.setAttribute("newMdpError", " Nouveau mot de passe incorrect."); 
+				request.getRequestDispatcher("/WEB-INF/pages/nouveauMdp.jsp").forward(request, response); 
+			}
 			
 			if(newMdp.equals(confirmation)) { 
 				user.setMotDePasse(userMgr.generateHash(newMdp));
