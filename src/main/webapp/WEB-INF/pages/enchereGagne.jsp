@@ -12,10 +12,10 @@
 <div class="container">
 		<c:choose>
 			<c:when test="${empty gagnant}">
-				<h5 class="titre-accueil" >Vous avez remporté la vente</h5>
+				<h5 style="color: #3e8ed0;font-size: 40px;" class="titre-accueil" >Vous avez remporté la vente</h5>
 			</c:when>
 			<c:otherwise>
-				<h5class="titre-accueil" >${ gagnant } a remporté la vente</h5>
+				<h5 style="color: #3e8ed0;font-size: 40px;" class="titre-accueil" >${ gagnant } a remporté la vente</h5>
 			</c:otherwise>
 		</c:choose>
 	<div class="row mt-5">
