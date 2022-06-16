@@ -12,7 +12,7 @@ bottom: 0;
 }
 </style>
 
-<nav class="navbar navbar-expand-lg bg-light mb-2">
+<nav class="navbar navbar-expand-lg bg-white mb-2">
 	<div class="container-fluid">
 		<a class="navbar-brand p-0" href="${pageContext.request.contextPath}/accueil"><img alt="" class="imgLogo" src="${pageContext.request.contextPath}/resources/logoENIEncheres.png"></a>
 	<div style="flex-grow: 1;">
