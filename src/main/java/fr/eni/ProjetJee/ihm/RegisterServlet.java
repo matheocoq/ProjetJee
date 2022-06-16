@@ -45,7 +45,7 @@ public class RegisterServlet extends HttpServlet {
 		UtilisateurMger userMgr = UtilisateurMger.getInstance();
 		try {
 			// on verifie la longueur du numero de tel et si le pseudo, l'email ou telephone existe déjà dans la base de données.
-			if((!tel.isEmpty() && tel.length() <10) || userMgr.checkPseudoEmailTel(speudo,email,tel)) {
+			if((!tel.isEmpty() && tel.length() <10) || userMgr.checkPseudoEmail(speudo,email)) {
 				req.setAttribute("errorInscription", " Inscription incorrect.");
 				req.getRequestDispatcher("/WEB-INF/pages/inscription.jsp").forward(req, resp);
 			}else {

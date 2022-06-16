@@ -113,6 +113,9 @@ public class CategorieDAOImpl implements CategorieDAO{
 		return categorie;
 	}
 
+	/**
+	 * Cette méthode permet de récuperer toutes catégories dans la base de données.
+	 */
 	@Override
 	public List<Categorie> selectAll() throws DALException {
 		List<Categorie> allCategories = new ArrayList<>();
@@ -152,6 +155,10 @@ public class CategorieDAOImpl implements CategorieDAO{
 		return allCategories;
 	}
 
+	/**
+	 * Cette méthode permet de mettre à jour une catégorie passé en paramètre.
+	 * @param  cat est la catégorie à mettre à jour.
+	 */
 	@Override
 	public void update(Categorie cat) throws DALException {
 		Connection conn = null;
@@ -192,6 +199,10 @@ public class CategorieDAOImpl implements CategorieDAO{
 		}	
 	}
 
+	/**
+	 * Cette méthode permet de supprimer une catégorie sur base du numero passé en paramètre.
+	 * @param  no_categorie est la catégorie à mettre à jour.
+	 */
 	@Override
 	public void delete(Integer no_categorie) throws DALException {
 		Connection conn = null;

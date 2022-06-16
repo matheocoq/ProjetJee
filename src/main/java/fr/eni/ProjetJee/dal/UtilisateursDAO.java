@@ -13,6 +13,6 @@ public interface UtilisateursDAO {
 	List<Utilisateur> selectAll() throws DALException;
 	void update(Utilisateur utilisateur) throws DALException;
 	void delete(Integer noUtilisateur) throws DALException;
-	boolean checkPseudoEmailTel(String speudo,String email,String tel) throws DALException;
-	boolean checkPseudoEmailTelModif(String speudo,String email,String tel) throws DALException;
+	boolean checkPseudoEmail(String speudo,String email) throws DALException;
+	boolean checkPseudoEmailModif(String speudo,String email) throws DALException;
 }

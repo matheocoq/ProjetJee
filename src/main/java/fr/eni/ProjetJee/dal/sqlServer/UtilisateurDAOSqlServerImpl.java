@@ -20,7 +20,7 @@ public class UtilisateurDAOSqlServerImpl implements UtilisateursDAO {
 	private static final String SELECT_ALL = "SELECT * FROM UTILISATEURS";
 	private static final String UPDATE = "UPDATE UTILISATEURS set pseudo = ?, nom = ?, prenom = ?, email = ?, telephone = ?, rue = ?, code_postal = ?, ville = ?, mot_de_passe = ?, credit = ?, administrateur = ?, active = ? WHERE no_utilisateur = ?";
 	private static final String DELETE = "DELETE FROM UTILISATEURS WHERE no_utilisateur = ?";
-	private static final String CHECK_UNIQUE = "SELECT pseudo,email,telephone FROM UTILISATEURS WHERE pseudo = ? or email=? or telephone=?";
+	private static final String CHECK_UNIQUE = "SELECT pseudo,email,telephone FROM UTILISATEURS WHERE pseudo = ? or email=?";
 
 	@Override
 	public void insert(Utilisateur utilisateur) throws DALException {
@@ -196,7 +196,7 @@ public class UtilisateurDAOSqlServerImpl implements UtilisateursDAO {
 	}
 
 	@Override
-	public boolean checkPseudoEmailTel(String speudo, String email, String tel) throws DALException {
+	public boolean checkPseudoEmail(String speudo, String email) throws DALException {
 		boolean isDuplicated = false; 
 		try (Connection conn = ConnectionProvider.getConnection();) {
 			PreparedStatement stmt = conn.prepareStatement(CHECK_UNIQUE);
@@ -205,9 +205,6 @@ public class UtilisateurDAOSqlServerImpl implements UtilisateursDAO {
 			//Préparer la requete
 			stmt.setString(1, speudo);
 			stmt.setString(2, email);
-			stmt.setString(3, tel);
-			
-			
 			
 			//Executer la requete
 			ResultSet rs = stmt.executeQuery();
@@ -222,7 +219,7 @@ public class UtilisateurDAOSqlServerImpl implements UtilisateursDAO {
 	}
 
 	@Override
-	public boolean checkPseudoEmailTelModif(String speudo, String email, String tel) throws DALException {
+	public boolean checkPseudoEmailModif(String speudo, String email) throws DALException {
 		
 		int nbLignes =0;
 		try (Connection conn = ConnectionProvider.getConnection();) {
@@ -232,9 +229,7 @@ public class UtilisateurDAOSqlServerImpl implements UtilisateursDAO {
 			//Préparer la requete
 			stmt.setString(1, speudo);
 			stmt.setString(2, email);
-			stmt.setString(3, tel);
-			
-			
+
 			
 			//Executer la requete
 			ResultSet rs = stmt.executeQuery();
