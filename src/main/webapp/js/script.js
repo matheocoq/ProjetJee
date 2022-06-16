@@ -41,7 +41,7 @@ getDateTime()
 	
 window.setInterval(function () {
 	getDateTime()
-}, 1000);
+}, 100);
 
 
 let Debut = document.querySelector("#dateDebut")
