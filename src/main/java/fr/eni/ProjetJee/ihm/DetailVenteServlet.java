@@ -55,12 +55,13 @@ public class DetailVenteServlet extends HttpServlet {
 				String propositionError = request.getParameter("propositionError");
 				Enchere enchere = encherMger.lastEnchereByArticle(idArticleVendue);
 				ArticleVendu article = articleVenduMger.articleVenduById(idArticleVendue);
-				Retrait retrait = article.getLieuRetrait();
-				
 				if (article == null) {
 					response.sendRedirect("/ProjetJee/accueil");
 					return;
 				}
+				Retrait retrait = article.getLieuRetrait();
+				
+				
 				
 				String etatEnchere = article.getEtatVente();
 				
@@ -72,6 +73,9 @@ public class DetailVenteServlet extends HttpServlet {
 				if (etatEnchere.equalsIgnoreCase("Créée") || etatEnchere.equalsIgnoreCase("En cours")) {
 					if (propositionError != null) {
 						request.setAttribute("propositionError", true);
+					}
+					if (utilisateur.getNoUtilisateur() == article.getUtilisateur().getNoUtilisateur() || (enchere != null && utilisateur.getNoUtilisateur() == enchere.getNoUtilisateur().getNoUtilisateur())) {
+						request.setAttribute("owner", true);
 					}
 					request.getRequestDispatcher("/WEB-INF/pages/detailVente.jsp").forward(request, response);
 				} else {

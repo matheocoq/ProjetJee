@@ -16,11 +16,12 @@
 		<div style="transform: translateY(-172px);">
 			
 			
-			${not empty nouvelleVenteError ? "<div class='alert alert-danger mb-4' role='alert'>Un ou plusieur champ innatendu !!</div>" : null}
+			
 			
 			<form action="<%= request.getContextPath() %>/NouvelleVente" method="post">
 				<div class="">
 					<div style="display: inline-block;width: 33%;" class="shadow-sm">
+					
 						<p class="text-center fw-bold m-0">Retrait</p>
 						
 						<div class="form-group">
@@ -41,6 +42,7 @@
 						
 					</div>
 					<div  class="rounded col-article article-info">
+					${not empty nouvelleVenteError ? "<div class='alert alert-danger mb-4' role='alert'>Un ou plusieur champ innatendu !!</div>" : null}
 						<div class="form-group ">
 							<label for="article">Article *</label>
 							<input type="text" class="form-control" name="article" id="article" placeholder="Nom de mon article" >
