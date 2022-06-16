@@ -29,11 +29,9 @@ import fr.eni.ProjetJee.bo.Utilisateur;
 public class SupprimerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Utilisateur user = (Utilisateur) request.getSession().getAttribute("utilisateur");
 		
 		UtilisateurMger utilisateurMger = UtilisateurMger.getInstance();

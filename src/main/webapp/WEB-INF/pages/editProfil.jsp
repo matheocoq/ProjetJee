@@ -70,9 +70,10 @@
 	</div>
 	<div class="saveEditProfil" >
 		<input type="submit" value="Enregistrer">
-		<button onclick="window.location.href = '<%=request.getContextPath()%>/supprimer';">Supprimer mon compte</button>
 	</div>
 	
 </form>
-
+<form action="<%=request.getContextPath()%>/supprimer" method="post" style="text-align: center;margin-top: 10px;">
+	<input class="bouton-sup-compte" type="submit" value="Supprimer mon compte">
+</form>
 <jsp:include page="footer/footer.jsp" />

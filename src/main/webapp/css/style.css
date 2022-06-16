@@ -295,5 +295,11 @@ a {
     padding: 7%;
     width: 62%
 }
-
+.bouton-sup-compte{
+	font-size: 17px;
+    color: #55C794;
+    border: solid 1px #55C794;
+    border-radius: 5px;
+    background-color: #F7F9F9;
+}
 
