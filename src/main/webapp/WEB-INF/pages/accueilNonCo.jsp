@@ -4,11 +4,12 @@
 <%@page import="java.util.ArrayList"%>
 <span class="titre-accueil">Liste des Enchères</span>
 <div class="container" >
-<span>Filtre :</span>
-<form action="/ProjetJee/" method="get">
-<input name="nom" type="text">
-<label for="categorie-select">Categorie:</label>
-<select name="categorie" id="categorie-select">
+<span class="filtre-titre">Filtre :</span>
+<form action="/ProjetJee/" method="get" class="form-filtre">
+<div style="display: inline-block;margin-top: 35px;">
+<input class="bandeau-recherche" name="nom" type="text"  placeholder="Recherche par mots-clé">
+<label style="margin-left: 80px;"for="categorie-select">Categorie:</label>
+<select style="border:0px;" name="categorie" id="categorie-select">
     <option value="Toute">Toute</option>
     <%
 		ArrayList<Categorie> categories= (ArrayList<Categorie>)request.getAttribute("categories");
@@ -20,7 +21,8 @@
 		}
     %>
 </select>
-<button value=true name="rechercher">Rechercher</button>
+</div>
+<button style="float: right; " class="bouton" value=true name="rechercher">Rechercher</button>
 </form>
 <div class="fiche-produits">
 	<%
@@ -32,11 +34,15 @@
 		
 	%>
 		<div class="article">
-		<img alt="" src="<%= article.getPhoto() %>">
-		<span><%= article.getNomArticle() %></span>
+		<div>
+		<img class="article-image" alt="" src="${pageContext.request.contextPath}/resources/logoENI.svg">
+		</div>
+		<div>
+		<span class="article-nom"><%= article.getNomArticle() %></span>
 		<span>Prix : <%= article.getPrixDeVente() %></span>
-		<span>Fin de l'enchère: <%= article.getDateFinEncheresFormat() %></span>
+		<span style="margin-bottom: 15px;">Fin de l'enchère: <%= article.getDateFinEncheresFormat() %></span>
 		<span>Vendeur : <%= article.getUtilisateur().getPseudo() %></span>
+		</div>
 		</div>
     <%
 		}

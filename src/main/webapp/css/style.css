@@ -2,7 +2,6 @@
 
 .fiche-produits{
 	display: block;
-	width: 50%;
 }
 
 .navbar-collapse{
@@ -22,3 +21,279 @@
     height: 100%;
     display: block;
 }
+
+.form-filtre{
+	margin-bottom: 90px;
+}
+
+.filtre-titre{
+	font-size: 24px;
+}
+.article{
+	width: 45%;
+	display: inline-block;
+}
+.article span{
+	display: block;
+}
+
+.article div{
+	display: inline-block;
+}
+
+.article-image{
+	width: 70px;
+    margin-top: -150px;
+	margin-right: 15px;
+}
+.article-nom{
+	font-weight: bold;
+	margin-bottom: 15px;
+}
+.bouton{
+	width: 250px;
+    background-color: #F7F9F9;
+    height: 125px;
+    font-size: 26px;
+    color: #55C794;
+    border: solid 1px #55C794;
+    border-radius: 5px;
+}
+.bouton:hover {
+	opacity: 0.80;
+	box-shadow: 0 0 8px rgb(0 0 0 / 25%);
+}
+.bandeau-recherche{
+	border: 0px;
+    border-bottom: 1px solid;
+    margin-bottom: 25px;
+   display: inline-block;
+}
+.bouton-bandeau {
+	color: #55C794;
+    border: solid 1px #55C794;
+    border-radius: 5px;
+    background-color: #F7F9F9;
+    margin-right: 10px;
+}
+
+.nav-bouton-texte{
+	color: #55C794;
+    font-weight: 500;
+}
+.modifInscription{
+	text-align: center;
+}
+.modifInscription label{
+
+	display: inline-block;
+ 	font-weight: bold;
+}
+.editCol input{
+	float: right;
+}
+
+.saveEditProfil {
+	    text-align: center;
+}
+.saveEditProfil input{
+	
+	font-size: 17px;
+	color: #55C794;
+	border: solid 1px #55C794;
+	border-radius: 5px;
+	background-color: #F7F9F9;
+       
+}
+.editCol div{
+	margin-bottom: 20px;
+}
+.saveEditProfil button{
+	margin-left: 13px;
+	font-size: 17px;
+	color: #55C794;
+	border: solid 1px #55C794;
+	border-radius: 5px;
+	background-color: #F7F9F9;
+}
+
+
+
+
+
+.saveNewInscription {
+	text-align: center;
+}
+.saveNewInscription input{
+	
+	font-size: 17px;
+	color: #55C794;
+	border: solid 1px #55C794;
+	border-radius: 5px;
+	background-color: #F7F9F9;
+       
+}
+.saveNewInscription button{
+	font-size: 25px;
+	
+	color: #55C794;
+	border: solid 1px #55C794;
+	border-radius: 5px;
+	background-color: #F7F9F9;
+}
+
+.inscription{
+	text-align: center;
+}
+.inscription label{
+	
+	width: 150px;
+	display: inline-block;
+	font-weight: bold;
+}
+
+.newMdp{
+	margin-top:50px;
+	text-align: center;
+}
+.newMdp label{
+
+	display: inline-block;
+ 	font-weight: bold;
+}
+.saveNewMdp{
+	text-align:center;
+}
+.saveNewMdp input{
+	
+	
+	font-size: 17px;
+	color: #55C794;
+	border: solid 1px #55C794;
+	border-radius: 5px;
+	background-color: #F7F9F9;
+}
+
+a {
+	text-decoration: none;
+}
+
+.white {
+	color: #F9F9F9
+}
+
+.blue {
+	color: #3FACF9;
+}
+
+.blue:hover {
+	color: #3FACF9;
+	opacity: 0.8;
+}
+
+.btn-blue {
+	color: #3FACF9;
+	border: solid;
+	border-width: 0.1em;
+	border-color: #3FACF9;
+}
+
+.btn-blue:hover {
+	color: #3FACF9;
+	border: solid;
+	border-width: 0.1em;
+	border-color: #3FACF9;
+	opacity: 0.8;
+}
+
+.green {
+	color: #55C794;
+}
+
+.green:hover {
+	color: #55C794;
+	opacity: 0.8;
+}
+
+.btn-green {
+	color: #55C794;
+	border: solid;
+	border-width: 0.1em;
+	border-color: #55C794;
+}
+
+.btn-green:hover {
+	color: #55C794;
+	border: solid;
+	border-width: 0.1em;
+	border-color: #55C794;
+	opacity: 0.8;
+}
+
+.light-blue {
+	color: #A8C8F8;
+}
+
+.light-blue:hover {
+	color: #A8C8F8;
+	opacity: 0.8;
+}
+
+.btn-light-blue {
+	color: #A8C8F8;
+	border: solid;
+	border-width: 0.1em;
+	border-color: #A8C8F8;
+}
+
+.btn-light-blue:hover {
+	color: #A8C8F8;
+	border: solid;
+	border-width: 0.1em;
+	border-color: #A8C8F8;
+	opacity: 0.8;
+}
+
+.col-connexion {
+	border: solid;
+	border-width: 0.1em;
+	border-color: #3FACF9;
+}
+
+.col-article {
+	border: solid;
+	border-width: 0.1em;
+	border-color: #3FACF9;
+}
+
+.col-retrait {
+	border: solid;
+	border-width: 0.1em;
+	border-color: #3FACF9;
+}
+
+.col-imgArticle {
+	border-right: solid;
+	border-right-width: 0.1em;
+	border-right-color: #A8C8F8;
+}
+
+.imgArticle {
+	border-width: 0.1em;
+	border-color: #3FACF9;
+	border-radius: 30px;
+	max-width: 300px;
+    max-height: 300px;
+    display: block;
+}
+
+.article-info{
+	display: inline-block;
+    margin-left: 20px;
+    padding-top: 2% !important;
+    padding-bottom: 2% !important;
+    padding: 7%;
+    width: 62%
+}
+
+

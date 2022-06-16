@@ -16,26 +16,47 @@
 	%>
 	<div class="modifInscription">
 		
-		<label for="pseudo">Pseudo :  </label>
-  		<input type="text" id="pseudo" name="pseudo"  required="required" value="<%= user.getPseudo()%>"> 
-  		<label for="nom">Nom :  </label>
-  		<input type="text" id="nom" name="nom" required="required" value="<%= user.getNom()%>"> <br><br>
-
-  		<label for="prenom">Prénom :  </label>
-  		<input type="text" id="prenom" name="prenom"  required="required" value="<%= user.getPrenom()%>"> 
-  		<label for="email">Email :  </label>
-  		<input type="email" id="email" name="email"  required="required" value="<%= user.getEmail()%>"><br><br>
- 
- 		<label for="tel">Teléphone :  </label>
-  		<input type="tel" id="tel" name="tel" value="<%= user.getTelephone()%>"> 
-  		<label for="rue">Rue :  </label>
-  		<input type="text" id="rue" name="rue"  required="required" value="<%= user.getRue()%>"><br><br>
-  	
-  		<label for="codePostal">Code postal :  </label>
-  		<input type="text" id="codePostal" name="codePostal"  required="required" value="<%= user.getCodePostal()%>"> 
-  		<label for="ville">Ville :  </label>
-  		<input type="text" id="ville" name="ville"  required="required" value="<%= user.getVille()%>"><br><br>
-	
+		<div>
+			<div style="display: inline-block;" class="editCol">
+			<div style="float: right;">
+			<label for="pseudo">Pseudo :  </label>
+	  		<input type="text" id="pseudo" name="pseudo"  required="required" value="<%= user.getPseudo()%>"> 
+	  		</div>
+	  		<div>
+	  		<label for="prenom">Prénom :  </label>
+	  		<input type="text" id="prenom" name="prenom"  required="required" value="<%= user.getPrenom()%>"> 
+	  		</div>
+	  		<div>
+	  		<label for="tel">Teléphone :  </label>
+	  		<input type="tel" id="tel" name="tel" value="<%= user.getTelephone()%>">
+	  		</div> 
+	  		<div>
+	  		<label for="codePostal">Code postal :  </label>
+	  		<input type="text" id="codePostal" name="codePostal"  required="required" value="<%= user.getCodePostal()%>">
+	  		</div> 
+  			</div>
+  			
+  			
+  			<div style="display: inline-block; transform: translateY(-6px);"class="editCol">
+			<div>
+			<label for="nom">Nom :  </label>
+	  		<input type="text" id="nom" name="nom" required="required" value="<%= user.getNom()%>"> 
+	  		</div>
+	  		<div>
+	  		<label for="email">Email :  </label>
+	  		<input type="email" id="email" name="email"  required="required" value="<%= user.getEmail()%>">
+	  		</div>
+	  		<div>
+	  		<label for="rue">Rue :  </label>
+	  		<input type="text" id="rue" name="rue"  required="required" value="<%= user.getRue()%>">
+	  		</div> 
+	  		<div>
+	  		<label for="ville">Ville :  </label>
+	  		<input type="text" id="ville" name="ville"  required="required" value="<%= user.getVille()%>">
+	  		</div> 
+  			</div>
+  			
+		</div>
 		<label for="mdp">Mot de passe actuel :  </label>
   		<input type="password" id="mdp" name="mdp"  required="required" pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{12,}$">
   		<a href="http://localhost:8080/ProjetJee/nouveauMdp">nouveau mot de passe?</a> <br>
