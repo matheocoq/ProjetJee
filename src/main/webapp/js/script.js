@@ -26,8 +26,7 @@ $(".boutonRadio").click(function() {
   	
 });
 
-
-window.setInterval(function () {
+function getDateTime() {
 	let pTime = document.createElement('p');
 	pTime.classList.add('txtTime');
 	let divTime = document.getElementsByClassName('time')
@@ -36,7 +35,13 @@ window.setInterval(function () {
 	pTime.appendChild(txtTime)
 	divTime[0].removeChild(oldPTime[0])
 	divTime[0].appendChild(pTime)
-}, 1000);
+}
+
+getDateTime()
+	
+window.setInterval(function () {
+	getDateTime()
+}, 100);
 
 
 let Debut = document.querySelector("#dateDebut")

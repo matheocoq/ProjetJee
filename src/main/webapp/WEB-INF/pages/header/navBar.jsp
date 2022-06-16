@@ -56,7 +56,7 @@ bottom: 0;
 					</ul>
 				</c:otherwise>
 			</c:choose>
-			<div class="time">
+			<div class="time blue mt-2">
 			<p class="txtTime"></p>
 			</div>
 		</div>
