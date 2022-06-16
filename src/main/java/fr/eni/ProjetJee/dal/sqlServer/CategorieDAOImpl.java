@@ -21,6 +21,10 @@ public class CategorieDAOImpl implements CategorieDAO{
 	private final String DELETE = "DELETE FROM CATEGORIES WHERE no_categorie=?";
 	
 
+	/**
+	 * Cette méthode permet d'inserer une catégorie dans la base de données.
+	 * @param  cat  est la catégorie à inserer.
+	 */
 	@Override
 	public void insert(Categorie cat) throws DALException {
 		Connection conn = null;
@@ -59,6 +63,10 @@ public class CategorieDAOImpl implements CategorieDAO{
 		
 	}
 
+	/**
+	 * Cette méthode permet de récuperer une catégorie dans la base de données sur base du numéro de la catégorie.
+	 * @param  no_categorie est le numéro de la catégorie.
+	 */
 	@Override
 	public Categorie selectById(Integer no_categorie) throws DALException {
 		Categorie categorie = null;

@@ -33,26 +33,41 @@ public class NouveauMdpServlet extends HttpServlet {
 		// on enregistre le nouveau mot de passe
 		Utilisateur user = (Utilisateur)request.getSession().getAttribute("utilisateur");
 		UtilisateurMger userMgr = UtilisateurMger.getInstance();
+		String actuelMdp = request.getParameter("mdpActuel");
 		String newMdp = request.getParameter("newMdp"); 
 		String confirmation = request.getParameter("confirmation"); 
-		if(newMdp.equals(confirmation)) { 
-			user.setMotDePasse(userMgr.generateHash(newMdp));
-			try { 
-				userMgr.majUtilisateur(user); 
-				request.getSession().setAttribute("utilisateur", user); 
-			} catch (BLLException e) { 
-				// TODO Auto-generated catch block 
-				e.printStackTrace(); 
-			} 								 
-			// on redirectionné vers la page de modification de profil
+		
+		// verification du mot de passe actuel
+		
+		if(userMgr.compareHashPassword(actuelMdp, user.getMotDePasse())) {
 			
-			request.setAttribute("infosNewMdp", "Nouveau mot de passe pris en compte.");
-			response.sendRedirect("http://localhost:8080/ProjetJee/editProfil"); 
-		}else { 
-			// le nouveau mot de passe et la confirmation doivent être identiques. 
-			request.setAttribute("infosNewMdp", " Nouveau mot de passe incorrect."); 
-			request.getRequestDispatcher("/WEB-INF/pages/register.jsp").forward(request, response); 
-		} 
+			System.out.println("mot de passe actuel ok");
+			
+			if(newMdp.equals(confirmation)) { 
+				user.setMotDePasse(userMgr.generateHash(newMdp));
+				try { 
+					userMgr.majUtilisateur(user); 
+					request.getSession().setAttribute("utilisateur", user); 
+				} catch (BLLException e) { 
+					// TODO Auto-generated catch block 
+					e.printStackTrace(); 
+				} 								 
+				// on redirectionné vers la page de modification de profil
+				
+				request.setAttribute("infosNewMdp", "Nouveau mot de passe pris en compte.");
+				response.sendRedirect("http://localhost:8080/ProjetJee/editProfil"); 
+			}else { 
+				// le nouveau mot de passe et la confirmation doivent être identiques. 
+				request.setAttribute("newMdpError", " Nouveau mot de passe incorrect."); 
+				request.getRequestDispatcher("/WEB-INF/pages/nouveauMdp.jsp").forward(request, response); 
+			} 
+			
+		}else {
+			request.setAttribute("newMdpError", " Saisissez votre mot de passe actuel."); 
+			request.getRequestDispatcher("/WEB-INF/pages/nouveauMdp.jsp").forward(request, response); 
+		}
+		
+		
 		
 	}
 
