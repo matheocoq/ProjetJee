@@ -16,6 +16,10 @@ public class UtilisateurMger {
 
 	private static UtilisateurMger instance;
 
+	/**
+	 * Singleton qui permet ainsi la création d'un seul objet (UtilisateurMger)
+	 * @return une instance de UtilisateurMger
+	 */
 	public static UtilisateurMger getInstance() {
 		if (instance == null) {
 			instance = new UtilisateurMger();
@@ -23,10 +27,18 @@ public class UtilisateurMger {
 		return instance;
 	}
 
+	/**
+	 * Récupere l'interface commune à tout les implémentations de UtilisateurDAO
+	 */
 	private UtilisateurMger() {
 		utilisateurDAO = DAOFactory.getDAOUtilisateur();
 	}
 
+	/**
+	 * ajouterUtilisateur permet l'ajout l'ajout d'un utilisateur en BDD
+	 * @param utilisateur
+	 * @throws BLLException
+	 */
 	public void ajouterUtilisateur(Utilisateur utilisateur) throws BLLException {
 		try {
 			utilisateurDAO.insert(utilisateur);
@@ -35,6 +47,11 @@ public class UtilisateurMger {
 		}
 	}
 	
+	/**
+	 * ajouterUtilisateurHistorique permet l'ajout l'ajout d'un utilisateur dans la table historique des utilisateurs en BDD
+	 * @param utilisateur
+	 * @throws BLLException
+	 */
 	public void ajouterUtilisateurHistorique(Utilisateur utilisateur) throws BLLException {
 		try {
 			utilisateurDAO.insertHistoriques(utilisateur);
@@ -43,6 +60,12 @@ public class UtilisateurMger {
 		}
 	}
 
+	/**
+	 * utilisateurById 
+	 * @param noUtilisateur
+	 * @return un utilisateur en fonction de son ID
+	 * @throws BLLException
+	 */
 	public Utilisateur utilisateurById(int noUtilisateur) throws BLLException {
 		try {
 			return utilisateurDAO.selectById(noUtilisateur);
@@ -51,6 +74,11 @@ public class UtilisateurMger {
 		}
 	}
 
+	/**
+	 * 
+	 * @return une liste d'utilisateur
+	 * @throws BLLException
+	 */
 	public List<Utilisateur> allUtilisateurs() throws BLLException {
 		try {
 			return utilisateurDAO.selectAll();
@@ -59,6 +87,11 @@ public class UtilisateurMger {
 		}
 	}
 
+	/**
+	 * majUtilisateur permet de modifier les infomartions d'un utilisateur stocker dans la BDD 
+	 * @param user
+	 * @throws BLLException
+	 */
 	public void majUtilisateur(Utilisateur user) throws BLLException {
 		try {
 			utilisateurDAO.update(user);
@@ -67,6 +100,11 @@ public class UtilisateurMger {
 		}
 	}
 
+	/**
+	 * supprimerUtilisateur permet la suppression d'un utilisateur en fonction de son ID
+	 * @param noUtilisateur
+	 * @throws BLLException
+	 */
 	public void supprimerUtilisateur(int noUtilisateur) throws BLLException {
 		try {
 			utilisateurDAO.delete(noUtilisateur);
@@ -75,6 +113,12 @@ public class UtilisateurMger {
 		}
 	}
 
+	/**
+	 * utilisateurByLogin
+	 * @param login
+	 * @return un utilisateur en fonction de son login
+	 * @throws BLLException
+	 */
 	public Utilisateur utilisateurByLogin(String login) throws BLLException {
 		try {
 			return utilisateurDAO.selectByLogin(login);
@@ -83,6 +127,13 @@ public class UtilisateurMger {
 		}
 	}
 
+	/**
+	 * verifConnexion permet de verifier les informations (login et mot de passe) saisie par l'utilisateur pour se connecter
+	 * @param login
+	 * @param mdp
+	 * @return l'instance de l'utilisateur si les information son correct sinon renvoie une erreur BLLException
+	 * @throws BLLException
+	 */
 	public Utilisateur verifConnexion(String login, String mdp) throws BLLException {
 		
 		Utilisateur user = this.utilisateurByLogin(login);
@@ -93,6 +144,11 @@ public class UtilisateurMger {
 		}
 	}
 
+	/**
+	 * generateHash
+	 * @param passwordToHash
+	 * @return le mot de passe saisie par l'utilisateur, hasher (SHA-256)
+	 */
 	public String generateHash(String passwordToHash) {
 		String generatedPassword = null;
 		try {
@@ -110,6 +166,12 @@ public class UtilisateurMger {
 		return generatedPassword;
 	}
 	
+	/**
+	 * compareHashPassword permet de comparer le mot de passe saisie par l'utilisateur et le mot de passe hasher stocker dans la BDD
+	 * @param inputMdp
+	 * @param bddMdp
+	 * @return true or false
+	 */
 	public boolean compareHashPassword(String inputMdp, String bddMdp) {
 		String generatedPassword = this.generateHash(inputMdp);	
 		if(bddMdp.equals(generatedPassword)) {
@@ -118,7 +180,7 @@ public class UtilisateurMger {
 			return false;
 		}
 	}
-	
+
 	public boolean checkPseudoEmailTel(String pseudo,String email,String tel) throws DALException {
 		
 		return utilisateurDAO.checkPseudoEmailTel(pseudo, email, tel);

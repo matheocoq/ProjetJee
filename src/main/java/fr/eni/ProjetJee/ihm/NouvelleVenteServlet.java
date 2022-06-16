@@ -91,7 +91,7 @@ public class NouvelleVenteServlet extends HttpServlet {
 				String codePostal = request.getParameter("codePostal");
 				String ville = request.getParameter("ville");
 				
-				if ("".equals(article) || "".equals(description) || "".equals(dateDebut) || "".equals(dateFin) || "".equals(rue) || "".equals(codePostal) || "".equals(ville)) {
+				if (prix <= 0 || "".equals(article) || "".equals(description) || "".equals(dateDebut) || "".equals(dateFin) || "".equals(rue) || "".equals(codePostal) || "".equals(ville)) {
 					System.err.println("Un ou plusieur champ innatendu !!");
 					response.sendRedirect("/ProjetJee/NouvelleVente?nouvelleVenteError=true");
 					return;

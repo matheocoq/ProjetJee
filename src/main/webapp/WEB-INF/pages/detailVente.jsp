@@ -87,6 +87,7 @@
 				</div>
 			</div>
 			
+			<c:if test = "${empty owner}">
 			<form action="<%= request.getContextPath() %>/DetailVente?article=${ article.getNoArticle() }" method="post">
 				<div class="row mt-5">
 					<div class="col-2">
@@ -100,6 +101,8 @@
 					</div>
 				</div>
 			</form>
+			</c:if>
+			
 			
 		</div>
 	</div>
