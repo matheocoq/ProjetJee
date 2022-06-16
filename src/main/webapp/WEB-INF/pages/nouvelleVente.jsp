@@ -20,7 +20,7 @@
 			
 			<form action="<%= request.getContextPath() %>/NouvelleVente" method="post">
 				<div class="">
-					<div style="display: inline-block;width: 33%;" class="shadow-sm">
+					<div style="display: inline-block;width: 33%;">
 					
 						<p class="text-center fw-bold m-0">Retrait</p>
 						
