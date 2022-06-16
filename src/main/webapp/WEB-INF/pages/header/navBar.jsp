@@ -56,6 +56,9 @@ bottom: 0;
 					</ul>
 				</c:otherwise>
 			</c:choose>
+			<div class="time">
+			<p class="txtTime"></p>
+			</div>
 		</div>
 	</div>
 </nav>

@@ -27,12 +27,25 @@ $(".boutonRadio").click(function() {
 });
 
 
+window.setInterval(function () {
+	let pTime = document.createElement('p');
+	pTime.classList.add('txtTime');
+	let divTime = document.getElementsByClassName('time')
+	let oldPTime = document.getElementsByClassName('txtTime')
+	let txtTime = document.createTextNode(moment().format('DD-MM-YYYY HH:mm:ss'))
+	pTime.appendChild(txtTime)
+	divTime[0].removeChild(oldPTime[0])
+	divTime[0].appendChild(pTime)
+}, 1000);
+
+
 let Debut = document.querySelector("#dateDebut")
 let Fin = document.querySelector("#dateFin")
 
 Debut.addEventListener('change', (e) => {
   	let dateDebut = moment(Debut.value)
-	Fin.value = moment(dateDebut).add(1, 'days').format('YYYY-MM-DDTHH:MM')
-	Fin.min = moment(dateDebut).add(1, 'days').format('YYYY-MM-DDTHH:MM')
+	Fin.value = moment(dateDebut).add(1, 'days').format('YYYY-MM-DDTHH:mm')
+	Fin.min = moment(dateDebut).add(1, 'days').format('YYYY-MM-DDTHH:mm')
 });
+
 
