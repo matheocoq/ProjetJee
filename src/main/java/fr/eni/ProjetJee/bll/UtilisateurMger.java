@@ -181,13 +181,13 @@ public class UtilisateurMger {
 		}
 	}
 
-	public boolean checkPseudoEmailTel(String pseudo,String email,String tel) throws DALException {
+	public boolean checkPseudoEmail(String pseudo,String email) throws DALException {
 		
-		return utilisateurDAO.checkPseudoEmailTel(pseudo, email, tel);
+		return utilisateurDAO.checkPseudoEmail(pseudo, email);
 	}
 
-	public boolean checkPseudoEmailTelModif(String pseudo,String email,String tel) throws DALException {
+	public boolean checkPseudoEmailModif(String pseudo,String email) throws DALException {
 		
-		return utilisateurDAO.checkPseudoEmailTelModif(pseudo, email, tel);
+		return utilisateurDAO.checkPseudoEmailModif(pseudo, email);
 	}
 }

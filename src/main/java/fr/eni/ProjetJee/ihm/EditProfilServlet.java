@@ -59,7 +59,7 @@ public class EditProfilServlet extends HttpServlet {
 				if(!ancienUser.getPseudo().equals(speudo) || !ancienUser.getTelephone().equals(tel) || !ancienUser.getEmail().equals(email)) {
 					
 					try {
-						if(userMgr.checkPseudoEmailTelModif(speudo,email,tel)){
+						if(userMgr.checkPseudoEmailModif(speudo,email)){
 							if(userMgr.compareHashPassword(mdp,bddMdp)) { 
 								prenom = prenom.substring(0, 1).toUpperCase()+prenom.substring(1);
 								Utilisateur user = new Utilisateur(noUser,speudo, nom.toUpperCase(), prenom, email, tel, rue, codePostal, ville.toUpperCase(), userMgr.generateHash(mdp), ancienUser.getCredit(),false); 
