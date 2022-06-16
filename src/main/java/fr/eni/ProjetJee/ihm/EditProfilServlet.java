@@ -61,7 +61,9 @@ public class EditProfilServlet extends HttpServlet {
 					try {
 						if(userMgr.checkPseudoEmailTelModif(speudo,email,tel)){
 							if(userMgr.compareHashPassword(mdp,bddMdp)) { 
-								Utilisateur user = new Utilisateur(noUser,speudo, nom, prenom, email, tel, rue, codePostal, ville, userMgr.generateHash(mdp), ancienUser.getCredit(),false); 
+								prenom = prenom.substring(0, 1).toUpperCase()+prenom.substring(1);
+								Utilisateur user = new Utilisateur(noUser,speudo, nom.toUpperCase(), prenom, email, tel, rue, codePostal, ville.toUpperCase(), userMgr.generateHash(mdp), ancienUser.getCredit(),false); 
+								System.out.println("Test : "+user.getNom());
 								try { 
 									userMgr.majUtilisateur(user); 
 									request.getSession().setAttribute("utilisateur", user); 
@@ -87,7 +89,8 @@ public class EditProfilServlet extends HttpServlet {
 				}else {
 					//On regarde si le mot de passe saisie est correct 
 					if(userMgr.compareHashPassword(mdp,bddMdp)) { 
-						Utilisateur user = new Utilisateur(noUser,speudo, nom, prenom, email, tel, rue, codePostal, ville, userMgr.generateHash(mdp), ancienUser.getCredit(),false); 
+						prenom = prenom.substring(0, 1).toUpperCase()+prenom.substring(1);
+						Utilisateur user = new Utilisateur(noUser,speudo, nom.toUpperCase(), prenom, email, tel, rue, codePostal, ville.toUpperCase(), userMgr.generateHash(mdp), ancienUser.getCredit(),false); 
 						try { 
 							userMgr.majUtilisateur(user); 
 							request.getSession().setAttribute("utilisateur", user); 

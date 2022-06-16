@@ -45,13 +45,14 @@ public class RegisterServlet extends HttpServlet {
 		UtilisateurMger userMgr = UtilisateurMger.getInstance();
 		try {
 			// on verifie la longueur du numero de tel et si le pseudo, l'email ou telephone existe déjà dans la base de données.
-			if(tel.length()<10 || userMgr.checkPseudoEmailTel(speudo,email,tel)) {
+			if((!tel.isEmpty() && tel.length() <10) || userMgr.checkPseudoEmailTel(speudo,email,tel)) {
 				req.setAttribute("errorInscription", " Inscription incorrect.");
 				req.getRequestDispatcher("/WEB-INF/pages/inscription.jsp").forward(req, resp);
 			}else {
 				// on verifie si le mdp et la confirmation sont les mêmes
 				if(mdp.equals(confirmation)) {
-					Utilisateur user = new Utilisateur(0, speudo, nom, prenom, email, tel, rue, codePostal, ville, userMgr.generateHash(mdp), 0,false);
+					prenom = prenom.substring(0, 1).toUpperCase()+prenom.substring(1);
+					Utilisateur user = new Utilisateur(0, speudo, nom.toUpperCase(), prenom, email, tel, rue, codePostal, ville.toUpperCase(), userMgr.generateHash(mdp), 100,false);
 					try {
 						
 						userMgr.ajouterUtilisateur(user);
